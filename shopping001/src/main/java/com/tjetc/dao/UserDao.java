@@ -11,14 +11,14 @@ public interface UserDao {
      * @param pwd
      * @return
      */
-    UserDao selectNameAndPwd(String name, String pwd);
+    User selectNameAndPwd(String name, String pwd);
 
     /**
      * 用户注册
      * @param user
      * @return
      */
-    UserDao addUser(User user);
+    int addUser(User user);
 
     /**
      * 删除用户
