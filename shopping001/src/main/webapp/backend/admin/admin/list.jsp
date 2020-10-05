@@ -10,16 +10,16 @@
 <html>
 <head>
     <title>显示所有管理员信息</title>
-    <link href="<%=request.getContextPath()%>/asserts/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/asserts/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 
     <script src="<%=request.getContextPath()%>/asserts/js/jquery-1.12.4.js" type="text/javascript"></script>
 
     <script src="<%=request.getContextPath()%>/asserts/js/bootstrap.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        function confirm_del(stuNO) {
-            if(confirm("您确定要删除" + stuNO + "的数据么?")) {
-                location.href="DeptDeleteServlet?stuNO=" + stuNO ;
+        function confirm_del(id) {
+            if (confirm("您确定要删除" + id + "的数据么?")) {
+                location.href = "AdminServlet?op=delete&id=" +id;
             }
         }
     </script>
@@ -38,33 +38,35 @@
                     <th>状态</th>
                     <th>操作</th>
                 </tr>
-                <tr>
-                    <c:forEach items="${page.data}" var="admin">
+                <c:forEach items="${page.data}" var="admin">
+                    <tr>
                         <td>${admin.adminId}</td>
                         <td>${admin.adminName}</td>
                         <td>${admin.adminPwd}</td>
                         <td>${admin.adminPhone}</td>
                         <td>
-                            <c:if test="${admin.adminState}=1">
+                            <c:if test="${admin.adminState==1}">
                                 启用
                             </c:if>
-                            <c:if test="${admin.adminState}=0">
+                            <c:if test="${admin.adminState==0}">
                                 禁用
                             </c:if>
                         </td>
                         <td>
-                            <a href="javascript:">详情</a>
-                            <a href="javascript:">删除</a>
+                            <a href="<%=request.getContextPath()%>/AdminServlet?op=update&id=${admin.adminId}">详情</a>
+                            <a href="javascript:confirm_del('${admin.adminId}')">删除</a>
                         </td>
-                    </c:forEach>
-
-                </tr>
+                    </tr>
+                </c:forEach>
                 <tr>
-                    <td colspan="3">
-                        <a href="javascript">首页</a>
-                        <a href="javascript">上一页</a>
-                        <a href="javascript">下一页</a>
-                        <a href="javascript">尾页</a>
+                    <td colspan="6" style="text-align: center">
+                        <a href="<%=request.getContextPath()%>/AdminServlet?op=selectAll&page=1">首页</a>
+                        <a href="<%=request.getContextPath()%>/AdminServlet?op=selectAll&page=${page.prev()}">上一页</a>
+                        <c:forEach begin="1" var="i" end="${page.getTotalPageCount()}">
+                            <a href="<%=request.getContextPath()%>/AdminServlet?op=selectAll&page=${i}">${i}</a>
+                        </c:forEach>
+                        <a href="<%=request.getContextPath()%>/AdminServlet?op=selectAll&page=${page.next()}">下一页</a>
+                        <a href="<%=request.getContextPath()%>/AdminServlet?op=selectAll&page=${page.getTotalPageCount()}">尾页</a>
                     </td>
                 </tr>
             </table>

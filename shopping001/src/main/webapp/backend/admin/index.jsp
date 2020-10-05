@@ -68,8 +68,8 @@
                 </li>
                 <li>
                     <ul>
-                        <li><a href="javascript:" target="frame">显示所有管理员信息</a></li>
-                        <li><a href="javascript:" target="frame">添加管理员</a></li>
+                        <li><a href="<%=request.getContextPath()%>/AdminServlet?op=selectAll" target="frame">显示所有管理员信息</a></li>
+                        <li><a href="<%=request.getContextPath()%>/backend/admin/admin/add.jsp" target="frame">添加管理员</a></li>
                     </ul>
                 </li>
                 <li>
