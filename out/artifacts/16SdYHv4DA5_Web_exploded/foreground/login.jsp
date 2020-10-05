@@ -19,7 +19,7 @@
 </head>
 <body>
 <form>
-    <div style="background-image: url('<%=request.getContextPath()%>/foreground/images/login.jpg ');background-repeat:no-repeat;background-size: 100% ">
+    <div style="background-image: url('<%=request.getContextPath()%>/foreground/images/登录.jpg');height: 100%;width: 100%; ">
     <div class="col-lg-4 mx-auto" >;
     <div class="form-group" style="margin-top: 150px">
         <label for="exampleInputEmail1">手机号</label>

@@ -2,7 +2,6 @@
   <artifact type="exploded-war" name="16SdYHv4DA5:Web exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/16SdYHv4DA5_Web_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="16SdYHv4DA5/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="16SdYHv4DA5" />
