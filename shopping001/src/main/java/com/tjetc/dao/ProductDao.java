@@ -1,7 +1,11 @@
 package com.tjetc.dao;
 
 import com.tjetc.domain.Product;
+import com.tjetc.domain.ProductImg;
+import com.tjetc.domain.ProductType;
 import com.tjetc.util.Page;
+
+import java.util.List;
 
 public interface ProductDao {
 
@@ -65,4 +69,8 @@ public interface ProductDao {
     Page<Product> selectLikeSales(int pageNum,int pageSize,Integer Sales);
     int countLikeSales(Integer Sales);
     //根据商品
+
+    public List<ProductImg> selectLikeProductId(int id);
+
+    public ProductType selectByProductTypeId(Integer id);
 }

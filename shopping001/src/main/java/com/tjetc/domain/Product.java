@@ -5,18 +5,18 @@ import java.util.List;
 public class Product {
     private int productId;//商品编号
     private String productName;//商品名称
-    private String productCount;//商品库存
-    private String productPrice;//商品价格
+    private int productCount;//商品库存
+    private double productPrice;//商品价格
     private List<ProductImg> list;//商品图片路径
     private String productDiscraction;//商品描述
     private int productSales;//商品销量
     private int productDiscount;//折扣
-    private Product product;//商品类型信息
+    private ProductType producttype;//商品类型信息
 
     public Product() {
     }
 
-    public Product(int productId, String productName, String productCount, String productPrice, List<ProductImg> list, String productDiscraction, int productSales, int productDiscount, Product product) {
+    public Product(int productId, String productName, int productCount, double productPrice, List<ProductImg> list, String productDiscraction, int productSales, int productDiscount, ProductType producttype) {
         this.productId = productId;
         this.productName = productName;
         this.productCount = productCount;
@@ -25,7 +25,7 @@ public class Product {
         this.productDiscraction = productDiscraction;
         this.productSales = productSales;
         this.productDiscount = productDiscount;
-        this.product = product;
+        this.producttype = producttype;
     }
 
     public int getProductId() {
@@ -44,19 +44,19 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductCount() {
+    public int getProductCount() {
         return productCount;
     }
 
-    public void setProductCount(String productCount) {
+    public void setProductCount(int productCount) {
         this.productCount = productCount;
     }
 
-    public String getProductPrice() {
+    public double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(String productPrice) {
+    public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
 
@@ -92,12 +92,12 @@ public class Product {
         this.productDiscount = productDiscount;
     }
 
-    public Product getProduct() {
-        return product;
+    public ProductType getProducttype() {
+        return producttype;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducttype(ProductType producttype) {
+        this.producttype = producttype;
     }
 
     @Override
@@ -105,13 +105,13 @@ public class Product {
         return "Product{" +
                 "productId=" + productId +
                 ", productName='" + productName + '\'' +
-                ", productCount='" + productCount + '\'' +
-                ", productPrice='" + productPrice + '\'' +
+                ", productCount=" + productCount +
+                ", productPrice=" + productPrice +
                 ", list=" + list +
                 ", productDiscraction='" + productDiscraction + '\'' +
                 ", productSales=" + productSales +
                 ", productDiscount=" + productDiscount +
-                ", product=" + product +
+                ", producttype=" + producttype +
                 '}';
     }
 }
