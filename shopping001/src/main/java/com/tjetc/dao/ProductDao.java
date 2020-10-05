@@ -73,4 +73,7 @@ public interface ProductDao {
     public List<ProductImg> selectLikeProductId(int id);
 
     public ProductType selectByProductTypeId(Integer id);
+
+    List<Product> selectListAll();
+
 }
