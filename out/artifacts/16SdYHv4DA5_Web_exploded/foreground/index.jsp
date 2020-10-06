@@ -60,16 +60,8 @@
                         <span class="s-2"> </span>
                         <span class="s-3"> </span>
                     </button>
-                    <div id="myNav" class="overlay">
-                        <div class="overlay-content">
-                            <a href="index.jsp">首页</a>
-                            <a href="about.jsp">关于我们</a>
-                            <a href="gallery.jsp">商品展示</a>
-                            <a href="service.jsp">商品分类</a>
-                            <a href="blog.jsp">留言</a>
-                            <a href="person_center.jsp">个人中心</a>
-                        </div>
-                    </div>
+<%--                    导航--%>
+                    <%@include file="myNav.jsp" %>
                 </div>
             </div>
         </nav>
@@ -126,8 +118,10 @@
                 </p>
                 <div>
                     <a href="login.jsp" class="slider-link">
-                        登录
-                    </a><br>
+                       登录
+                    </a>
+                </div>
+                <div>
                     <a href="register.jsp" class="slider-link">
                         注册
                     </a>
@@ -138,109 +132,7 @@
 </section>
 <!-- end slider section -->
 
-<!-- about section -->
-
-<section class="about_section layout_padding ">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="img-box">
-                    <img src="images/about-img.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="detail-box">
-                    <div class="heading_container">
-                        <h2>
-                            关于我们
-                        </h2>
-                    </div>
-                    <p>
-                        凯瑞智能家居致力于向广大消费者提供可靠、便捷的智能家居通道。
-                    </p>
-                    <a href="">
-                        了解更多
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- end about section -->
-
-<!-- gallery section -->
-
-<div class="gallery_section layout_padding2">
-    <div class="container-fluid">
-        <div class="heading_container heading_center">
-            <h2>
-                热销商品
-            </h2>
-        </div>
-        <div class="row">
-            <div class=" col-sm-8 col-md-6 px-0">
-                <div class="img-box">
-                    <img src="images/g1.jpg" alt="">
-                    <a href="images/g1.jpg" data-toggle="lightbox" data-gallery="gallery">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3 px-0">
-                <div class="img-box">
-                    <img src="images/g2.jpg" alt="">
-                    <a href="images/g2.jpg" data-toggle="lightbox" data-gallery="gallery">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3 px-0">
-                <div class="img-box">
-                    <img src="images/g3.jpg" alt="">
-                    <a href="images/g3.jpg" data-toggle="lightbox" data-gallery="gallery">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3 px-0">
-                <div class="img-box">
-                    <img src="images/g4.jpg" alt="">
-                    <a href="images/g4.jpg" data-toggle="lightbox" data-gallery="gallery">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3 px-0">
-                <div class="img-box">
-                    <img src="images/g5.jpg" alt="">
-                    <a href="images/g5.jpg" data-toggle="lightbox" data-gallery="gallery">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-8 col-md-6 px-0">
-                <div class="img-box">
-                    <img src="images/g6.jpg" alt="">
-                    <a href="images/g6.jpg" data-toggle="lightbox" data-gallery="gallery">
-                        <i class="fa fa-picture-o" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="btn-box">
-            <a href="">
-                查看所有
-            </a>
-        </div>
-    </div>
-</div>
-
-<!-- end gallery section -->
-
-
-<!-- service section -->
-
+<%--商品分类--%>
 <section class="service_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
@@ -252,7 +144,7 @@
             <div class="col-md-6 col-lg-2 mx-auto">
                 <div class="box">
                     <div class="img-box">
-                        <img src="images/s1.jpg" alt="">
+                        <img src="images/1-1.png" alt="">
                     </div>
                     <div class="detail-box">
                         <h5>
@@ -363,6 +255,108 @@
 </section>
 
 <!-- end service section -->
+
+<!-- gallery section -->
+
+<div class="gallery_section layout_padding2">
+    <div class="container-fluid">
+        <div class="heading_container heading_center">
+            <h2>
+                热销商品
+            </h2>
+        </div>
+        <div class="row">
+            <div class=" col-sm-8 col-md-6 px-0">
+                <div class="img-box">
+                    <img src="images/g1.jpg" alt="">
+                    <a href="images/g1.jpg" data-toggle="lightbox" data-gallery="gallery">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3 px-0">
+                <div class="img-box">
+                    <img src="images/g2.jpg" alt="">
+                    <a href="images/g2.jpg" data-toggle="lightbox" data-gallery="gallery">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 px-0">
+                <div class="img-box">
+                    <img src="images/g3.jpg" alt="">
+                    <a href="images/g3.jpg" data-toggle="lightbox" data-gallery="gallery">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 px-0">
+                <div class="img-box">
+                    <img src="images/g4.jpg" alt="">
+                    <a href="images/g4.jpg" data-toggle="lightbox" data-gallery="gallery">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3 px-0">
+                <div class="img-box">
+                    <img src="images/g5.jpg" alt="">
+                    <a href="images/g5.jpg" data-toggle="lightbox" data-gallery="gallery">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-6 px-0">
+                <div class="img-box">
+                    <img src="images/g6.jpg" alt="">
+                    <a href="images/g6.jpg" data-toggle="lightbox" data-gallery="gallery">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="btn-box">
+            <a href="">
+                查看所有
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- end gallery section -->
+
+
+<!-- about section -->
+
+<section class="about_section layout_padding ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="img-box">
+                    <img src="images/about-img.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="heading_container">
+                        <h2>
+                            关于我们
+                        </h2>
+                    </div>
+                    <p>
+                        凯瑞智能家居致力于向广大消费者提供可靠、便捷的智能家居通道。
+                    </p>
+                    <a href="">
+                        了解更多
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- end about section -->
+
 
 <!-- client section -->
 
@@ -511,89 +505,7 @@
 </section>
 <!-- end contact section -->
 
-<!-- info section -->
-<section class="info_section ">
-    <div class="container">
-        <div class="row info_main_row">
-            <div class="col-md-6 col-lg-3">
-                <div class="info_insta">
-                    <h4>
-                        <a href="index.html" class="navbar-brand m-0 p-0">
-                <span>
-                  凯瑞智能家居
-                </span>
-                        </a>
-                    </h4>
-                    <p class="mb-0">
-                        介绍
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="info_detail">
-                    <h4>
-                        公司
-                    </h4>
-                    <p class="mb-0">
-                        公司介绍
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <h4>
-                    联系我们
-                </h4>
-                <div class="info_contact">
-                    <a href="">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <span>
-                地址：天津市滨海新区第七大街
-              </span>
-                    </a>
-                    <a href="">
-                        <i class="fa fa-phone" aria-hidden="true"></i>
-                        <span>
-                欢迎致电： +01 1234567890
-              </span>
-                    </a>
-                    <a href="">
-                        <i class="fa fa-envelope"></i>
-                        <span>
-                欢迎邮箱：demo@gmail.com
-              </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-2">
-                <h4>
-                    关注我们
-                </h4>
-                <div class="social_box">
-                    <a href="">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                    </a>
-                    <a href="">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- end info_section -->
-
-
-<!-- footer section -->
-<footer class="footer_section">
-    <div class="container">
-        <p>
-            版权 &copy; 2020.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-        </p>
-    </div>
-</footer>
-<!-- footer section -->
-
+<%@include file="myFoot.jsp" %>
 
 <!-- jQery -->
 <script src="js/jquery-3.4.1.min.js"></script>

@@ -1,0 +1,39 @@
+.container #cart{
+	padding: 0;
+}
+.container #cart #cartHead{
+	border: 1px solid;
+}
+
+.container #cart #cartBody{
+	border: 1px solid;
+}
+
+.container #cart #cartBody img{
+	width: 100%;
+}
+.container #cart #cartBody .num{
+	width: 80px;
+}
+
+.container #cart #kong{
+	border: 1px solid;
+	height: 400px;
+	width: 100%;
+	/*background-image: url(../img/asd.jpg);*/
+	margin: 0;
+	line-height: 400px;
+	font-family: "arial black";
+	font-weight: bold;
+	font-size: 100px;
+}
+.container #cart #cartFoot{
+	border: 1px solid;
+}
+
+.container #cart #cartFoot span{
+	color: red;
+}
+
+
+
