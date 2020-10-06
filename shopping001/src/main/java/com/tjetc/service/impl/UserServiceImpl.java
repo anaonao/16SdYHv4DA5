@@ -1,18 +1,34 @@
 package com.tjetc.service.impl;
 
 import com.tjetc.dao.UserDao;
+import com.tjetc.dao.impl.UserDaoImpl;
+import com.tjetc.domain.User;
 import com.tjetc.service.UserService;
 import com.tjetc.util.Page;
 
 public class UserServiceImpl implements UserService {
-    @Override
-    public UserDao findNameAndPwd(String name, String pwd) {
-        return null;
+    private UserDao userDao;
+
+    public UserServiceImpl() {
+        this.userDao = new UserDaoImpl();
     }
 
+    //登录
     @Override
-    public UserDao addUser(UserDao user) {
-        return null;
+    public User findNameAndPwd(String name, String pwd) {
+        return this.userDao.selectNameAndPwd(name,pwd);
+    }
+    //注册
+    @Override
+    public boolean addUser(User user) {
+        //用户名重复
+        if(this.userDao.selectByName(user.getUserName())!=null){
+            return false;
+            //数据库添加失败
+        }else if(this.userDao.addUser(user)<0){
+            return false;
+        }
+        return true;
     }
 
     @Override

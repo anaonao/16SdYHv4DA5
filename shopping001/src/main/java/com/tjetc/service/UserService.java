@@ -1,6 +1,7 @@
 package com.tjetc.service;
 
 import com.tjetc.dao.UserDao;
+import com.tjetc.domain.User;
 import com.tjetc.util.Page;
 
 public interface UserService {
@@ -10,14 +11,14 @@ public interface UserService {
      * @param pwd
      * @return
      */
-    UserDao findNameAndPwd(String name, String pwd);
+    User findNameAndPwd(String name, String pwd);
 
     /**
      * 用户注册
      * @param user
      * @return
      */
-    UserDao addUser(UserDao user);
+    boolean addUser(User user);
 
     /**
      * 删除用户
