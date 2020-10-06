@@ -16,7 +16,7 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao {
     @Override
     public int add(Product product) {
-        String sql = "insert into product (product_id,product_name,product_count,product_price,product_msg,product_sales,type_id,poduct_discount) values(null,?,?,?,?,?,?,?);";
+        String sql = "insert into product (product_id,product_name,product_count,product_price,product_msg,product_sales,type_id,product_discount) values(null,?,?,?,?,?,?,?);";
         int n = DBUtil.addDeleteUpdate(sql,product.getProductName(),product.getProductCount(),product.getProductPrice(),product.getProductDiscraction(),product.getProductSales(),product.getProducttype().getType_id(),product.getProductCount());
         return n;
     }
@@ -30,8 +30,8 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public int update(Product product) {
-        String sql = "update product set product_name=?,product_count=?,product_price=?,product_msg=?,product_sales=?,type_id=?,poduct_discount=? where product_id=?";
-        int n = DBUtil.addDeleteUpdate(sql,product.getProductName(),product.getProductCount(),product.getProductPrice(),product.getProductDiscraction(),product.getProductSales(),product.getProducttype().getType_id(),product.getProductCount(),product.getProductId());
+        String sql = "update product set product_name=?,product_count=?,product_price=?,product_msg=?,product_sales=?,type_id=?,product_discount=? where product_id=?";
+        int n = DBUtil.addDeleteUpdate(sql,product.getProductName(),product.getProductCount(),product.getProductPrice(),product.getProductDiscraction(),product.getProductSales(),product.getProducttype().getType_id(),product.getProductDiscount(),product.getProductId());
         return n;
     }
 

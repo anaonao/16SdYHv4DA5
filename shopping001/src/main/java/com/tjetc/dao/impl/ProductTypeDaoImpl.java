@@ -157,4 +157,25 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
             DBUtil.close();
         }
     }
+
+    @Override
+    public List<ProductType> selectListAll() {
+        List<ProductType> list = new ArrayList<>();
+        String sql = "select type_id,type_name from product_type";
+        ResultSet rs = DBUtil.select(sql);
+        try {
+            while (rs.next()){
+                ProductType productType = new ProductType();
+                productType.setType_name(rs.getString("type_name"));
+                productType.setType_id(rs.getInt("type_id"));
+                list.add(productType);
+            }
+            return list;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.close();
+        }
+    }
 }

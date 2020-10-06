@@ -22,9 +22,9 @@ public class AdminTest {
     @Test
     public void addAdmin(){
         Admin admin = new Admin();
-        admin.setAdminName("1");
+        admin.setAdminName("123");
         admin.setAdminPwd("123");
-        admin.setAdminPhone("1");
+        admin.setAdminPhone("123");
 
         System.out.println(adminService.addAdmin(admin));
     }
@@ -32,4 +32,5 @@ public class AdminTest {
     public void selectByNameDao(){
         System.out.println(adminDao.selectByName("1"));
     }
+
 }

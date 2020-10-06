@@ -49,7 +49,6 @@
             </div>
             <div class="col-md-6">
                 <div style="position: absolute;right: 0;line-height: 50px">
-                    <div style="color: #FFF;float: left;">当前访问量:${applicationScope.num}</div>
                     <c:if test="${adminname!=null}">
                         <div style="float: left;margin-left: 50px;color: #FFF">欢迎${adminname}&nbsp;<a style="color: #FFF" href="<%=request.getContextPath()%>/AdminServlet?op=removeLogin">注销</a></div>
                     </c:if>
@@ -78,7 +77,7 @@
                 </li>
                 <li>
                     <ul>
-                        <li><a href="javascript:" target="frame">显示所有商品</a></li>
+                        <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectAll" target="frame">显示所有商品</a></li>
                         <li><a href="javascript:" target="frame">添加商品</a></li>
                     </ul>
                 </li>

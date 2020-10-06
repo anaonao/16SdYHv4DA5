@@ -3,6 +3,8 @@ package com.tjetc.service;
 import com.tjetc.domain.ProductType;
 import com.tjetc.util.Page;
 
+import java.util.List;
+
 public interface ProductTypeService {
     /**
      * @param productType
@@ -50,4 +52,6 @@ public interface ProductTypeService {
      * @return
      */
     Page<ProductType> findPageLikeName(int pageNum, int pageSize,String name);
+
+    List<ProductType> findListAll();
 }
