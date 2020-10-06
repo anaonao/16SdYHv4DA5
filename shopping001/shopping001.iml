@@ -35,6 +35,6 @@
     <orderEntry type="library" exported="" name="Maven: taglibs:standard:1.1.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: javax.servlet:jstl:1.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.alibaba:fastjson:1.2.73" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 9.0.33" level="application_server_libraries" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 9.0.37" level="application_server_libraries" />
   </component>
 </module>
