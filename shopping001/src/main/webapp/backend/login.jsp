@@ -21,7 +21,7 @@
 
         </div>
         <div class="col-md-6">
-            <form class="form-horizontal" action="#" method="post">
+            <form class="form-horizontal" action="<%=request.getContextPath()%>/AdminServlet?op=login" method="post" id="formlogin">
                 <h1 style="text-align: center;margin-top: 50px">管理员登录</h1>
                 <div class="form-group" style="margin-top: 100px">
                     <label for="adminname" class="col-sm-2 control-label">用户名</label>
@@ -30,16 +30,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="adminpass" class="col-sm-2 control-label">密码</label>
+                    <label for="pwd" class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="adminpass" name="adminpass" placeholder="密码">
+                        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="密码">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="ck"> 七天免登录
+                                <input type="checkbox" name="ck" id="ck"> 七天免登录
                             </label>
                         </div>
                     </div>
@@ -55,5 +55,28 @@
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $("#formlogin").submit(function () {
+            $.ajax({
+                url:"<%=request.getContextPath()%>/AdminServlet?op=login",
+                type:"post",
+                data:{
+                    "adminname":$("#adminname").val(),
+                    "pwd":$("#pwd").val(),
+                    "ck":$("#ck").val()
+                },
+                success:function (data) {
+                    if(data=="1"){
+                        location.href="<%=request.getContextPath()%>/backend/admin/index.jsp";
+                    }else if(data=="0"){
+                        alert("用户名或者密码错误")
+                    }
+                }
+            })
+            return false;
+        })
+    })
+</script>
 </body>
 </html>

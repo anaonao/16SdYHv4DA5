@@ -1,5 +1,6 @@
 package com.tjetc.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.tjetc.domain.Admin;
 import com.tjetc.service.AdminService;
 import com.tjetc.service.impl.AdminServiceImpl;
@@ -34,9 +35,51 @@ public class AdminServlet extends HttpServlet {
             deleteById(req,resp);
         }else if("updateAdmin".equals(op)){
             updateAdmin(req,resp);
+        }else if("adminByname".equals(op)){
+            adminByname(req,resp);
+        }else if("login".equals(op)){
+            login(req,resp);
+
+        }else if("".equals(op)){
+
+        }else if("".equals(op)){
+
+        }else if("".equals(op)){
+
         }else if("".equals(op)){
 
         }
+    }
+
+    //管理员登录
+    private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String adminname = req.getParameter("adminname");
+        String pwd = req.getParameter("pwd");
+        Admin nameAndPwd = adminService.findNameAndPwd(adminname, pwd);
+        PrintWriter out = resp.getWriter();
+        if(nameAndPwd!=null){
+            //登录成功！
+            System.out.println("登录成功");
+            out.write("1");
+            out.flush();
+        }else {
+            //用户名或者密码错误
+            out.write("0");
+            out.flush();
+        }
+    }
+
+    //判断用户名是否存在
+    private void adminByname(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String adminname = req.getParameter("adminname");
+        Admin byName = adminService.findByName(adminname);
+        PrintWriter out = resp.getWriter();
+        String msg="";
+        if(byName!=null){
+           msg="用户名已存在";
+        }
+        out.write(msg);
+        out.flush();
     }
 
     //修改管理员信息
