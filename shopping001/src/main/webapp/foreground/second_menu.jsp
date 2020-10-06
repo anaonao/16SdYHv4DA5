@@ -47,31 +47,7 @@
 
 <body>
 
-<!-- header section strats -->
-<header class="header_section innerpage_header">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="index.html">
-          <span>
-            凯瑞智能家居
-          </span>
-            </a>
-            <div class="" id="">
-
-                <div class="custom_menu-btn">
-                    <button onclick="openNav()">
-                        <span class="s-1"> </span>
-                        <span class="s-2"> </span>
-                        <span class="s-3"> </span>
-                    </button>
-                    <%@include file="myNav.jsp" %>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
-<!-- end header section -->
-
+<%@include file="myNav.jsp"%>
 
 <!-- blog section -->
 

@@ -26,19 +26,11 @@
                         </a>
                     </h4>
                     <p class="mb-0">
-                        介绍
+                        凯瑞智能家居致力于提升家居安全性、便利性、舒适性、艺术性，并实现环保节能的居住环境，全心全意为您服务。
                     </p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="info_detail">
-                    <h4>
-                        公司
-                    </h4>
-                    <p class="mb-0">
-                        公司介绍
-                    </p>
-                </div>
+            <div class="col-md-6 col-lg-2">
             </div>
             <div class="col-md-6 col-lg-4">
                 <h4>

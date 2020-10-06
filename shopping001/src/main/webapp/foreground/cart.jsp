@@ -42,30 +42,7 @@
 
 <body>
 
-<!-- header section strats -->
-<header class="header_section innerpage_header">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="index.html">
-          <span>
-            凯瑞智能家居
-          </span>
-            </a>
-            <div class="" id="">
-
-                <div class="custom_menu-btn">
-                    <button onclick="openNav()">
-                        <span class="s-1"> </span>
-                        <span class="s-2"> </span>
-                        <span class="s-3"> </span>
-                    </button>
-                    <%@include file="myNav.jsp" %>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
-<!-- end header section -->
+<%@include file="myNav.jsp"%>
 
 
 <!-- about section -->
@@ -73,6 +50,7 @@
 <section class="about_section layout_padding ">
     <div class="container">
         <!--购物车-->
+
         <div class="row">
             <div class="col-md-10" id="movie">
                 <div id="cart">
@@ -141,14 +119,14 @@
 
 <%@include file="myFoot.jsp" %>
 
-
+<!-- custom js -->
+<script src="js/custom.js"></script>
 <!-- jQery -->
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/cart.js" type="text/javascript" />
 <!-- bootstrap js -->
 <script src="js/bootstrap.js"></script>
-<!-- custom js -->
-<script src="js/custom.js"></script>
+
 
 </body>
 

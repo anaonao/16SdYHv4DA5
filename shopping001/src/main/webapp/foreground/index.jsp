@@ -50,31 +50,7 @@
 
 <body>
 
-<!-- header section strats -->
-<header class="header_section">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="index.html">
-          <span>
-            凯瑞智能家居
-          </span>
-            </a>
-            <div class="" id="">
-
-                <div class="custom_menu-btn">
-                    <button onclick="openNav()">
-                        <span class="s-1"> </span>
-                        <span class="s-2"> </span>
-                        <span class="s-3"> </span>
-                    </button>
-                    <%--                    导航--%>
-                    <%@include file="myNav.jsp" %>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
-<!-- end header section -->
+<%@include file="myNav.jsp"%>
 
 <!-- 轮播图-->
 <section class="slider_section position-relative">
@@ -380,7 +356,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="img-box">
-                    <img src="images/about-img.jpg" alt="">
+                    <img src="images/login.jpg" alt="">
                 </div>
             </div>
             <div class="col-md-6">
@@ -392,6 +368,7 @@
                     </div>
                     <p>
                         凯瑞智能家居致力于向广大消费者提供可靠、便捷的智能家居通道。
+                        智能家居（smart home, home automation）是以住宅为平台，利用综合布线技术、网络通信技术、 安全防范技术、自动控制技术、音视频技术将家居生活有关的设施集成，构建高效的住宅设施与家庭日程事务的管理系统，提升家居安全性、便利性、舒适性、艺术性，并实现环保节能的居住环境。
                     </p>
                     <a href="">
                         了解更多
@@ -451,7 +428,7 @@
                                             Siaalya
                                         </h6>
                                     </div>
-                                    <p>
+                                    <p style="width: 1200px">
                                         大没离开过
                                     </p>
                                     <i class="fa fa-quote-left" aria-hidden="true"></i>
@@ -560,8 +537,7 @@
 <script src="js/bootstrap.js"></script>
 <!-- lightbox Gallery-->
 <script src="js/ekko-lightbox.min.js"></script>
-<!-- custom js -->
-<script src="js/custom.js"></script>
+
 
 </body>
 
