@@ -37,7 +37,7 @@ public interface ProductTypeDao {
      * @param name
      * @return
      */
-    ProductType selectByName(int pageNum, int pageSize,String name);
+    ProductType selectByName(String name);
 
     /**
      * 根据编号查询

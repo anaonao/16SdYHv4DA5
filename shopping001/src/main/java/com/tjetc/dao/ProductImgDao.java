@@ -32,4 +32,14 @@ public interface ProductImgDao {
      */
     Page<ProductImg> selectAll(int pageNum, int pageSize);
     int countAll();
+
+    /**
+     * 根据商品编号查询商品图片
+     * @param pageNum
+     * @param pageSize
+     * @param id
+     * @return
+     */
+    Page<ProductImg> selectByProductId(int pageNum, int pageSize,Integer id);
+    int countByProductId(Integer id);
 }
