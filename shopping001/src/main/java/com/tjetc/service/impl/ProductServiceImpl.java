@@ -6,6 +6,8 @@ import com.tjetc.domain.Product;
 import com.tjetc.service.ProductService;
 import com.tjetc.util.Page;
 
+import java.util.List;
+
 public class ProductServiceImpl implements ProductService {
     private ProductDao productDao = new ProductDaoImpl();
     @Override
@@ -52,5 +54,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> findLikeSales(int pageNum, int pageSize, Integer Sales) {
         return null;
+    }
+
+    @Override
+    public List<Product> findListAll() {
+        return productDao.selectListAll();
     }
 }

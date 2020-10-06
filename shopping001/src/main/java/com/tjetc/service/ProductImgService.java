@@ -30,4 +30,11 @@ public interface ProductImgService {
      * @return
      */
     Page<ProductImg> findAll(int pageNum, int pageSize);
+
+    /**
+     * 根据编号查询
+     * @param id
+     * @return
+     */
+    ProductImg findByProductId(Integer id);
 }

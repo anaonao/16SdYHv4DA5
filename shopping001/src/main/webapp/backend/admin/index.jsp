@@ -72,13 +72,23 @@
                     </ul>
                 </li>
                 <li>
-                    商品管理
-                    <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
-                </li>
+                商品管理
+                <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
+            </li>
                 <li>
                     <ul>
                         <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectAll" target="frame">显示所有商品</a></li>
                         <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectProductTypeAll" target="frame">添加商品</a></li>
+                    </ul>
+                </li>
+                <li>
+                    商品图片管理
+                    <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectAll" target="frame">显示所有商品图片</a></li>
+                        <li><a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectProductAll" target="frame">添加商品</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,6 +1,5 @@
 package com.tjetc.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.tjetc.domain.Admin;
 import com.tjetc.service.AdminService;
 import com.tjetc.service.impl.AdminServiceImpl;
