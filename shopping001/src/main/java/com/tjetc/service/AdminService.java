@@ -10,14 +10,14 @@ public interface AdminService {
      * @param Pwd
      * @return
      */
-    Admin findNameAndPwd(String name,String Pwd);
+    Admin findNameAndPwd(String name,String pwd);
 
     /**
      * 添加管理员
      * @param admin
      * @return
      */
-    int addAdmin(Admin admin);
+    String addAdmin(Admin admin);
 
     /**
      * 删除管理员

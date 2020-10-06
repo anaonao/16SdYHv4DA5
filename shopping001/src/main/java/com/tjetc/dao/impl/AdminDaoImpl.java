@@ -116,7 +116,7 @@ public class AdminDaoImpl implements AdminDao {
     public Admin selectByName(String name) {
         String sql ="select * from admin where admin_name=?";
         ResultSet rs =DBUtil.select(sql,name);
-        Admin admin = new Admin();
+        Admin admin = null;
         try {
             if (rs.next()){
                 new Admin(rs.getInt("admin_Id"),
@@ -138,7 +138,7 @@ public class AdminDaoImpl implements AdminDao {
     public Admin selectById(Integer id) {
         String sql ="select * from admin where admin_Id=?";
         ResultSet rs =DBUtil.select(sql,id);
-        Admin admin = new Admin();
+        Admin admin = null;
         try {
             if (rs.next()){
                 new Admin(rs.getInt("admin_Id"),
