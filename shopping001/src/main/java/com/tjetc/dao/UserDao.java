@@ -1,8 +1,9 @@
 package com.tjetc.dao;
 
+import com.tjetc.domain.User;
 import com.tjetc.util.Page;
 
-public interface User {
+public interface UserDao {
 
     /**
      * 用户登录
@@ -10,14 +11,14 @@ public interface User {
      * @param pwd
      * @return
      */
-    User selectNameAndPwd(String name,String pwd);
+    User selectNameAndPwd(String name, String pwd);
 
     /**
      * 用户注册
      * @param user
      * @return
      */
-    User addUser(User user);
+    int addUser(User user);
 
     /**
      * 删除用户
@@ -59,7 +60,7 @@ public interface User {
      * @param name
      * @return
      */
-    Page<User> selectPageLikeName(int pageNum, int pageSize,String name);
+    Page<User> selectPageLikeName(int pageNum, int pageSize, String name);
     int countLikeName(String name);
 
     /**
@@ -67,7 +68,7 @@ public interface User {
      * @param phone
      * @return
      */
-    Page<User> selectPageLikePhone(int pageNum, int pageSize,String phone);
+    Page<User> selectPageLikePhone(int pageNum, int pageSize, String phone);
     int countLikePhone(String phone);
 
     /**
@@ -75,6 +76,6 @@ public interface User {
      * @param state
      * @return
      */
-    Page<User> selectPageByState(int pageNum, int pageSize,Integer state);
+    Page<User> selectPageByState(int pageNum, int pageSize, Integer state);
     int countByState(Integer state);
 }

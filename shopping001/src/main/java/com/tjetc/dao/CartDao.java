@@ -1,7 +1,11 @@
 package com.tjetc.dao;
 
 import com.tjetc.domain.Cart;
+import com.tjetc.domain.Product;
+import com.tjetc.domain.User;
 import com.tjetc.util.Page;
+
+import java.util.List;
 
 public interface CartDao {
 
@@ -55,5 +59,8 @@ public interface CartDao {
      */
     Page<Cart> selectLikeName(int pageNum, int pageSize,String name);
     int countLikeName(String name);
+
+
+
 
 }
