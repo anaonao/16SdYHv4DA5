@@ -78,7 +78,7 @@
                 <li>
                     <ul>
                         <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectAll" target="frame">显示所有商品</a></li>
-                        <li><a href="javascript:" target="frame">添加商品</a></li>
+                        <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectProductTypeAll" target="frame">添加商品</a></li>
                     </ul>
                 </li>
             </ul>

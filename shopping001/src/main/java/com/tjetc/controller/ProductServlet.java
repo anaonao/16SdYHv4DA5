@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/ProductServlet")
@@ -37,10 +38,10 @@ public class ProductServlet extends HttpServlet {
             deleteById(req,resp);
         }else if("updateProduct".equals(op)){
             updateProduct(req,resp);
-        }else if("".equals(op)){
-
-        }else if("".equals(op)){
-
+        }else if("selectProductTypeAll".equals(op)){
+            selectProductTypeAll(req,resp);
+        }else if("addProduct".equals(op)){
+            addProduct(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -60,6 +61,50 @@ public class ProductServlet extends HttpServlet {
         }else if("".equals(op)){
 
         }
+    }
+
+    //添加商品信息
+    private void addProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String productName = req.getParameter("productName");//商品名称
+        int productCount =Integer.parseInt(req.getParameter("productCount"));//库存
+        double productPrice =Double.parseDouble(req.getParameter("productPrice"));//价格
+        String productDiscraction = req.getParameter("productDiscraction");//描述
+        int producttype =Integer.parseInt(req.getParameter("producttype"));//类型
+        int productDiscount = Integer.parseInt(req.getParameter("productDiscount"));//折扣
+
+        Product product = new Product();
+        product.setProductName(productName);
+        product.setProductCount(productCount);
+        product.setProductPrice(productPrice);
+        product.setProductDiscraction(productDiscraction);
+
+        ProductType productType = new ProductType();
+        productType.setType_id(producttype);
+        product.setProducttype(productType);
+        product.setProductDiscount(productDiscount);
+
+        int n = productService.add(product);
+        System.out.println("添加返回："+n);
+        PrintWriter out = resp.getWriter();
+        String msg="";
+        if(n>0){
+            //数据添加成功
+            msg="1";
+        }else {
+            //数据添加失败
+            msg="0";
+        }
+        out.write(msg);
+        out.flush();
+
+    }
+
+    //查询所有商品类型
+    private void selectProductTypeAll(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        //查询所有商品类型信息
+        List<ProductType> listTypeAll = productTypeService.findListAll();
+        req.setAttribute("listTypeAll",listTypeAll);
+        req.getRequestDispatcher("backend/admin/product/add.jsp").forward(req,resp);
     }
 
     //修改商品数据
