@@ -1,6 +1,7 @@
 package com.tjetc.domain;
 
-public class OrderItem {
+public class
+OrderItem {
     private int orderitemId;
     private Order order;
     private Product product;
