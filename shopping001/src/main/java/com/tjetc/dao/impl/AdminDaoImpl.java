@@ -119,7 +119,7 @@ public class AdminDaoImpl implements AdminDao {
         Admin admin = null;
         try {
             if (rs.next()){
-                new Admin(rs.getInt("admin_Id"),
+                admin = new Admin(rs.getInt("admin_Id"),
                         rs.getString("admin_name"),
                         rs.getString("admin_Pwd"),
                         rs.getString("admin_phone"),
@@ -136,12 +136,12 @@ public class AdminDaoImpl implements AdminDao {
 
     @Override
     public Admin selectById(Integer id) {
-        String sql ="select * from admin where admin_Id=?";
+        String sql ="select * from admin where admin_id=?";
         ResultSet rs =DBUtil.select(sql,id);
         Admin admin = null;
         try {
             if (rs.next()){
-                new Admin(rs.getInt("admin_Id"),
+                admin = new Admin(rs.getInt("admin_id"),
                         rs.getString("admin_name"),
                         rs.getString("admin_Pwd"),
                         rs.getString("admin_phone"),

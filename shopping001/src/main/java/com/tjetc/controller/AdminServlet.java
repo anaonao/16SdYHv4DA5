@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/AdminServlet")
 public class AdminServlet extends HttpServlet {
@@ -31,30 +32,64 @@ public class AdminServlet extends HttpServlet {
             add(req,resp);
         }else if("delete".equals(op)){
             deleteById(req,resp);
-        }else if("".equals(op)){
-
+        }else if("updateAdmin".equals(op)){
+            updateAdmin(req,resp);
         }else if("".equals(op)){
 
         }
+    }
+
+    //修改管理员信息
+    private void updateAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String adminId = req.getParameter("adminId");
+        String adminname = req.getParameter("adminname");
+        String pwd = req.getParameter("pwd");
+        String phone = req.getParameter("phone");
+        String state = req.getParameter("state");
+        System.out.println("state:"+state);
+        Admin admin = new Admin(Integer.parseInt(adminId),adminname,pwd,phone,Integer.parseInt(state));
+        int update = adminService.update(admin);
+        if(update>0){
+            //修改成功跳转到显示所有
+            resp.sendRedirect("AdminServlet?op=selectAll");
+        }else {
+            //修改失败返回当前页面并给提示
+            resp.sendRedirect("AdminServlet?op=update&id="+adminId);
+        }
+
     }
 
     //根据编号删除管理员
     private void deleteById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String id = req.getParameter("id");
         int i = adminService.deleteById(Integer.parseInt(id));
-        resp.sendRedirect(req.getContextPath()+"/AdminServlet?op=selectAll");
+        resp.sendRedirect("AdminServlet?op=selectAll");
     }
 
     //添加管理员
-    private void add(HttpServletRequest req, HttpServletResponse resp) {
+    private void add(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String adminname = req.getParameter("adminname");
+        String pwd = req.getParameter("pwd");
+        String phone = req.getParameter("phone");
+        Admin admin = new Admin();
+        admin.setAdminName(adminname);
+        admin.setAdminPwd(pwd);
+        admin.setAdminPhone(phone);
+        String s = adminService.addAdmin(admin);
+        req.setAttribute("msg",s);
+        PrintWriter out = resp.getWriter();
+        out.write(s);
+        out.flush();
     }
 
     //修改管理员信息
     private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
+        System.out.println("id:"+id);
         Admin admin = adminService.findById(Integer.parseInt(id));
+        System.out.println("admin:"+admin);
         req.setAttribute("admin",admin);
-        req.getRequestDispatcher(req.getContextPath()+"/backend/admin/admin/modify.jsp").forward(req,resp);
+        req.getRequestDispatcher("backend/admin/admin/modify.jsp").forward(req,resp);
 
     }
 
