@@ -36,11 +36,11 @@ public class OrderItemDaoImpl implements OrderItemDao {
 
     @Override
     public Page<OrderItem> selectAll(int pageNum, int pageSize) {
-        Page<OrderItem> page = new Page<>();
+        Page<OrderItem> page = new Page<>(pageNum,pageSize);
         page.setTotalData(countAll());
         List<OrderItem> list= new ArrayList<>();
         String sql = "select orderitem_id,order_id,product_id,product_count from order_item limit ?,?";
-        ResultSet rs = DBUtil.select(sql, page.start(), page.getPageSize());
+        ResultSet rs = DBUtil.select(sql,page.start(),page.getPageSize());
         try {
             while (rs.next()){
                 OrderItem orderItem = new OrderItem();

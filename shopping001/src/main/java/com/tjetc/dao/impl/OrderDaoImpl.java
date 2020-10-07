@@ -113,4 +113,11 @@ public class OrderDaoImpl implements OrderDao {
     public int countByUserName(String userName) {
         return 0;
     }
+
+    @Override
+    public int update(Order order) {
+        String sql = "update orders set order_date=?,order_price=?,order_state=?,user_id=? where order_id=?";
+        int n = DBUtil.addDeleteUpdate(sql, order.getOrderDate(), order.getOrder_price(), order.getState(), order.getUser().getUserId(),order.getOrderid());
+        return n;
+    }
 }

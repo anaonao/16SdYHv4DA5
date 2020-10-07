@@ -15,6 +15,13 @@ public interface OrderDao {
     int add(Order order);
 
     /**
+     * 根据编号修改订单信息
+     * @param order
+     * @return
+     */
+    int update(Order order);
+
+    /**
      * 查询订单信息
      * @return
      */

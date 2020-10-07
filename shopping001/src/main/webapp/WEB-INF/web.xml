@@ -21,4 +21,18 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+
+    <!--登录过滤器，没有登录的不能访问后台任何一个页面-->
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.tjetc.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/backend/admin/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
 </web-app>

@@ -39,8 +39,8 @@ public class AdminServlet extends HttpServlet {
         }else if("login".equals(op)){
             login(req,resp);
 
-        }else if("".equals(op)){
-
+        }else if("removeLogin".equals(op)){
+            removeLogin(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -48,6 +48,12 @@ public class AdminServlet extends HttpServlet {
         }else if("".equals(op)){
 
         }
+    }
+
+    //销毁session
+    private void removeLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().removeAttribute("adminname");
+        req.getRequestDispatcher("backend/login.jsp").forward(req,resp);
     }
 
     //管理员登录
@@ -59,6 +65,7 @@ public class AdminServlet extends HttpServlet {
         if(nameAndPwd!=null){
             //登录成功！
             System.out.println("登录成功");
+            req.getSession().setAttribute("adminname",adminname);
             out.write("1");
             out.flush();
         }else {

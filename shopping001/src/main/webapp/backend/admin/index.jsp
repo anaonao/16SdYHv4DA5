@@ -129,6 +129,19 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    订单管理
+                    <span class="glyphicon glyphicon-menu-right"
+                          style="position:absolute ;right: 10px;top: 3px;"></span>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="<%=request.getContextPath()%>/OrderServlet?op=selectAll"
+                               target="frame">显示所有订单</a></li>
+                        <li><a href="<%=request.getContextPath()%>/OrderItemServlet?op=selectAll"
+                               target="frame">显示所有订单详情</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
 

@@ -39,4 +39,12 @@ public class OrderServiceImpl implements OrderService {
     public Page<Order> findByUserName(int pageNum, int pageSize, String userName) {
         return orderDao.selectByUserName(pageNum,pageSize,userName);
     }
+
+    @Override
+    public int update(Order order) {
+        if(order!=null){
+            return orderDao.update(order);
+        }
+        return 0;
+    }
 }
