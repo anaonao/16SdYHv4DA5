@@ -67,4 +67,13 @@ public interface ProductService {
      * @return
      */
     List<Product> findListAll();
+
+    /**
+     * 根据商品类型编号查询
+     * @param pageNum
+     * @param pageSize
+     * @param typeId
+     * @return
+     */
+    Page<Product> findByTypeId(int pageNum,int pageSize,Integer typeId);
 }
