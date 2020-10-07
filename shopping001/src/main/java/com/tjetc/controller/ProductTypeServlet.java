@@ -1,5 +1,6 @@
 package com.tjetc.controller;
 
+import com.google.gson.Gson;
 import com.tjetc.dao.ProductTypeDao;
 import com.tjetc.domain.Product;
 import com.tjetc.domain.ProductType;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet("/ProductTypeServlet")
 public class ProductTypeServlet extends HttpServlet {
@@ -36,8 +38,8 @@ public class ProductTypeServlet extends HttpServlet {
             deleteById(req,resp);
         }else if("addProductType".equals(op)){
             addProductType(req,resp);
-        }else if("".equals(op)){
-
+        }else if("findAllType".equals(op)){
+            findAllType(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -53,6 +55,15 @@ public class ProductTypeServlet extends HttpServlet {
         }else if("".equals(op)){
 
         }
+    }
+    //查找所有商品类型
+    private void findAllType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        List<ProductType> listAll = productTypeService.findListAll();
+        PrintWriter out = resp.getWriter();
+        Gson gson = new Gson();
+        String str = gson.toJson(listAll);
+        out.write(str);
+        out.flush();
     }
 
     //添加商品类型信息

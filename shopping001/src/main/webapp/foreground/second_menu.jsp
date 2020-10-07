@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: wkx
@@ -19,23 +20,23 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="icon" href="images/favicon.png" type="image/gif" />
+    <link rel="icon" href="<%=request.getContextPath()%>/foreground/images/favicon.png" type="image/gif" />
 
     <title>二级页面</title>
 
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/foreground/css/bootstrap.css" />
 
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
 
     <!-- font awesome style -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/foreground/css/font-awesome.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/foreground/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
-    <link href="css/responsive.css" rel="stylesheet" />
-    <style type="text/css">
+    <link href="<%=request.getContextPath()%>/foreground/css/responsive.css" rel="stylesheet" />
+    <style type="<%=request.getContextPath()%>/foreground/text/css">
         .product img{
             width: 300px;
             height: 300px;
@@ -59,66 +60,25 @@
             </h2>
         </div>
         <div class="row product" >
-            <div class="col-lg-3 ">
-                <div class="box">
-                    <div >
-                        <img src="images/b1.jpg" alt="">
+            <c:forEach items="${page.data}" var="product">
+
+                <div class="col-lg-3 ">
+                    <div class="box">
                         <div >
-                            <h5>
-                                商品名称
-                            </h5>
-                            <p>
-                                商品简介
-                            </p>
+                            <img src="<%=request.getContextPath()%>/foreground/images/"+${product.productName} alt="">
+                            <div >
+                                <h5>
+                                        ${product.productName}
+                                </h5>
+                                <p>
+                                        ${product.productDiscraction}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 ">
-                <div class="box">
-                    <div >
-                        <img src="images/b1.jpg" alt="">
-                        <div >
-                            <h5>
-                                商品名称
-                            </h5>
-                            <p>
-                                商品简介
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 ">
-                <div class="box">
-                    <div >
-                        <img src="images/b1.jpg" alt="">
-                        <div >
-                            <h5>
-                                商品名称
-                            </h5>
-                            <p>
-                                商品简介
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 ">
-                <div class="box">
-                    <div >
-                        <img src="images/b1.jpg" alt="">
-                        <div >
-                            <h5>
-                                商品名称
-                            </h5>
-                            <p>
-                                商品简介
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
+
         </div>
     </div>
 </section>
@@ -129,12 +89,12 @@
 
 
 <!-- jQery -->
-<script src="js/jquery-3.4.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/foreground/js/jquery-3.4.1.min.js"></script>
 <!-- bootstrap js -->
-<script src="js/bootstrap.js"></script>
+<script src="<%=request.getContextPath()%>/foreground/js/bootstrap.js"></script>
 
 <!-- custom js -->
-<script src="js/custom.js"></script>
+<script src="<%=request.getContextPath()%>/foreground/js/custom.js"></script>
 
 </body>
 

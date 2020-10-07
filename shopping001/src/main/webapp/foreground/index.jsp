@@ -96,15 +96,15 @@
                 <div>
                     <%--                    变量记录用户是否登录--%>
                     <c:set var="islogin" value="${empty sessionScope.userName}"/>
-<%--                        未登录--%>
+                    <%--                        未登录--%>
                     <c:if test="${islogin}">
                         <a href="login.jsp" class="slider-link">
                             登录
                         </a>
                     </c:if>
-<%--                        已登录--%>
+                    <%--                        已登录--%>
                     <c:if test="${!islogin}">
-                        <a  class="slider-link">
+                        <a class="slider-link">
                             欢迎您，<c:out value="${userName}"></c:out>
                         </a>
                     </c:if>
@@ -142,7 +142,7 @@
                 商品分类
             </h2>
         </div>
-        <div class="row">
+        <div class="row" id="typeName">
             <%--            加载商品类型--%>
 
 
@@ -164,20 +164,7 @@
             <%--                    </div>--%>
             <%--                </div>--%>
             <%--            </div>--%>
-            <div class="col-md-6 col-lg-2 mx-auto">
-                <div class="box">
-                    <div class="detail-box">
-                        <p>
-                        <h5>
-                            空调
-                        </h5>
-                        </p>
-                        <a href="second_menu.jsp">
-                            了解更多
-                        </a>
-                    </div>
-                </div>
-            </div>
+
 
         </div>
     </div>
@@ -426,7 +413,37 @@
 
 
 <script>
+    $(function () {
+        $.ajax({
+            url: "<%=request.getContextPath()%>/ProductTypeServlet?op=findAllType",
+            type: "post",
+            data: {},
+            success: function (data) {
+                console.log(data);
+                $.each(data, function (i, item) {
+                    $("#typeName").append(
+                        "<div class=\"col-md-6 col-lg-2 mx-auto\">\n" +
+                        "                        <div class=\"box\">\n" +
+                        "                        <div class=\"detail-box\">\n" +
+                        "                        <p>\n" +
+                        "                        <h5>\n" +
+                                                item.type_name +
+                        "                        </h5>\n" +
+                        "                        </p>\n" +
+                        "                        <a href='<%=request.getContextPath()%>/ProductServlet?op=findByTypeId&id="+item.type_id+"'>\n" +
+                        "                        了解更多\n" +
+                        "                        </a>\n" +
+                        "                        </div>\n" +
+                        "                        </div>\n" +
+                        "                        </div>"
+                    );
 
+
+                })
+            },
+            dataType: "json"
+        })
+    })
 </script>
 
 </body>

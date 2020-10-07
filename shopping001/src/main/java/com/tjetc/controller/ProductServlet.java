@@ -42,8 +42,8 @@ public class ProductServlet extends HttpServlet {
             selectProductTypeAll(req,resp);
         }else if("addProduct".equals(op)){
             addProduct(req,resp);
-        }else if("".equals(op)){
-
+        }else if("findByTypeId".equals(op)){
+            findByTypeId(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -61,6 +61,14 @@ public class ProductServlet extends HttpServlet {
         }else if("".equals(op)){
 
         }
+    }
+
+    private void findByTypeId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        String pageSize = req.getParameter("page");
+        Page<Product> all = productService.findByTypeId(pageSize == null ? 1 : Integer.parseInt(pageSize), 10,Integer.parseInt(id));
+        req.setAttribute("page",all);
+        req.getRequestDispatcher("foreground/second_menu.jsp").forward(req,resp);
     }
 
     //添加商品信息
