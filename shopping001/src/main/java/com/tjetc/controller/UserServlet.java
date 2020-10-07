@@ -1,8 +1,10 @@
 package com.tjetc.controller;
 
+import com.tjetc.domain.Admin;
 import com.tjetc.domain.User;
 import com.tjetc.service.UserService;
 import com.tjetc.service.impl.UserServiceImpl;
+import com.tjetc.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,8 +30,19 @@ public class UserServlet extends HttpServlet {
             login(req, resp);
         } else if ("register".equals(op)) {
             register(req, resp);
+        }else if ("selectAll".equals(op)) {
+            selectAll(req, resp);
         }
     }
+
+    //后台显示所有用户信息
+    private void selectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String pageSize = req.getParameter("page");
+        Page<User> all = userService.findPageAll(pageSize == null ? 1 : Integer.parseInt(pageSize), 10);
+        req.setAttribute("page",all);
+        req.getRequestDispatcher("backend/admin/user/list.jsp").forward(req,resp);
+    }
+
 
     //注册
     private void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {

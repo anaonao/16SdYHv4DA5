@@ -4,38 +4,40 @@
 <head>
     <title>凯瑞智能家居后台管理系统</title>
 
-    <link href="<%=request.getContextPath()%>/asserts/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/asserts/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 
     <script src="<%=request.getContextPath()%>/asserts/js/jquery-1.12.4.js" type="text/javascript"></script>
 
     <script src="<%=request.getContextPath()%>/asserts/js/bootstrap.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        $(function(){
+        $(function () {
             $(".main-ml>ul>li:odd").hide();
 
-            $(".main-ml>ul>li:even").click(function(){
+            $(".main-ml>ul>li:even").click(function () {
                 $(this).next().slideToggle();
-                if($(this).children("span").attr("class")=="glyphicon glyphicon-menu-right"){
-                    $(this).children("span").attr("class","glyphicon glyphicon-menu-down")
-                }else{
-                    $(this).children("span").attr("class","glyphicon glyphicon-menu-right")
+                if ($(this).children("span").attr("class") == "glyphicon glyphicon-menu-right") {
+                    $(this).children("span").attr("class", "glyphicon glyphicon-menu-down")
+                } else {
+                    $(this).children("span").attr("class", "glyphicon glyphicon-menu-right")
                 }
             })
         })
     </script>
     <style type="text/css">
-        .main-ml ul{
+        .main-ml ul {
             list-style: none;
             color: #FFF;
         }
-        .main-ml ul li{
+
+        .main-ml ul li {
             margin-top: 10px;
             position: relative;
 
         }
-        .main-ml ul li:hover{
-            cursor:pointer;
+
+        .main-ml ul li:hover {
+            cursor: pointer;
         }
     </style>
 
@@ -50,7 +52,9 @@
             <div class="col-md-6">
                 <div style="position: absolute;right: 0;line-height: 50px">
                     <c:if test="${adminname!=null}">
-                        <div style="float: left;margin-left: 50px;color: #FFF">欢迎${adminname}&nbsp;<a style="color: #FFF" href="<%=request.getContextPath()%>/AdminServlet?op=removeLogin">注销</a></div>
+                        <div style="float: left;margin-left: 50px;color: #FFF">欢迎${adminname}&nbsp;<a
+                                style="color: #FFF"
+                                href="<%=request.getContextPath()%>/AdminServlet?op=removeLogin">注销</a></div>
                     </c:if>
                 </div>
             </div>
@@ -58,54 +62,79 @@
     </div>
 
     <div class="row">
-        <div class="col-md-2 main-ml" style="background-color:#262626 ;height: 600px;border-top: 2px solid #FFF;border-bottom: 2px solid #FFF;">
+        <div class="col-md-2 main-ml"
+             style="background-color:#262626 ;height: 600px;border-top: 2px solid #FFF;border-bottom: 2px solid #FFF;">
             <label style="font-size: 16px;color: #FFF;margin-top:20px;">凯瑞智能家居后台管理系统</label>
             <ul style="margin-top: 20px;">
                 <li>
                     管理员管理
-                    <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
+                    <span class="glyphicon glyphicon-menu-right"
+                          style="position:absolute ;right: 10px;top: 3px;"></span>
                 </li>
                 <li>
                     <ul>
-                        <li><a href="<%=request.getContextPath()%>/AdminServlet?op=selectAll" target="frame">显示所有管理员信息</a></li>
-                        <li><a href="<%=request.getContextPath()%>/backend/admin/admin/add.jsp" target="frame">添加管理员</a></li>
+                        <li><a href="<%=request.getContextPath()%>/AdminServlet?op=selectAll"
+                               target="frame">显示所有管理员信息</a></li>
+                        <li><a href="<%=request.getContextPath()%>/backend/admin/admin/add.jsp" target="frame">添加管理员</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                商品管理
-                <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
-            </li>
+                    用户管理
+                    <span class="glyphicon glyphicon-menu-right"
+                          style="position:absolute ;right: 10px;top: 3px;"></span>
+                </li>
                 <li>
                     <ul>
-                        <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectAll" target="frame">显示所有商品</a></li>
-                        <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectProductTypeAll" target="frame">添加商品</a></li>
+                        <li><a href="<%=request.getContextPath()%>/UserServlet?op=selectAll"
+                               target="frame">显示所有用户信息</a></li>
+                    </ul>
+                </li>
+                <li>
+                    商品管理
+                    <span class="glyphicon glyphicon-menu-right"
+                          style="position:absolute ;right: 10px;top: 3px;"></span>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectAll"
+                               target="frame">显示所有商品</a></li>
+                        <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectProductTypeAll"
+                               target="frame">添加商品</a></li>
                     </ul>
                 </li>
                 <li>
                     商品图片管理
-                    <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
+                    <span class="glyphicon glyphicon-menu-right"
+                          style="position:absolute ;right: 10px;top: 3px;"></span>
                 </li>
                 <li>
                     <ul>
-                        <li><a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectAll" target="frame">显示所有商品图片</a></li>
-                        <li><a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectProductAll" target="frame">添加商品</a></li>
+                        <li><a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectAll" target="frame">显示所有商品图片</a>
+                        </li>
+                        <li><a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectProductAll"
+                               target="frame">添加商品</a></li>
                     </ul>
                 </li>
                 <li>
                     商品类型管理
-                    <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
+                    <span class="glyphicon glyphicon-menu-right"
+                          style="position:absolute ;right: 10px;top: 3px;"></span>
                 </li>
                 <li>
                     <ul>
-                        <li><a href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectAll" target="frame">显示所有商品类型</a></li>
-                        <li><a href="<%=request.getContextPath()%>/backend/admin/productType/add.jsp" target="frame">添加商品类型</a></li>
+                        <li><a href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectAll" target="frame">显示所有商品类型</a>
+                        </li>
+                        <li><a href="<%=request.getContextPath()%>/backend/admin/productType/add.jsp" target="frame">添加商品类型</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
         </div>
 
         <div class="col-md-10" style="height: 600px;">
-            <iframe name="frame" src="<%=request.getContextPath()%>/backend/admin/indexCount.jsp" frameborder="0" height="100%" width="100%">
+            <iframe name="frame" src="<%=request.getContextPath()%>/backend/admin/indexCount.jsp" frameborder="0"
+                    height="100%" width="100%">
 
             </iframe>
         </div>

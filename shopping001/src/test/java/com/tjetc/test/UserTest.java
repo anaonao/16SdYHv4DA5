@@ -25,6 +25,8 @@ public class UserTest {
     }
     @Test
     public void selectPageAll(){
-        userDao.selectPageAll(1,1).getData().forEach(System.out::println);
+        userDao.selectPageAll(1,10).getData().forEach(System.out::println);
     }
+
+
 }
