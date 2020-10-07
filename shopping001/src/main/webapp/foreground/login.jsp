@@ -91,10 +91,10 @@
                     </p>
                     <div class="col-lg-4 mx-auto" >
                         <div class="form-group">
-                            <input class="form-control" id="username" name="username" placeholder="请输入您的用户名">
+                            <input class="form-control" id="userName" name="userName" placeholder="请输入您的用户名">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="pwd" name="pwd" placeholder="请输入您的密码">
+                            <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="请输入您的密码">
                         </div>
                         <div class="checkbox">
                             <label>
@@ -129,11 +129,12 @@
                 url:"<%=request.getContextPath()%>/UserServlet?op=login",
                 type:"post",
                 data:{
-                    "username":$("#username").val(),
-                    "pwd":$("#pwd").val(),
+                    "userName":$("#userName").val(),
+                    "userPwd":$("#userPwd").val(),
                     "ck":$("#ck").val()
                 },
                 success:function (data) {
+                    // alert(data)
                     if(data=="1"){
                         location.href="<%=request.getContextPath()%>/foreground/index.jsp";
                     }else if(data=="0"){

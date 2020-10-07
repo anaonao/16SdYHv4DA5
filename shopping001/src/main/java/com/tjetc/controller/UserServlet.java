@@ -64,14 +64,18 @@ public class UserServlet extends HttpServlet {
 
     //登录
     private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String pwd = req.getParameter("pwd");
-        User user = userService.findNameAndPwd(username, pwd);
+        String userName = req.getParameter("userName");
+        String userPwd = req.getParameter("userPwd");
+        User user = userService.findNameAndPwd(userName, userPwd);
         PrintWriter out = resp.getWriter();
+        System.out.println(userName);
+        System.out.println(userPwd);
+        System.out.println(user);
         //登录成功
         if (user != null) {
             req.setAttribute("user", user);
             System.out.println(user);
+            req.getSession().setAttribute("userName",userName);
             out.write("1");
             out.flush();
         } else {

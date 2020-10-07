@@ -38,12 +38,14 @@
     <link href="css/style.css" rel="stylesheet"/>
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet"/>
+    <%--    jstl--%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 </head>
 
 <body>
 
-<%@include file="myNav.jsp"%>
+<%@include file="myNav.jsp" %>
 
 <!-- 轮播图-->
 <section class="slider_section position-relative">
@@ -86,22 +88,46 @@
         <div class="col-md-8 col-lg-6 mx-auto">
             <div class="inner_detail-box">
                 <h1>
-                    凯瑞智能家居<br>
-                    工作室
+                    凯瑞智能家居
                 </h1>
                 <p>
                     凯瑞智能家居商城欢迎您的到来~
                 </p>
                 <div>
-                    <a href="login.jsp" class="slider-link">
-                        登录
-                    </a>
+                    <%--                    变量记录用户是否登录--%>
+                    <c:set var="islogin" value="${empty sessionScope.userName}"/>
+<%--                        未登录--%>
+                    <c:if test="${islogin}">
+                        <a href="login.jsp" class="slider-link">
+                            登录
+                        </a>
+                    </c:if>
+<%--                        已登录--%>
+                    <c:if test="${!islogin}">
+                        <a  class="slider-link">
+                            欢迎您，<c:out value="${userName}"></c:out>
+                        </a>
+                    </c:if>
+
                 </div>
                 <div>
-                    <a href="register.jsp" class="slider-link">
-                        注册
-                    </a>
+                    <%--                    变量记录用户是否登录--%>
+                    <c:set var="islogin" value="${empty sessionScope.userName}"/>
+                    <%--                        未登录--%>
+                    <c:if test="${islogin}">
+                        <a href="<%=request.getContextPath()%>/foreground/register.jsp.jsp" class="slider-link">
+                            注册
+                        </a>
+                    </c:if>
+                    <%--                        已登录--%>
+                    <c:if test="${!islogin}">
+                        <a href="<%=request.getContextPath()%>/foreground/login.jsp" class="slider-link">
+                            切换账号
+                        </a>
+                    </c:if>
+
                 </div>
+
             </div>
         </div>
     </div>
@@ -117,26 +143,27 @@
             </h2>
         </div>
         <div class="row">
-<%--            加载商品类型--%>
+            <%--            加载商品类型--%>
 
-<%--            <div class="col-md-6 col-lg-2 mx-auto">--%>
-<%--                <div class="box">--%>
-<%--                    <div class="img-box">--%>
-<%--                        <img src="images/1-1.png" alt="">--%>
-<%--                    </div>--%>
-<%--                    <div class="detail-box">--%>
-<%--                        <p>--%>
-<%--                        <h5>--%>
-<%--                            监控摄像--%>
-<%--                        </h5>--%>
-<%--                        </p>--%>
 
-<%--                        <a href="second_menu.jsp">--%>
-<%--                            了解更多--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            <%--            <div class="col-md-6 col-lg-2 mx-auto">--%>
+            <%--                <div class="box">--%>
+            <%--                    <div class="img-box">--%>
+            <%--                        <img src="images/1-1.png" alt="">--%>
+            <%--                    </div>--%>
+            <%--                    <div class="detail-box">--%>
+            <%--                        <p>--%>
+            <%--                        <h5>--%>
+            <%--                            监控摄像--%>
+            <%--                        </h5>--%>
+            <%--                        </p>--%>
+
+            <%--                        <a href="second_menu.jsp">--%>
+            <%--                            了解更多--%>
+            <%--                        </a>--%>
+            <%--                    </div>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
             <div class="col-md-6 col-lg-2 mx-auto">
                 <div class="box">
                     <div class="detail-box">
@@ -248,7 +275,8 @@
                     </div>
                     <p>
                         凯瑞智能家居致力于向广大消费者提供可靠、便捷的智能家居通道。
-                        智能家居（smart home, home automation）是以住宅为平台，利用综合布线技术、网络通信技术、 安全防范技术、自动控制技术、音视频技术将家居生活有关的设施集成，构建高效的住宅设施与家庭日程事务的管理系统，提升家居安全性、便利性、舒适性、艺术性，并实现环保节能的居住环境。
+                        智能家居（smart home, home automation）是以住宅为平台，利用综合布线技术、网络通信技术、
+                        安全防范技术、自动控制技术、音视频技术将家居生活有关的设施集成，构建高效的住宅设施与家庭日程事务的管理系统，提升家居安全性、便利性、舒适性、艺术性，并实现环保节能的居住环境。
                     </p>
                     <a href="">
                         了解更多
