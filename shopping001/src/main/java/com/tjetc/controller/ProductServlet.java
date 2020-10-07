@@ -44,8 +44,8 @@ public class ProductServlet extends HttpServlet {
             addProduct(req,resp);
         }else if("findByTypeId".equals(op)){
             findByTypeId(req,resp);
-        }else if("".equals(op)){
-
+        }else if("findById".equals(op)){
+            findById(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -61,6 +61,14 @@ public class ProductServlet extends HttpServlet {
         }else if("".equals(op)){
 
         }
+    }
+
+    private void findById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        System.out.println(id);
+        Product byId = productService.findById(Integer.parseInt(id));
+        req.setAttribute("product",byId);
+        req.getRequestDispatcher("foreground/about.jsp").forward(req,resp);
     }
 
     private void findByTypeId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

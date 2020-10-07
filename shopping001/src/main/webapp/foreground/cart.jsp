@@ -21,7 +21,7 @@
     <meta name="author" content="" />
     <link rel="icon" href="images/favicon.png" type="image/gif" />
 
-    <title>商品详情页</title>
+    <title>购物车</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
