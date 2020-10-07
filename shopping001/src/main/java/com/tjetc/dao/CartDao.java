@@ -38,27 +38,20 @@ public interface CartDao {
     int countAll();
 
     /**
-     * 根据订单编号查询
-     * @param orderId
+     * 根据购物车编号查询
+     * @param id
      * @return
      */
-    Cart selectById(String orderId);
+    Cart selectById(Integer id);
 
     /**
-     * 根据用户名查询
-     * @param name
+     * 根据用户编号查询
+     * @param id
      * @return
      */
-    Page<Cart> selectByName(int pageNum, int pageSize,String name);
-    int countByName(String name);
+    Page<Cart> selectByUserId(int pageNum, int pageSize,Integer id);
+    int countByUserId(Integer id);
 
-    /**
-     * 根据用户名模糊查询
-     * @param name
-     * @return
-     */
-    Page<Cart> selectLikeName(int pageNum, int pageSize,String name);
-    int countLikeName(String name);
 
 
 

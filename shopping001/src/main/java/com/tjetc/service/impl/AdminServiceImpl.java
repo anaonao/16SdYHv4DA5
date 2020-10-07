@@ -4,6 +4,7 @@ import com.tjetc.dao.AdminDao;
 import com.tjetc.dao.impl.AdminDaoImpl;
 import com.tjetc.domain.Admin;
 import com.tjetc.service.AdminService;
+import com.tjetc.util.MD5Utils;
 import com.tjetc.util.Page;
 
 public class AdminServiceImpl implements AdminService {
@@ -11,6 +12,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin findNameAndPwd(String name, String pwd) {
+        //利用MD5把密码加密
+        pwd = MD5Utils.stringToMD5(pwd);
         return adminDao.selectNameAndPwd(name,pwd);
     }
 
@@ -23,6 +26,8 @@ public class AdminServiceImpl implements AdminService {
             }
             //默认管理员状态为1启动
             admin.setAdminState(1);
+            //利用MD5把密码加密
+            admin.setAdminPwd(MD5Utils.stringToMD5(admin.getAdminPwd()));
             int i = adminDao.addAdmin(admin);
             if(i>0){
                 return "管理员注册成功";

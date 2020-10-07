@@ -3,6 +3,8 @@ package com.tjetc.service;
 import com.tjetc.domain.Product;
 import com.tjetc.util.Page;
 
+import java.util.List;
+
 public interface ProductService {
     /**
      * 添加商品
@@ -59,5 +61,10 @@ public interface ProductService {
      * @return
      */
     Page<Product> findLikeSales(int pageNum, int pageSize,Integer Sales);
-    //根据商品
+
+    /**
+     * 显示所有商品
+     * @return
+     */
+    List<Product> findListAll();
 }

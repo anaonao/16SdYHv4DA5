@@ -1,5 +1,6 @@
 package com.tjetc.dao.impl;
 
+import com.tjetc.dao.ProductDao;
 import com.tjetc.dao.ProductImgDao;
 import com.tjetc.domain.Product;
 import com.tjetc.domain.ProductImg;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductImgDaoImpl implements ProductImgDao {
+    private ProductDao productDao = new ProductDaoImpl();
     @Override
     public int add(ProductImg productImg) {
         String sql = "insert into product_image(product_img_name,product_id) values(?,?)";
@@ -46,8 +48,7 @@ public class ProductImgDaoImpl implements ProductImgDao {
                 productImg.setProductImgId(rs.getInt("product_img_id"));
                 productImg.setProductImgName(rs.getString("product_img_name"));
 
-                Product product = new Product();
-                product.setProductId(rs.getInt("product_id"));
+                Product product = productDao.selectById(rs.getInt("product_id"));
                 productImg.setProduct(product);
 
                 list.add(productImg);
@@ -83,26 +84,20 @@ public class ProductImgDaoImpl implements ProductImgDao {
     }
 
     @Override
-    public Page<ProductImg> selectByProductId(int pageNum, int pageSize, Integer id) {
-        Page<ProductImg> page = new Page<>(pageNum,pageSize);
-        page.setTotalData(countByProductId(id));
-        List<ProductImg> list = new ArrayList<>();
-        String sql = "select product_img_id,product_img_name,product_id from product_image where product_id=? limit ?,?";
-        ResultSet rs = DBUtil.select(sql, id,page.start(), page.getPageSize());
+    public ProductImg selectByProductId(Integer id) {
+        ProductImg productImg=null;
+        String sql = "select product_img_id,product_img_name,product_id from product_image where product_img_id=?";
+        ResultSet rs = DBUtil.select(sql,id);
         try {
-            while (rs.next()){
-                ProductImg productImg = new ProductImg();
+            if (rs.next()){
+                productImg = new ProductImg();
                 productImg.setProductImgId(rs.getInt("product_img_id"));
                 productImg.setProductImgName(rs.getString("product_img_name"));
 
-                Product product = new Product();
-                product.setProductId(rs.getInt("product_id"));
+                Product product = productDao.selectById(rs.getInt("product_id"));
                 productImg.setProduct(product);
-
-                list.add(productImg);
-                page.setData(list);
             }
-            return page;
+            return productImg;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;
@@ -111,21 +106,5 @@ public class ProductImgDaoImpl implements ProductImgDao {
         }
     }
 
-    @Override
-    public int countByProductId(Integer id) {
-        String sql = "select count(1) from product_image where product_id=?";
-        ResultSet rs = DBUtil.select(sql);
-        int n =0;
-        try {
-            if(rs.next()){
-                n = rs.getInt(1);
-            }
-            return  n;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return 0;
-        }finally {
-            DBUtil.close();
-        }
-    }
+
 }

@@ -3,6 +3,8 @@ package com.tjetc.dao;
 import com.tjetc.domain.ProductType;
 import com.tjetc.util.Page;
 
+import java.util.List;
+
 public interface ProductTypeDao {
 
     /**
@@ -53,4 +55,10 @@ public interface ProductTypeDao {
      */
     Page<ProductType> selectPageLikeName(int pageNum, int pageSize,String name);
     int countLikeName(String name);
+
+    /**
+     * 查询所有商品类型
+     * @return
+     */
+    List<ProductType> selectListAll();
 }

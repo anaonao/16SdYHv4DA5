@@ -18,7 +18,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    boolean addUser(User user);
+    String addUser(User user);
 
     /**
      * 删除用户
@@ -32,50 +32,46 @@ public interface UserService {
      * @param user
      * @return
      */
-    int update(UserDao user);
+    int update(User user);
 
     /**
      * 查询所有用户信息
      * @return
      */
-    Page<UserDao> findPageAll(int pageNum, int pageSize);
-    int countAll();
+    Page<User> findPageAll(int pageNum, int pageSize);
 
     /**
      * 根据编号查询用户信息
      * @param id
      * @return
      */
-    UserDao findById(Integer id);
+    User findById(Integer id);
 
     /**
      * 根据姓名查询用户
      * @param name
      * @return
      */
-    UserDao findByName(String name);
+    User findByName(String name);
 
     /**
      * 根据姓名模糊查询
      * @param name
      * @return
      */
-    Page<UserDao> findPageLikeName(int pageNum, int pageSize, String name);
-    int countLikeName(String name);
+    Page<User> findPageLikeName(int pageNum, int pageSize, String name);
 
     /**
      * 根据手机号模糊查询
      * @param phone
      * @return
      */
-    Page<UserDao> findPageLikePhone(int pageNum, int pageSize, String phone);
-    int countLikePhone(String phone);
+    Page<User> findPageLikePhone(int pageNum, int pageSize, String phone);
 
     /**
      * 根据状态查询
      * @param state
      * @return
      */
-    Page<UserDao> findPageByState(int pageNum, int pageSize, Integer state);
-    int countByState(Integer state);
+    Page<User> findPageByState(int pageNum, int pageSize, Integer state);
 }

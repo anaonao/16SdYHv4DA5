@@ -29,6 +29,5 @@ public interface ReceiverService {
      * 查询所有地址
      * @return
      */
-    Page<Receiver> selectAll(int pageNum, int pageSize);
-    int countAll();
+    Page<Receiver> findAll(int pageNum, int pageSize);
 }

@@ -107,41 +107,187 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User selectById(Integer id) {
-        return null;
+        User user= null;
+        String sql = "select user_id,user_name,user_pwd,user_phone,user_states,user_image from user where user_id=?";
+        ResultSet rs = DBUtil.select(sql,id);
+        try {
+            while (rs.next()){
+                user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setUserName(rs.getString("user_name"));
+                user.setUserPwd(rs.getString("user_pwd"));
+                user.setUserIphone(rs.getString("user_phone"));
+                user.setUserStates(rs.getInt("user_states"));
+                user.setUserImg(rs.getString("user_image"));
+            }
+            return user;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.close();
+        }
     }
 
     @Override
     public User selectByName(String name) {
-        return null;
+        User user= null;
+        String sql = "select user_id,user_name,user_pwd,user_phone,user_states,user_image from user where user_name=?";
+        ResultSet rs = DBUtil.select(sql,name);
+        try {
+            while (rs.next()){
+                user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setUserName(rs.getString("user_name"));
+                user.setUserPwd(rs.getString("user_pwd"));
+                user.setUserIphone(rs.getString("user_phone"));
+                user.setUserStates(rs.getInt("user_states"));
+                user.setUserImg(rs.getString("user_image"));
+            }
+            return user;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.close();
+        }
     }
 
     @Override
     public Page<User> selectPageLikeName(int pageNum, int pageSize, String name) {
-        return null;
+        Page<User> page = new Page<>(pageNum,pageSize);
+        page.setTotalData(countLikeName(name));
+        List<User> list = new ArrayList<>();
+        String sql = "select user_id,user_name,user_pwd,user_phone,user_states,user_image from user where user_name like ? limit ?,?";
+        ResultSet rs = DBUtil.select(sql,name,page.start(), page.getPageSize());
+        try {
+            while (rs.next()){
+                User user= new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setUserName(rs.getString("user_name"));
+                user.setUserPwd(rs.getString("user_pwd"));
+                user.setUserIphone(rs.getString("user_phone"));
+                user.setUserStates(rs.getInt("user_states"));
+                user.setUserImg(rs.getString("user_image"));
+                list.add(user);
+                page.setData(list);
+            }
+            return page;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.close();
+        }
     }
 
     @Override
     public int countLikeName(String name) {
-        return 0;
+        String sql = "select count(1) from user where user_name like ?";
+        ResultSet rs = DBUtil.select(sql,"%"+name+"%");
+        int n = 0;
+        try {
+            if(rs.next()){
+                n= rs.getInt(1);
+            }
+            return n;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }finally {
+            DBUtil.close();
+        }
     }
 
     @Override
     public Page<User> selectPageLikePhone(int pageNum, int pageSize, String phone) {
-        return null;
+        Page<User> page = new Page<>(pageNum,pageSize);
+        page.setTotalData(countLikePhone(phone));
+        List<User> list = new ArrayList<>();
+        String sql = "select user_id,user_name,user_pwd,user_phone,user_states,user_image from user where user_phone like ? limit ?,?";
+        ResultSet rs = DBUtil.select(sql,phone,page.start(), page.getPageSize());
+        try {
+            while (rs.next()){
+                User user= new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setUserName(rs.getString("user_name"));
+                user.setUserPwd(rs.getString("user_pwd"));
+                user.setUserIphone(rs.getString("user_phone"));
+                user.setUserStates(rs.getInt("user_states"));
+                user.setUserImg(rs.getString("user_image"));
+                list.add(user);
+                page.setData(list);
+            }
+            return page;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.close();
+        }
     }
 
     @Override
     public int countLikePhone(String phone) {
-        return 0;
+        String sql = "select count(1) from user where user_phone like ?";
+        ResultSet rs = DBUtil.select(sql,"%"+phone+"%");
+        int n = 0;
+        try {
+            if(rs.next()){
+                n= rs.getInt(1);
+            }
+            return n;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }finally {
+            DBUtil.close();
+        }
     }
 
     @Override
     public Page<User> selectPageByState(int pageNum, int pageSize, Integer state) {
-        return null;
+        Page<User> page = new Page<>(pageNum,pageSize);
+        page.setTotalData(countByState(state));
+        List<User> list = new ArrayList<>();
+        String sql = "select user_id,user_name,user_pwd,user_phone,user_states,user_image from user where user_states=? limit ?,?";
+        ResultSet rs = DBUtil.select(sql,state,page.start(), page.getPageSize());
+        try {
+            while (rs.next()){
+                User user= new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setUserName(rs.getString("user_name"));
+                user.setUserPwd(rs.getString("user_pwd"));
+                user.setUserIphone(rs.getString("user_phone"));
+                user.setUserStates(rs.getInt("user_states"));
+                user.setUserImg(rs.getString("user_image"));
+                list.add(user);
+                page.setData(list);
+            }
+            return page;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.close();
+        }
     }
 
     @Override
     public int countByState(Integer state) {
-        return 0;
+        String sql = "select count(1) from user where user_states=?";
+        ResultSet rs = DBUtil.select(sql,state);
+        int n = 0;
+        try {
+            if(rs.next()){
+                n= rs.getInt(1);
+            }
+            return n;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }finally {
+            DBUtil.close();
+        }
     }
 }
