@@ -89,10 +89,10 @@
                     <p>
                         ${product.productDiscraction}
                     </p>
-                    <a href="">
+                    <a href="javascript:" id="isloginCart">
                         加入购物车
                     </a>
-                    <a href="">
+                    <a href="javascript:">
                         立即购买
                     </a>
                 </div>
@@ -111,7 +111,40 @@
 <script src="<%=request.getContextPath()%>/foreground/js/bootstrap.js"></script>
 <!-- custom js -->
 <script src="<%=request.getContextPath()%>/foreground/js/custom.js"></script>
-
+<script>
+    $(function () {
+           //添加购物车
+            $("#isloginCart").click(function () {
+                console.log("购物车点击事件")
+                //如果用户没有登录不能点击加入购物车
+                if(${userName==nul}){
+                    if(confirm("您还没有登录,是否现在登录???")){
+                        console.log("跳转到登录陆")
+                        location.href="<%=request.getContextPath()%>/foreground/login.jsp"
+                    }
+                }else {
+                    //把当前数据加入购物车
+                    console.log("加入购物车")
+                    $.ajax({
+                        url:"<%=request.getContextPath()%>/CartSrvlet?op=addCart",
+                        type:"post",
+                        data:{
+                            "productId":${product.productId},
+                            "userId":${userId}
+                        },
+                        success:function (data) {
+                            console.log(data)
+                            if(data=="1"){
+                                alert("添加购物车成功")
+                            }else if(data=="0"){
+                                alert("添加购物车失败！！！")
+                            }
+                        }
+                    })
+                }
+            })
+    })
+</script>
 </body>
 
 </html>

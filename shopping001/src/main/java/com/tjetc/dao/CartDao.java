@@ -52,6 +52,14 @@ public interface CartDao {
     Page<Cart> selectByUserId(int pageNum, int pageSize,Integer id);
     int countByUserId(Integer id);
 
+    /**
+     * 根据用户编号和商品编号查询
+     * @param userId
+     * @param productId
+     * @return
+     */
+    Cart selectByUserIdAndProductId(Integer userId,Integer productId);
+
 
 
 

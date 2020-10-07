@@ -44,4 +44,12 @@ public interface CartService {
      * @return
      */
     Page<Cart> findByUserId(int pageNum, int pageSize,Integer id);
+
+    /**
+     * 根据用户编号和商品编号查询
+     * @param userId
+     * @param productId
+     * @return
+     */
+    Cart findByUserIdAndProductId(Integer userId,Integer productId);
 }

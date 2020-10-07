@@ -31,11 +31,11 @@
                     <%--                    导航--%>
                     <div id="myNav" class="overlay">
                         <div class="overlay-content">
-                            <a href="index.jsp">首页</a>
-                            <a href="cart.jsp">购物车</a>
-                            <a href="person_center.jsp">个人中心</a>
-                            <a href="message.jsp">留言</a>
-                            <a href="about.jsp">关于我们</a>
+                            <a href="<%=request.getContextPath()%>/foreground/index.jsp">首页</a>
+                            <a href="<%=request.getContextPath()%>/foreground/cart.jsp">购物车</a>
+                            <a href="<%=request.getContextPath()%>/foreground/person_center.jsp">个人中心</a>
+                            <a href="<%=request.getContextPath()%>/foreground/message.jsp">留言</a>
+                            <a href="<%=request.getContextPath()%>/foreground/about.jsp">关于我们</a>
                         </div>
                     </div>
                 </div>

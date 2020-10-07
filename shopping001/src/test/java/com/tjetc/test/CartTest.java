@@ -5,10 +5,13 @@ import com.tjetc.dao.impl.CardDaoImpl;
 import com.tjetc.domain.Cart;
 import com.tjetc.domain.Product;
 import com.tjetc.domain.User;
+import com.tjetc.service.CartService;
+import com.tjetc.service.impl.CartServiceImpl;
 import org.junit.Test;
 
 public class CartTest {
     private CartDao cartDao = new CardDaoImpl();
+    private CartService cartService = new CartServiceImpl();
     @Test
     public void selectPageAll(){
         cartDao.selectAll(1,1).getData().forEach(System.out::println);
@@ -25,5 +28,9 @@ public class CartTest {
         cart.setProductsCount(10);
 
         System.out.println(cartDao.add(cart));
+    }
+    @Test
+    public void findByUserIdAll(){
+        cartService.findByUserId(1,2,1).getData().forEach(System.out::println);
     }
 }

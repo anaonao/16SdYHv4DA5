@@ -63,6 +63,7 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
+    //前台页面详情展示
     private void findById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         System.out.println(id);

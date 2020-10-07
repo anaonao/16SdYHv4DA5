@@ -19,25 +19,25 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <link rel="icon" href="images/favicon.png" type="image/gif"/>
+    <link rel="icon" href="<%=request.getContextPath()%>/foreground/images/favicon.png" type="image/gif"/>
 
     <title>首页</title>
 
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/foreground/css/bootstrap.css"/>
 
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
 
     <!-- lightbox Gallery-->
-    <link rel="stylesheet" href="css/ekko-lightbox.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/foreground/css/ekko-lightbox.css"/>
 
     <!-- font awesome style -->
-    <link href="css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/foreground/css/font-awesome.min.css" rel="stylesheet"/>
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/foreground/css/style.css" rel="stylesheet"/>
     <!-- responsive style -->
-    <link href="css/responsive.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/foreground/css/responsive.css" rel="stylesheet"/>
     <%--    jstl--%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -54,21 +54,21 @@
             <div class="carousel-item active">
                 <div class="img_container">
                     <div class="img-box">
-                        <img src="images/timg.jpg" class="" alt="...">
+                        <img src="<%=request.getContextPath()%>/foreground/images/timg.jpg" class="" alt="...">
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="img_container">
                     <div class="img-box">
-                        <img src="images/slider-bg.jpg" class="" alt="...">
+                        <img src="<%=request.getContextPath()%>/foreground/images/slider-bg.jpg" class="" alt="...">
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="img_container">
                     <div class="img-box">
-                        <img src="images/slider-bg.jpg" class="" alt="...">
+                        <img src="<%=request.getContextPath()%>/foreground/images/slider-bg.jpg" class="" alt="...">
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                     <c:set var="islogin" value="${empty sessionScope.userName}"/>
                     <%--                        未登录--%>
                     <c:if test="${islogin}">
-                        <a href="login.jsp" class="slider-link">
+                        <a href="<%=request.getContextPath()%>/foreground/login.jsp" class="slider-link">
                             登录
                         </a>
                     </c:if>
@@ -185,48 +185,48 @@
         <div class="row">
             <div class=" col-sm-8 col-md-6 px-0">
                 <div class="img-box">
-                    <img src="images/g1.jpg" alt="">
-                    <a href="images/g1.jpg" data-toggle="lightbox" data-gallery="gallery">
+                    <img src="<%=request.getContextPath()%>/foreground/images/g1.jpg" alt="">
+                    <a href="<%=request.getContextPath()%>/foreground/images/g1.jpg" data-toggle="lightbox" data-gallery="gallery">
                         <i class="fa fa-picture-o" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
             <div class="col-sm-4 col-md-3 px-0">
                 <div class="img-box">
-                    <img src="images/g2.jpg" alt="">
-                    <a href="images/g2.jpg" data-toggle="lightbox" data-gallery="gallery">
+                    <img src="<%=request.getContextPath()%>/foreground/images/g2.jpg" alt="">
+                    <a href="<%=request.getContextPath()%>/foreground/images/g2.jpg" data-toggle="lightbox" data-gallery="gallery">
                         <i class="fa fa-picture-o" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3 px-0">
                 <div class="img-box">
-                    <img src="images/g3.jpg" alt="">
-                    <a href="images/g3.jpg" data-toggle="lightbox" data-gallery="gallery">
+                    <img src="<%=request.getContextPath()%>/foreground/images/g3.jpg" alt="">
+                    <a href="<%=request.getContextPath()%>/foreground/images/g3.jpg" data-toggle="lightbox" data-gallery="gallery">
                         <i class="fa fa-picture-o" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3 px-0">
                 <div class="img-box">
-                    <img src="images/g4.jpg" alt="">
-                    <a href="images/g4.jpg" data-toggle="lightbox" data-gallery="gallery">
+                    <img src="<%=request.getContextPath()%>/foreground/images/g4.jpg" alt="">
+                    <a href="<%=request.getContextPath()%>/foreground/images/g4.jpg" data-toggle="lightbox" data-gallery="gallery">
                         <i class="fa fa-picture-o" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
             <div class="col-sm-4 col-md-3 px-0">
                 <div class="img-box">
-                    <img src="images/g5.jpg" alt="">
-                    <a href="images/g5.jpg" data-toggle="lightbox" data-gallery="gallery">
+                    <img src="<%=request.getContextPath()%>/foreground/images/g5.jpg" alt="">
+                    <a href="<%=request.getContextPath()%>/foreground/images/g5.jpg" data-toggle="lightbox" data-gallery="gallery">
                         <i class="fa fa-picture-o" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
             <div class="col-sm-8 col-md-6 px-0">
                 <div class="img-box">
-                    <img src="images/g6.jpg" alt="">
-                    <a href="images/g6.jpg" data-toggle="lightbox" data-gallery="gallery">
+                    <img src="<%=request.getContextPath()%>/foreground/images/g6.jpg" alt="">
+                    <a href="<%=request.getContextPath()%>/foreground/images/g6.jpg" data-toggle="lightbox" data-gallery="gallery">
                         <i class="fa fa-picture-o" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -250,7 +250,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="img-box">
-                    <img src="images/login.jpg" alt="">
+                    <img src="<%=request.getContextPath()%>/foreground/images/login.jpg" alt="">
                 </div>
             </div>
             <div class="col-md-6">
@@ -293,7 +293,7 @@
                         <div class="col-md-11 col-lg-10 mx-auto">
                             <div class="box">
                                 <div class="img-box">
-                                    <img src="images/client.jpg" alt=""/>
+                                    <img src="<%=request.getContextPath()%>/foreground/images/client.jpg" alt=""/>
                                 </div>
                                 <div class="detail-box">
                                     <div class="name">
@@ -315,7 +315,7 @@
                         <div class="col-md-11 col-lg-10 mx-auto">
                             <div class="box">
                                 <div class="img-box">
-                                    <img src="images/client.jpg" alt=""/>
+                                    <img src="<%=request.getContextPath()%>/foreground/images/client.jpg" alt=""/>
                                 </div>
                                 <div class="detail-box">
                                     <div class="name">
@@ -405,11 +405,11 @@
 <%@include file="myFoot.jsp" %>
 
 <!-- jQery -->
-<script src="js/jquery-3.4.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/foreground/js/jquery-3.4.1.min.js"></script>
 <!-- bootstrap js -->
-<script src="js/bootstrap.js"></script>
+<script src="<%=request.getContextPath()%>/foreground/js/bootstrap.js"></script>
 <!-- lightbox Gallery-->
-<script src="js/ekko-lightbox.min.js"></script>
+<script src="<%=request.getContextPath()%>/foreground/js/ekko-lightbox.min.js"></script>
 
 
 <script>

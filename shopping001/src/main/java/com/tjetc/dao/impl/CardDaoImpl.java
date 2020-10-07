@@ -1,6 +1,8 @@
 package com.tjetc.dao.impl;
 
 import com.tjetc.dao.CartDao;
+import com.tjetc.dao.ProductDao;
+import com.tjetc.dao.UserDao;
 import com.tjetc.domain.Cart;
 import com.tjetc.domain.Product;
 import com.tjetc.domain.User;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardDaoImpl implements CartDao {
+    private ProductDao productDao = new ProductDaoImpl();
+    private UserDao userDao = new UserDaoImpl();
     @Override
     public int add(Cart cart) {
         String sql = "insert into cart (cart_id,product_id,products_count,user_id) values(null,?,?,?);";
@@ -44,10 +48,8 @@ public class CardDaoImpl implements CartDao {
         try {
             while (rs.next()){
                 Cart cart = new Cart();
-                Product product = new Product();
-                product.setProductId(rs.getInt("product_id"));
-                User user = new User();
-                user.setUserId(rs.getInt("user_id"));
+                Product product = productDao.selectById(rs.getInt("product_id"));
+                User user = userDao.selectById(rs.getInt("user_id"));
                 cart.setCartId(rs.getInt("cart_id"));
                 cart.setProduct(product);
                 cart.setProductsCount(rs.getInt("products_count"));
@@ -89,10 +91,8 @@ public class CardDaoImpl implements CartDao {
         Cart cart = new Cart();
         try {
             if(rs.next()){
-                Product product = new Product();
-                product.setProductId(rs.getInt("product_id"));
-                User user = new User();
-                user.setUserId(rs.getInt("user_id"));
+                Product product = productDao.selectById(rs.getInt("product_id"));
+                User user = userDao.selectById(rs.getInt("user_id"));
                 cart.setCartId(rs.getInt("cart_id"));
                 cart.setProduct(product);
                 cart.setProductsCount(rs.getInt("products_count"));
@@ -114,14 +114,13 @@ public class CardDaoImpl implements CartDao {
         page.setTotalData(countByUserId(id));
         List<Cart> list = new ArrayList<>();
         String sql = "select cart_id,product_id,products_count,user_id from cart where user_id=? limit ?,?";
-        ResultSet rs = DBUtil.select(sql,id,page.start(), page.getPageSize());
+        ResultSet rs = DBUtil.select(sql,id,page.start(),page.getPageSize());
         try {
             while (rs.next()){
                 Cart cart = new Cart();
-                Product product = new Product();
-                product.setProductId(rs.getInt("product_id"));
-                User user = new User();
-                user.setUserId(rs.getInt("user_id"));
+                Product product = productDao.selectById(rs.getInt("product_id"));
+                User user = userDao.selectById(rs.getInt("user_id"));
+
                 cart.setCartId(rs.getInt("cart_id"));
                 cart.setProduct(product);
                 cart.setProductsCount(rs.getInt("products_count"));
@@ -156,5 +155,26 @@ public class CardDaoImpl implements CartDao {
         }
     }
 
-
+    @Override
+    public Cart selectByUserIdAndProductId(Integer userId, Integer productId) {
+        String sql = "select cart_id,product_id,products_count,user_id from cart where user_id=? and product_id=?";
+        ResultSet rs = DBUtil.select(sql,userId,productId);
+        Cart cart = new Cart();
+        try {
+            if(rs.next()){
+                Product product = productDao.selectById(rs.getInt("product_id"));
+                User user = userDao.selectById(rs.getInt("user_id"));
+                cart.setCartId(rs.getInt("cart_id"));
+                cart.setProduct(product);
+                cart.setProductsCount(rs.getInt("products_count"));
+                cart.setUser(user);
+            }
+            return cart;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.close();
+        }
+    }
 }

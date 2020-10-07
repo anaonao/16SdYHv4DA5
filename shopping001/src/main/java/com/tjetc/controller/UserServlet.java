@@ -76,6 +76,7 @@ public class UserServlet extends HttpServlet {
             req.setAttribute("user", user);
             System.out.println(user);
             req.getSession().setAttribute("userName",userName);
+            req.getSession().setAttribute("userId",user.getUserId());
             out.write("1");
             out.flush();
         } else {

@@ -24,8 +24,7 @@
     <title>购物车</title>
 
     <!-- bootstrap core css -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/foreground/css/bootstrap.css" />
-
+    <link href="<%=request.getContextPath()%>/asserts/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
 
@@ -79,48 +78,51 @@
         </div>
 
         <!-- start card-main -->
-        <%--<div class="card-main" id="commisnull">
+        <div class="card-main" id="commisnull">
             <div class="row card-main-1 hidden">
                 <div class="col-xs-12 col-md-12" style="text-align: center;">
                     购物车还没有选购商品，快去选购吧！！！
                 </div>
             </div>
-        </div>--%>
+        </div>
         <!-- start card-main -->
-<%--            <div class="card-main" style="margin-top: 20px;">--%>
-<%--                <div class="row card-main-1">--%>
-<%--                    <div class="col-md-1">--%>
-<%--                        <input type="checkbox" name="ck" class="ck"/>--%>
-<%--                    </div>--%>
-<%--                    <div class="col-md-3">--%>
-<%--                        <div class="row">--%>
-<%--                            <div class="col-md-4">--%>
-<%--                                <img src="#" />--%>
-<%--                            </div>--%>
-<%--                            <div class="col-md-8">--%>
-<%--                                文字描述--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="col-md-2">--%>
-<%--                        颜色分类（）机型（）--%>
-<%--                    </div>--%>
+        <div id="selectCart">
 
-<%--                    <div class=col-md-1 price">--%>
-<%--                    <span class="aa">3999</span>--%>
-<%--                </div>--%>
-<%--                <div class="col-xs-3 col-md-3 aaa">--%>
-<%--                    <input type="button"  class="bt1 btn" value="-"/>--%>
-<%--                    <input type="text" value="1" min="0" class="txt"/>--%>
-<%--                    <input type="button" value="+" class="bt2 btn"/>--%>
-<%--                </div>--%>
-<%--                <div class="col-md-1 xj">--%>
-<%--                    3999--%>
-<%--                </div>--%>
-<%--                <div class="col-md-1">--%>
-<%--                    <a href="javascript:" class="outcomm">移出商品</a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+        </div>
+            <%--<div class="card-main" style="margin-top: 20px;">
+                <div class="row card-main-1">
+                    <div class="col-md-1">
+                        <input type="checkbox" name="ck" class="ck"/>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="#" />
+                            </div>
+                            <div class="col-md-8">
+                                文字描述
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        颜色分类（）机型（）
+                    </div>
+
+                    <div class="col-md-1 price">
+                    <span class="aa">3999</span>
+                </div>
+                <div class="col-xs-3 col-md-3 aaa">
+                    <input type="button"  class="bt1 btn" value="-"/>
+                    <input type="text" value="1" min="0" class="txt"/>
+                    <input type="button" value="+" class="bt2 btn"/>
+                </div>
+                <div class="col-md-1 xj">
+                    3999
+                </div>
+                <div class="col-md-1">
+                    <a href="javascript:" class="outcomm">移出商品</a>
+                </div>
+            </div>--%>
 
         <!-- start bottom -->
         <div class="bottom">
@@ -154,13 +156,188 @@
 <!-- jQery -->
 <script src="<%=request.getContextPath()%>/asserts/js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
 <!-- custom js -->
-<script src="<%=request.getContextPath()%>/foreground/js/custom.js"></script>
-<script src="<%=request.getContextPath()%>/foreground/js/cart.js" type="text/javascript" />
+<script src="<%=request.getContextPath()%>/foreground/js/custom.js" charset="utf-8"></script>
 <!-- bootstrap js -->
 <script src="<%=request.getContextPath()%>/foreground/js/bootstrap.js"></script>
 
-<script src="<%=request.getContextPath()%>/foreground/js/card.js" type="text/javascript"></script>
+<script>
+    $(function() {
+        /*页面初始化加载用户购物车数据*/
+        $.ajax({
+            url:"<%=request.getContextPath()%>/CartSrvlet?op=findAll",
+            type:"post",
+            data:{
+            },
+            success:function (data) {
+                console.log(data.data)
 
+                /*动态数据展示*/
+                $.each(data.data,function (i,item) {
+                    $("#selectCart").append("<div class=\"card-main\" style=\"margin-top: 20px;\">\n" +
+                        "                <div class=\"row card-main-1\">\n" +
+                        "                    <div class=\"col-md-1\">\n" +
+                        "                        <input type=\"checkbox\" name=\"ck\" class=\"ck\"/>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"col-md-3\">\n" +
+                        "                        <div class=\"row\">\n" +
+                        "                            <div class=\"col-md-4\">\n" +
+                        "                                <img src=\"#\" />\n" +
+                        "                            </div>\n" +
+                        "                            <div class=\"col-md-8\">\n" +
+                        "                                "+item.product.productDiscraction+"\n" +
+                        "                            </div>\n" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"col-md-2\">\n" +
+                        "                        颜色分类（）机型（）\n" +
+                        "                    </div>\n" +
+                        "\n" +
+                        "                    <div class=\"col-md-1 price\">\n" +
+                        "                    <span class=\"aa\">3999</span>\n" +
+                        "                </div>\n" +
+                        "                <div class=\"col-xs-3 col-md-3 aaa\">\n" +
+                        "                    <input type=\"button\"  class=\"bt1 btn\" value=\"-\"/>\n" +
+                        "                    <input type=\"text\" value=\"1\" min=\"0\" class=\"txt\"/>\n" +
+                        "                    <input type=\"button\" value=\"+\" class=\"bt2 btn\"/>\n" +
+                        "                </div>\n" +
+                        "                <div class=\"col-md-1 xj\">\n" +
+                        "                    3999\n" +
+                        "                </div>\n" +
+                        "                <div class=\"col-md-1\">\n" +
+                        "                    <a href=\"javascript:\" class=\"outcomm\">移出商品</a>\n" +
+                        "                </div>\n" +
+                        "            </div>")
+                })
+
+                /*数据end*/
+
+            },
+            dataType:"json"
+        })
+
+        //全选功能
+        $(".ckAll").click(function() {
+            //获取复选框状态
+            var ckAll = $(this).prop("checked");
+            // alert(ckAll)
+            // 调整所有复选框状态
+            $(".ck").prop("checked", ckAll)
+            zj();
+            zjj();
+        })
+        //商品是否全选调整
+        $(".ck").click(function() {
+            var flag = true;
+            $(".ck").each(function() {
+                if ($(this).prop("checked") == false) {
+                    flag = false;
+                }
+            })
+            $(".ckAll").prop("checked", flag);
+            zj();
+            zjj();
+        })
+
+        //购物车加减
+        $(".bt1").click(function() {
+            var jian = $(this).next().val();
+            // alert(jian)
+            if (jian > 1) {
+                jian--;
+            }
+            $(this).next().val(jian);
+
+            //价格
+            var price = $(this).parent().prev().text();
+            //小计
+            $(this).parent().next().text(price * jian);
+            zj();
+            zjj();
+        })
+
+        //购物车加减
+        $(".bt2").click(function() {
+            var jia = $(this).prev().val();
+            // alert(jian)
+            jia++;
+            $(this).prev().val(jia);
+
+            //价格
+            var price = $(this).parent().prev().text();
+            //小计
+            $(this).parent().next().text(price * jia);
+            zj();
+            zjj();
+        })
+
+        //删除单个商品
+        $(".outcomm").click(function() {
+            if (confirm("是否移除当前选中商品???")) {
+                $(this).parents(".card-main").remove();
+                commisnull();
+            }
+            zj();
+            zjj();
+        })
+        //判断商品是否为空
+        function commisnull() {
+            if ($(".card-main").length == 1) {
+                $("#commisnull .card-main-1").removeClass("hidden");
+            }
+        }
+        //批量删除
+        $(".delAll").click(function() {
+            if (confirm("是否移除当前选中商品???")) {
+                $(".ck").each(function() {
+                    if ($(this).prop("checked")) {
+                        $(this).parents(".card-main").remove();
+                        commisnull();
+                    }
+                })
+            }
+            zj();
+            zjj();
+        })
+        //页面加载就判断当前商品是否为空
+        commisnull();
+        xj();
+        //单价
+        function xj(){
+            $(".price").each(function(){
+                // $("xj").text()
+                var price = ($(this).parents(".card-main-1").children(".price").text())
+                var num =($(this).parents(".card-main-1").children(".aaa").children(".txt").val())
+                $(this).parents(".card-main-1").children(".xj").text(price*num)
+            })
+        }
+
+
+        //总计
+        function zj(){
+            var sum=0;
+            $(".ck").each(function(){
+                if($(this).prop("checked")){
+                    var p =$(this).parents(".card-main-1").children(".xj").text();
+                    sum+=parseInt(p);
+                }
+            })
+            $(".zj").text(sum);
+        }
+
+        //件数
+        function zjj(){
+            var sum=0;
+            $(".ck").each(function(){
+                if($(this).prop("checked")){
+                    var p =($(this).parents(".card-main-1").children(".aaa").children(".txt").val())
+                    sum+=parseInt(p);
+                }
+            })
+            $(".sum").text(sum);
+        }
+    })
+
+</script>
 
 
 </body>

@@ -44,4 +44,9 @@ public class CartServiceImpl implements CartService {
         return cartDao.selectByUserId(pageNum,pageSize,id);
     }
 
+    @Override
+    public Cart findByUserIdAndProductId(Integer userId, Integer productId) {
+        return cartDao.selectByUserIdAndProductId(userId,productId);
+    }
+
 }
