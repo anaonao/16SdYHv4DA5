@@ -19,7 +19,7 @@
     <script type="text/javascript">
         function confirm_del(id) {
             if (confirm("您确定要删除" + id + "的数据么?")) {
-                location.href = "ProductImgServlet?op=deleteById&id=" +id;
+                location.href = "ProductTypeServlet?op=deleteById&id=" +id;
             }
         }
     </script>
@@ -37,23 +37,23 @@
                 </tr>
                 <c:forEach items="${page.data}" var="productType">
                     <tr>
-                        <td>${productType}</td>
-                        <td>${productType}</td>
+                        <td>${productType.type_id}</td>
+                        <td>${productType.type_name}</td>
                         <td>
-                            <a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectById&id=${productImg.productImgId}">详情</a>
-                            <a href="javascript:confirm_del('${productImg.productImgId}')">删除</a>
+                            <a href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectById&id=${productType.type_id}">详情</a>
+                            <a href="javascript:confirm_del('${productType.type_id}')">删除</a>
                         </td>
                     </tr>
                 </c:forEach>
                 <tr>
                     <td colspan="6" style="text-align: center">
-                        <a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectAll&page=1">首页</a>
-                        <a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectAll&page=${page.prev()}">上一页</a>
+                        <a href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectAll&page=1">首页</a>
+                        <a href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectAll&page=${page.prev()}">上一页</a>
                         <c:forEach begin="1" var="i" end="${page.getTotalPageCount()}">
-                            <a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectAll&page=${i}">${i}</a>
+                            <a href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectAll&page=${i}">${i}</a>
                         </c:forEach>
-                        <a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectAll&page=${page.next()}">下一页</a>
-                        <a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectAll&page=${page.getTotalPageCount()}">尾页</a>
+                        <a href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectAll&page=${page.next()}">下一页</a>
+                        <a href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectAll&page=${page.getTotalPageCount()}">尾页</a>
                     </td>
                 </tr>
             </table>

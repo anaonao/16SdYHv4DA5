@@ -13,8 +13,8 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Admin findNameAndPwd(String name, String pwd) {
         //利用MD5把密码加密
-        pwd = MD5Utils.stringToMD5(pwd);
-        return adminDao.selectNameAndPwd(name,pwd);
+        String pwd1 = MD5Utils.stringToMD5(pwd);
+        return adminDao.selectNameAndPwd(name,pwd1);
     }
 
     @Override

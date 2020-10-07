@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductTypeDaoImpl implements ProductTypeDao {
     @Override
     public int add(ProductType productType) {
-        String sql = "insert into product_type(type_name) values('aa')";
+        String sql = "insert into product_type(type_name) values(?)";
         int n = DBUtil.addDeleteUpdate(sql, productType.getType_name());
         return n;
     }

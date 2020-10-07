@@ -4,6 +4,7 @@ import com.tjetc.dao.UserDao;
 import com.tjetc.dao.impl.UserDaoImpl;
 import com.tjetc.domain.User;
 import com.tjetc.service.UserService;
+import com.tjetc.util.MD5Utils;
 import com.tjetc.util.Page;
 
 public class UserServiceImpl implements UserService {
@@ -11,7 +12,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findNameAndPwd(String name, String pwd) {
-        return userDao.selectNameAndPwd(name,pwd);
+        String pwd1 = MD5Utils.stringToMD5(pwd);
+        return userDao.selectNameAndPwd(name,pwd1);
     }
 
     @Override
@@ -21,6 +23,8 @@ public class UserServiceImpl implements UserService {
             if(user1!=null){
                 return "用户名重复！！！";
             }else {
+                user.setUserPwd(MD5Utils.stringToMD5(user.getUserPwd()));
+                user.setUserStates(1);
                 int n = userDao.addUser(user);
                 if(n>0){
                     return "添加成功";
