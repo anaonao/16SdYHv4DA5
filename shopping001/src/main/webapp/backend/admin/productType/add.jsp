@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>商品图片信息添加</title>
+    <title>商品类型信息添加</title>
     <link href="<%=request.getContextPath()%>/asserts/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 
     <script src="<%=request.getContextPath()%>/asserts/js/jquery-1.12.4.js" type="text/javascript"></script>
@@ -18,29 +18,12 @@
 </head>
 <body>
 <div class="container">
-    <h1 style="text-align: center">商品图片信息添加</h1>
-    <form id="formadd" class="form-horizontal" action="<%=request.getContextPath()%>/ProductImgServlet?op=addProductImg" method="post" enctype="multipart/form-data">
+    <h1 style="text-align: center">商品类型信息添加</h1>
+    <form id="formadd" class="form-horizontal">
         <div class="form-group">
-            <label  class="col-sm-2 control-label">图片</label>
+            <label  class="col-sm-2 control-label">商品类型</label>
             <div class="col-sm-10">
-                <img style="height: 200px;width: 150px;border:1px solid #0c0c0c;" src="" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label  class="col-sm-2 control-label">图片选择</label>
-            <div class="col-sm-10">
-                <input class="form-control" type="file" name="productImg" id="productImg" multiple>
-            </div>
-        </div>
-        <div class="form-group">
-            <label  class="col-sm-2 control-label">商品名称</label>
-            <div class="col-sm-10">
-                <select class="form-control" name="product" id="product">
-                    <c:forEach items="${product}" var="product">
-                        <option value="${product.productId}">${product.productName}</option>
-                    </c:forEach>
-
-                </select>
+                <input class="form-control" type="text" name="productTypeName" id="productTypeName">
             </div>
         </div>
         <div class="form-group">
@@ -52,6 +35,27 @@
 </div>
 <script>
     $(function () {
+        $("#formadd").submit(function () {
+            /*判断商品类不能重复*/
+            $.ajax({
+                url:"<%=request.getContextPath()%>/ProductTypeServlet?op=addProductType",
+                type:"post",
+                data:{
+                    "productTypeId":$("#productTypeId").val(),
+                    "productTypeName":$("#productTypeName").val()
+                },
+                success:function (data) {
+                    console.log(data)
+                    if(data=="1"){
+                        location.href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectAll";
+                    }
+                    if(data=="0"){
+                        alert("添加失败！");
+                    }
+                }
+            })
+            return false;
+        })
     })
 </script>
 </body>

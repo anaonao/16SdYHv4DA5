@@ -91,6 +91,16 @@
                         <li><a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectProductAll" target="frame">添加商品</a></li>
                     </ul>
                 </li>
+                <li>
+                    商品类型管理
+                    <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="<%=request.getContextPath()%>/ProductTypeServlet?op=selectAll" target="frame">显示所有商品类型</a></li>
+                        <li><a href="<%=request.getContextPath()%>/backend/admin/productType/add.jsp" target="frame">添加商品类型</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
 
