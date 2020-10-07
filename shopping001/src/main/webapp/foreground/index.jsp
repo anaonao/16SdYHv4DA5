@@ -39,13 +39,6 @@
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet"/>
 
-    <style type="text/css">
-        .detail-box {
-            height: 400px;
-        }
-
-    </style>
-
 </head>
 
 <body>
@@ -124,154 +117,41 @@
             </h2>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-2 mx-auto">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/1-1.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            监控摄像
-                        </h5>
-                        <p>
-                            360度全景摄像头
-                            家用卡片机
-                            智能猫眼
-                            枪机监控
-                            半球监控
+<%--            加载商品类型--%>
 
-                        </p>
-                        <a href="">
-                            了解更多
-                        </a>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="col-md-6 col-lg-2 mx-auto">--%>
+<%--                <div class="box">--%>
+<%--                    <div class="img-box">--%>
+<%--                        <img src="images/1-1.png" alt="">--%>
+<%--                    </div>--%>
+<%--                    <div class="detail-box">--%>
+<%--                        <p>--%>
+<%--                        <h5>--%>
+<%--                            监控摄像--%>
+<%--                        </h5>--%>
+<%--                        </p>--%>
+
+<%--                        <a href="second_menu.jsp">--%>
+<%--                            了解更多--%>
+<%--                        </a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="col-md-6 col-lg-2 mx-auto">
                 <div class="box">
-                    <div class="img-box">
-                        <img src="images/kongtiao.png" alt="">
-                    </div>
                     <div class="detail-box">
+                        <p>
                         <h5>
                             空调
                         </h5>
-                        <p>
-                            独立除湿
-                            自动清洁
-                            智能空调
-                            圆柱式空调
-                            易拆洗
-                            静音空调
                         </p>
-                        <a href="">
+                        <a href="second_menu.jsp">
                             了解更多
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-2 mx-auto">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/chuang.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            床
-                        </h5>
-                        <p>
-                            现代中式
-                            美式轻奢
-                            简美
-                            欧式
-                            美式乡村
-                            新中式
-                            后现代
-                            现代简约
-                        </p>
-                        <a href="">
-                            了解更多
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-2 mx-auto">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/zaojiao.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            早教启智
-                        </h5>
-                        <p>
-                            塑料
-                            仿生
-                            婴儿
-                            学龄前儿童
-                            学龄后儿童
-                            进口
-                            国产
-                            其它
-                        </p>
 
-                        <a href="">
-                            了解更多
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-2 mx-auto">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/chaji.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            边桌/茶几
-                        </h5>
-                        <p>
-                            美式轻奢
-                            欧式
-                            后现代
-                            现代简约
-                            意式
-                            复古怀旧
-                            低调简约
-                            其他
-                        </p>
-                        <a href="">
-                            了解更多
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-2 mx-auto">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/shafa.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            沙发
-                        </h5>
-                        <p>
-                            美式轻奢
-                            简美
-                            欧式
-                            美式乡村
-                            新中式
-                            后现代
-                            现代简约
-                            东南亚
-                            意式
-                        </p>
-                        <a href="">
-                            了解更多
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -403,33 +283,11 @@
                                 <div class="detail-box">
                                     <div class="name">
                                         <h6>
-                                            Siaalya
+                                            用户名
                                         </h6>
                                     </div>
                                     <p style="width: 1200px">
-                                        特别好
-                                    </p>
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row">
-                        <div class="col-md-11 col-lg-10 mx-auto">
-                            <div class="box">
-                                <div class="img-box">
-                                    <img src="images/client.jpg" alt=""/>
-                                </div>
-                                <div class="detail-box">
-                                    <div class="name">
-                                        <h6>
-                                            Siaalya
-                                        </h6>
-                                    </div>
-                                    <p style="width: 1200px">
-                                        大没离开过
+                                        留言
                                     </p>
                                     <i class="fa fa-quote-left" aria-hidden="true"></i>
                                 </div>
@@ -450,7 +308,7 @@
                                             用户名
                                         </h6>
                                     </div>
-                                    <p>
+                                    <p style="width: 1200px">
                                         留言
                                     </p>
                                     <i class="fa fa-quote-left" aria-hidden="true"></i>
@@ -538,6 +396,10 @@
 <!-- lightbox Gallery-->
 <script src="js/ekko-lightbox.min.js"></script>
 
+
+<script>
+
+</script>
 
 </body>
 

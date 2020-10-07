@@ -310,10 +310,15 @@ a:focus {
           align-items: flex-start;
 }
 
+.detail-box p{
+  height: 400px;
+  width: 1200px;
+}
 .slider_section .detail-box {
   position: relative;
-  width: 100%;
+  /*width: 100%;*/
   z-index: 4;
+
 }
 
 .slider_section .detail-box .inner_detail-box {

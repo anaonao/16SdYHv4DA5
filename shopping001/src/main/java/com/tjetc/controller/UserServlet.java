@@ -24,26 +24,46 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String op = req.getParameter("op");
-        if("login".equals(op)){
-            login(req,resp);
-        }else if("register".equals(op)){
-            register(req,resp);
+        if ("login".equals(op)) {
+            login(req, resp);
+        } else if ("register".equals(op)) {
+            register(req, resp);
         }
     }
 
-    private void register(HttpServletRequest req, HttpServletResponse resp) {
+    //注册
+    private void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String userName = req.getParameter("userName");
+        String userPwd = req.getParameter("userPwd");
+        String userPhone = req.getParameter("userPhone");
+        User user = new User();
+        user.setUserName(userName);
+        user.setUserIphone(userPhone);
+        user.setUserPwd(userPwd);
+        String msg = userService.addUser(user);
+        System.out.println(msg);
+        PrintWriter out = resp.getWriter();
+
+        out.write(msg);
+        out.flush();
 
     }
 
-    private void login(HttpServletRequest req, HttpServletResponse resp) {
+    //登录
+    private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String pwd = req.getParameter("pwd");
-        User user = userService.findNameAndPwd(username,pwd);
-        //判断用户是否为空
-        if(user==null){
-            req.setAttribute("msg","用户名为空");
+        User user = userService.findNameAndPwd(username, pwd);
+        PrintWriter out = resp.getWriter();
+        //登录成功
+        if (user != null) {
+            req.setAttribute("user", user);
+            System.out.println(user);
+            out.write("1");
+            out.flush();
+        } else {
+            out.write("0");
+            out.flush();
         }
-
-        req.getRequestDispatcher("login.jsp");
     }
 }

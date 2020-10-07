@@ -7,10 +7,17 @@ import org.junit.Test;
 
 public class UserTest {
     private UserDao userDao = new UserDaoImpl();
+
+    public static void main(String[] args) {
+         UserDao userDao = new UserDaoImpl();
+
+        System.out.println(userDao.selectByName("yanan"));
+    }
     @Test
     public void add(){
         System.out.println(userDao.addUser(new User("adfs","123")));
     }
+
 
     @Test
     public void loginDao(){

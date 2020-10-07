@@ -57,12 +57,46 @@
 </div>
 <script>
     $(function () {
+        /*验证用户名是否存在*/
+        $("#adminname").blur(function () {
+            $.ajax({
+                url:"<%=request.getContextPath()%>/AdminServlet?op=adminByname",
+                type:"post",
+                data:{
+                    "adminname":$("#adminname").val(),
+                },
+                success:function (data) {
+                    $("#namespan").text(data)
+                }
+            })
+        })
+
         $("#form-s").submit(function () {
           if($("#pwd").val()!=$("#pwd2").val()){
               $("#pwd2span").text("俩次密码不一致请重新输入")
               return false;
           }
-            return true;
+          /*验证手机号是否合法*/
+          /*判断用户名是否存在*/
+          /*判断是否添加成功*/
+            $.ajax({
+                url:"<%=request.getContextPath()%>/AdminServlet?op=add",
+                type:"post",
+                data:{
+                    "adminname":$("#adminname").val(),
+                    "pwd":$("#pwd").val(),
+                    "phone":$("#phone").val()
+                },
+                success:function (data) {
+                 alert(data);
+                    if(data=="管理员注册成功"){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            })
+            return false;
         })
     })
 </script>

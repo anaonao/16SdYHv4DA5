@@ -9,7 +9,8 @@ public class UserServiceIMplTest {
         UserService userService = new UserServiceImpl();
 //        System.out.println(userService.findNameAndPwd("yanan","123456"));
         User user = new User();
-        user.setUserName("ydfsn");
+        user.setUserName("yanan");
+//        System.out.println(userService.addUser(user));
         System.out.println(userService.addUser(user));
     }
 }

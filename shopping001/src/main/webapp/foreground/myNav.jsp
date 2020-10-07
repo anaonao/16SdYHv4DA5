@@ -44,7 +44,7 @@
     </div>
 </header>
 <!-- custom js -->
-<script src="js/custom.js"></script>
+<script src="<%=request.getContextPath()%>/foreground/js/custom.js"></script>
 
 </body>
 </html>

@@ -49,7 +49,6 @@
             </div>
             <div class="col-md-6">
                 <div style="position: absolute;right: 0;line-height: 50px">
-                    <div style="color: #FFF;float: left;">当前访问量:${applicationScope.num}</div>
                     <c:if test="${adminname!=null}">
                         <div style="float: left;margin-left: 50px;color: #FFF">欢迎${adminname}&nbsp;<a style="color: #FFF" href="<%=request.getContextPath()%>/AdminServlet?op=removeLogin">注销</a></div>
                     </c:if>
@@ -73,13 +72,23 @@
                     </ul>
                 </li>
                 <li>
-                    商品管理
+                商品管理
+                <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
+            </li>
+                <li>
+                    <ul>
+                        <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectAll" target="frame">显示所有商品</a></li>
+                        <li><a href="<%=request.getContextPath()%>/ProductServlet?op=selectProductTypeAll" target="frame">添加商品</a></li>
+                    </ul>
+                </li>
+                <li>
+                    商品图片管理
                     <span class="glyphicon glyphicon-menu-right" style="position:absolute ;right: 10px;top: 3px;"></span>
                 </li>
                 <li>
                     <ul>
-                        <li><a href="javascript:" target="frame">显示所有商品</a></li>
-                        <li><a href="javascript:" target="frame">添加商品</a></li>
+                        <li><a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectAll" target="frame">显示所有商品图片</a></li>
+                        <li><a href="<%=request.getContextPath()%>/ProductImgServlet?op=selectProductAll" target="frame">添加商品</a></li>
                     </ul>
                 </li>
             </ul>
