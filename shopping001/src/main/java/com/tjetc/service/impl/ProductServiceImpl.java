@@ -60,4 +60,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findListAll() {
         return productDao.selectListAll();
     }
+
+    @Override
+    public Page<Product> findByTypeId(int pageNum, int pageSize, Integer typeId) {
+        return productDao.selectByTypeId(pageNum,pageSize,typeId);
+    }
 }

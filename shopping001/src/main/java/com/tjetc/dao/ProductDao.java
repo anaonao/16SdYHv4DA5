@@ -76,4 +76,14 @@ public interface ProductDao {
 
     List<Product> selectListAll();
 
+    /**
+     * 根据商品类型编号查询
+     * @param pageNum
+     * @param pageSize
+     * @param typeId
+     * @return
+     */
+    Page<Product> selectByTypeId(int pageNum,int pageSize,Integer typeId);
+    int countByTypeId(Integer typeId);
+
 }

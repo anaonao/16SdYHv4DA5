@@ -216,4 +216,44 @@ public class ProductDaoImpl implements ProductDao {
             DBUtil.close();
         }
     }
+
+    @Override
+    public Page<Product> selectByTypeId(int pageNum, int pageSize, Integer typeId) {
+        Page<Product> page = new Page<>(pageNum,pageSize);
+        page.setTotalData(countByTypeId(typeId));
+        List<Product> list = new ArrayList<>();
+        String sql = "select product_id,product_name,product_count,product_price,product_msg,product_sales,type_id,product_discount from product where type_id=? limit ?,?";
+        ResultSet rs = DBUtil.select(sql,typeId,page.start(),page.getPageSize());
+        try {
+            while (rs.next()){
+                Product product = new Product(rs.getInt("product_id"),rs.getString("product_name"),rs.getInt("product_count"),rs.getDouble("product_price"),selectLikeProductId(rs.getInt("product_id")),rs.getString("product_msg"),rs.getInt("product_sales"),rs.getInt("product_discount"),selectByProductTypeId(rs.getInt("type_id")));
+                list.add(product);
+                page.setData(list);
+            }
+            return page;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.close();
+        }
+    }
+
+    @Override
+    public int countByTypeId(Integer typeId) {
+        String sql = "select count(*) from product where type_id=?";
+        ResultSet rs = DBUtil.select(sql,typeId);
+        int n =0;
+        try {
+            if(rs.next()){
+                n = rs.getInt(1);
+            }
+            return n;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }finally {
+            DBUtil.close();
+        }
+    }
 }
