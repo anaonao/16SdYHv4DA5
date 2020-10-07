@@ -1,77 +1,78 @@
 package com.tjetc.service.impl;
 
 import com.tjetc.dao.UserDao;
+import com.tjetc.dao.impl.UserDaoImpl;
+import com.tjetc.domain.User;
 import com.tjetc.service.UserService;
 import com.tjetc.util.Page;
 
 public class UserServiceImpl implements UserService {
+    private  UserDao userDao = new UserDaoImpl();
+
     @Override
-    public UserDao findNameAndPwd(String name, String pwd) {
-        return null;
+    public User findNameAndPwd(String name, String pwd) {
+        return userDao.selectNameAndPwd(name,pwd);
     }
 
     @Override
-    public UserDao addUser(UserDao user) {
-        return null;
+    public String addUser(User user) {
+        if(user!=null){
+            User user1 = userDao.selectByName(user.getUserName());
+            if(user1!=null){
+                return "用户名重复！！！";
+            }else {
+                int n = userDao.addUser(user);
+                if(n>0){
+                    return "添加成功";
+                }else {
+                    return "添加失败！";
+                }
+            }
+        }else {
+            return "用户信息为空";
+        }
     }
 
     @Override
     public int deleteById(Integer id) {
+        return userDao.deleteById(id);
+    }
+
+    @Override
+    public int update(User user) {
+        if(user!=null){
+            return userDao.update(user);
+        }
         return 0;
     }
 
     @Override
-    public int update(UserDao user) {
-        return 0;
+    public Page<User> findPageAll(int pageNum, int pageSize) {
+        return userDao.selectPageAll(pageNum,pageSize);
     }
 
     @Override
-    public Page<UserDao> findPageAll(int pageNum, int pageSize) {
-        return null;
+    public User findById(Integer id) {
+        return userDao.selectById(id);
     }
 
     @Override
-    public int countAll() {
-        return 0;
+    public User findByName(String name) {
+        return userDao.selectByName(name);
     }
 
     @Override
-    public UserDao findById(Integer id) {
-        return null;
+    public Page<User> findPageLikeName(int pageNum, int pageSize, String name) {
+        return userDao.selectPageLikeName(pageNum,pageSize,name);
     }
 
     @Override
-    public UserDao findByName(String name) {
-        return null;
+    public Page<User> findPageLikePhone(int pageNum, int pageSize, String phone) {
+        return userDao.selectPageLikePhone(pageNum,pageSize,phone);
     }
 
     @Override
-    public Page<UserDao> findPageLikeName(int pageNum, int pageSize, String name) {
-        return null;
-    }
-
-    @Override
-    public int countLikeName(String name) {
-        return 0;
-    }
-
-    @Override
-    public Page<UserDao> findPageLikePhone(int pageNum, int pageSize, String phone) {
-        return null;
-    }
-
-    @Override
-    public int countLikePhone(String phone) {
-        return 0;
-    }
-
-    @Override
-    public Page<UserDao> findPageByState(int pageNum, int pageSize, Integer state) {
-        return null;
-    }
-
-    @Override
-    public int countByState(Integer state) {
-        return 0;
+    public Page<User> findPageByState(int pageNum, int pageSize, Integer state) {
+        return userDao.selectPageByState(pageNum,pageSize,state);
     }
 }

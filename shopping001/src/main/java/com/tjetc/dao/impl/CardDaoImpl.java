@@ -83,9 +83,9 @@ public class CardDaoImpl implements CartDao {
     }
 
     @Override
-    public Cart selectById(String orderId) {
+    public Cart selectById(Integer id) {
         String sql = "select cart_id,product_id,products_count,user_id from cart where cart_id=?";
-        ResultSet rs = DBUtil.select(sql, orderId);
+        ResultSet rs = DBUtil.select(sql, id);
         Cart cart = new Cart();
         try {
             if(rs.next()){
@@ -109,23 +109,52 @@ public class CardDaoImpl implements CartDao {
     }
 
     @Override
-    public Page<Cart> selectByName(int pageNum, int pageSize, String name) {
-        return null;
+    public Page<Cart> selectByUserId(int pageNum, int pageSize, Integer id) {
+        Page<Cart> page = new Page<>(pageNum,pageSize);
+        page.setTotalData(countByUserId(id));
+        List<Cart> list = new ArrayList<>();
+        String sql = "select cart_id,product_id,products_count,user_id from cart where user_id=? limit ?,?";
+        ResultSet rs = DBUtil.select(sql,id,page.start(), page.getPageSize());
+        try {
+            while (rs.next()){
+                Cart cart = new Cart();
+                Product product = new Product();
+                product.setProductId(rs.getInt("product_id"));
+                User user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                cart.setCartId(rs.getInt("cart_id"));
+                cart.setProduct(product);
+                cart.setProductsCount(rs.getInt("products_count"));
+                cart.setUser(user);
+                list.add(cart);
+                page.setData(list);
+            }
+            return page;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.close();
+        }
     }
 
     @Override
-    public int countByName(String name) {
-        return 0;
+    public int countByUserId(Integer id) {
+        String sql = "select count(1) from cart where user_id=?";
+        ResultSet rs = DBUtil.select(sql,id);
+        int n = 0;
+        try {
+            if(rs.next()){
+                n = rs.getInt(1);
+            }
+            return n;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }finally {
+            DBUtil.close();
+        }
     }
 
-    @Override
-    public Page<Cart> selectLikeName(int pageNum, int pageSize, String name) {
-        return null;
-    }
-
-    @Override
-    public int countLikeName(String name) {
-        return 0;
-    }
 
 }

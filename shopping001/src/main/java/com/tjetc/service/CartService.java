@@ -32,23 +32,16 @@ public interface CartService {
     Page<Cart> findAll(int pageNum, int pageSize);
 
     /**
-     * 根据订单编号查询
-     * @param orderId
+     * 根据购物车编号查询
+     * @param id
      * @return
      */
-    Cart findById(String orderId);
+    Cart findById(Integer id);
 
     /**
-     * 根据用户名查询
-     * @param name
+     * 根据用户编号查询
+     * @param id
      * @return
      */
-    Page<Cart> findByName(int pageNum, int pageSize,String name);
-
-    /**
-     * 根据用户名模糊查询
-     * @param name
-     * @return
-     */
-    Page<Cart> findLikeName(int pageNum, int pageSize,String name);
+    Page<Cart> findByUserId(int pageNum, int pageSize,Integer id);
 }

@@ -22,21 +22,21 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<Order> findAll(int pageNum, int pageSize) {
-        return null;
+        return orderDao.selectAll(pageNum,pageSize);
     }
 
     @Override
     public Order findById(String id) {
-        return null;
+        return orderDao.selectById(id);
     }
 
     @Override
     public Page<Order> findLikeDate(int pageNum, int pageSize, Date startDate, Date endStart) {
-        return null;
+        return orderDao.selectLikeDate(pageNum,pageSize,startDate,endStart);
     }
 
     @Override
     public Page<Order> findByUserName(int pageNum, int pageSize, String userName) {
-        return null;
+        return orderDao.selectByUserName(pageNum,pageSize,userName);
     }
 }
