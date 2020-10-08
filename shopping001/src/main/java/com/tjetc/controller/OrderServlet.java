@@ -28,6 +28,8 @@ public class OrderServlet extends HttpServlet {
             selectAll(req,resp);
         }else if("updateByState".equals(op)){
             updateByState(req,resp);
+        }else if("submitCart".equals(op)){
+            submitCart(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -44,8 +46,27 @@ public class OrderServlet extends HttpServlet {
 
         }else if("".equals(op)){
 
-        }else if("".equals(op)){
+        }
+    }
 
+    //提交订单
+    private void submitCart(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String[] list= req.getParameter("cartIListd").split(",");
+        String countPrice = req.getParameter("countPrice");
+        String userId = req.getParameter("userId");
+        if(countPrice!=null&&userId!=null){
+            int n =orderService.addOrders(list,Double.parseDouble(countPrice),Integer.parseInt(userId));
+        if(n>0){
+            //成功
+            //返回到购物车
+            resp.sendRedirect("foreground/cart.jsp");
+        }else {
+            System.out.println("数据提交不成功:n=="+n);
+        }
+
+
+        }else {
+            System.out.println("提交失败！！");
         }
     }
 

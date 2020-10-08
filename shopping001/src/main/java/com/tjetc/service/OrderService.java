@@ -46,4 +46,6 @@ public interface OrderService {
      * @return
      */
     Page<Order> findByUserName(int pageNum, int pageSize,String userName);
+
+    int addOrders(String[] id,Double price,int userId);
 }

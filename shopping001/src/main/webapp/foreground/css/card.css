@@ -232,7 +232,7 @@ body {
 .address{
 	margin-top: 50px;
 }
-.address .row .col-md-3 div{
+.address-1{
 	width: 90%;
 	margin: 0 auto;
 	border: 5px dashed transparent;
@@ -240,7 +240,7 @@ body {
 	repeating-linear-gradient(-45deg,#FF0036 0, #FFF 0.25em,white 0,white 0.75em);
 }
 /* 地址选中特效 */
-.address-1,.address-2,.address-3{
+.address-1{
 	cursor: pointer;
 }
 .address>div>div>div{

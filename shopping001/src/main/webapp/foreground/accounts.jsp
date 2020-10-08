@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 安
@@ -108,37 +109,12 @@
             </div>
             <!-- 选择收货地址 -->
             <div class="address">
-                <div class="row">
-                    <div class="col-md-3">
                         <div class="address-1">
                             <p>天津(yanan)</p>
                             <hr />
                             <p>滨海新区第七大街81号</p>
                             <a href="javascript:">修改</a>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="address-2">
-                            <p>吉林省(yanan)</p>
-                            <hr />
-                            <p>四平市梨树县</p>
-                            <a href="javascript:">修改</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="address-3">
-                            <p>天津(yanan)</p>
-                            <hr />
-                            <p>滨海新区第七大街81号</p>
-                            <a href="javascript:">修改</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div>
-
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="address2">
                 <div class="row">
@@ -174,42 +150,47 @@
                 <table class="table">
                     <tr>
                         <td>店铺宝贝</td>
-                        <td>商品属性</td>
+                        <td>商品描述</td>
                         <td>单价</td>
                         <td>数量</td>
                         <td>优惠方式</td>
                         <td>小计</td>
                     </tr>
-                    <tr>&nbsp;
-                        <td><img src="img/main4-2.png" >&nbsp;&nbsp;<span>商品描述（）</span></td>
-                        <td>商品属性描述（）</td>
-                        <td>50</td>
-                        <td>23</td>
-                        <td>省39.90:爆款特卖</td>
-                        <td>10.10</td>
-                    </tr>
+                    <c:forEach items="${list}" var="cart">
+                        <tr>
+                            <td><img src="<%=request.getContextPath()%>/foreground/images/${cart.product.list[0].productImgName}" >&nbsp;&nbsp;<span>${cart.product.productName}</span></td>
+                            <td>${cart.product.productDiscraction}</td>
+                            <td>${cart.product.productPrice}</td>
+                            <td>${cart.productsCount}</td>
+                            <td>省39.90:爆款特卖</td>
+                            <td>${(cart.product.productPrice)*(cart.productsCount)}</td>
+                        </tr>
+                    </c:forEach>
+
                     <tr>
                         <td colspan="6" class="sum">
                             <div>
-                                <span>店铺合计(含运费)￥</span><span>49.90</span>
+                                <span>店铺合计(含运费)￥</span><span>${countPrice}</span>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="6" class="sum">
                             <div>
-                                <span>实付款：￥</span><span>49.90</span>
+                                <span>实付款：￥</span><span>${countPrice}</span>
                             </div>
                         </td>
                     </tr>
+
+
                     <tr>
                         <td colspan="6" class="sum">
                             <div>
-                                <span class="glyphicon glyphicon-hand-left"></span><span><a href="购物车.html">返回购物车</a></span>
+                                <span class="glyphicon glyphicon-hand-left"></span><span><a href="<%=request.getContextPath()%>/foreground/cart.jsp">返回购物车</a></span>
                                 &nbsp;
                                 &nbsp;
                                 &nbsp;
-                                <button type="button" class="btn btn-danger">提交订单</button>
+                                <button type="button" class="btn btn-danger" id="submitOrder">提交订单</button>
                             </div>
                         </td>
                     </tr>
@@ -235,5 +216,16 @@
 <script src="<%=request.getContextPath()%>/foreground/js/bootstrap.js"></script>
 <!-- custom js -->
 <script src="<%=request.getContextPath()%>/foreground/js/custom.js"></script>
+
+<script>
+    $(function () {
+        $("#submitOrder").click(function () {
+            if(confirm("是否确定提交？？？")){
+                alert("下单成功！")
+                location.href="<%=request.getContextPath()%>/OrderServlet?op=submitCart&cartIListd=${listByid}&countPrice=${countPrice}&userId=${userId}";
+            }
+        })
+    })
+</script>
 </body>
 </html>

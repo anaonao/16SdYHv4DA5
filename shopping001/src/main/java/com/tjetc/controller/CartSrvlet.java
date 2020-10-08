@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/CartSrvlet")
 public class CartSrvlet extends HttpServlet {
@@ -36,8 +38,9 @@ public class CartSrvlet extends HttpServlet {
             deleteById(req,resp);
         }else if("deleteByListCartId".equals(op)){
             deleteByListCartId(req,resp);
-        }else if("".equals(op)){
-
+        }else if("accountsAll".equals(op)){
+            //把购物车选中编号获取到
+            accountsAll(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -49,6 +52,27 @@ public class CartSrvlet extends HttpServlet {
         }else if("".equals(op)){
 
         }
+    }
+
+    //获取选中购物车编号，显示数据
+    private void accountsAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String[] list= req.getParameter("listCartId").split(",");
+        List<Cart> cartList = new ArrayList<>();
+
+        double sum =0;
+        for (int i = 0; i <list.length ; i++) {
+         Cart cartByid = cartService.findById(Integer.parseInt(list[i]));
+         cartList.add(cartByid);
+         sum+=cartByid.getProduct().getProductPrice()*cartByid.getProductsCount();
+        }
+        System.out.println("总价格："+sum);
+        System.out.println("显示所有选中的集合："+cartList);
+        req.setAttribute("list",cartList);
+        req.setAttribute("countPrice",sum);
+        //把购物车中选中的编号传递
+        req.setAttribute("listByid",list);
+        req.getRequestDispatcher("foreground/accounts.jsp").forward(req,resp);
+
     }
 
     //批量删除购物车中的商品

@@ -205,7 +205,7 @@
                         "                    <input type=\"button\" value=\"+\" class=\"bt2 btn\"/>\n" +
                         "                </div>\n" +
                         "                <div class=\"col-md-1 xj\">\n" +
-                        "                                "+item.product.productPrice+"\n" +
+                        "                                "+(item.product.productPrice)*(item.productsCount)+"\n" +
                         "                </div>\n" +
                         "                <div class=\"col-md-1\">\n" +
                         "                    <a href=\"javascript:\" class=\"outcomm\" onclick='deleteById(\""+item.cartId+"\")'>移出商品</a>\n" +
@@ -303,16 +303,6 @@
         })
         //页面加载就判断当前商品是否为空
         commisnull();
-        xj();
-        //单价
-        function xj(){
-            $(".price").each(function(){
-                // $("xj").text()
-                var price = ($(this).parents(".card-main-1").children(".price").text())
-                var num =($(this).parents(".card-main-1").children(".aaa").children(".txt").val())
-                $(this).parents(".card-main-1").children(".xj").text(price*num)
-            })
-        }
 
 
 
@@ -368,7 +358,15 @@
 
         //结算
         $("#conmitCart").click(function () {
-             alert("结算")
+            console.log("结算")
+            obj = document.getElementsByName("ck");
+            var check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            console.log("购物车编号"+check_val);
+            location.href="<%=request.getContextPath()%>/CartSrvlet?op=accountsAll&listCartId="+check_val+"";
         })
 
     })
