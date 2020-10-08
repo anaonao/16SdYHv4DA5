@@ -1,12 +1,12 @@
 package com.tjetc.controller;
 
-import com.tjetc.domain.Admin;
 import com.tjetc.domain.User;
 import com.tjetc.service.UserService;
 import com.tjetc.service.impl.UserServiceImpl;
 import com.tjetc.util.Page;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/UserServlet")
+@MultipartConfig
 public class UserServlet extends HttpServlet {
     UserService userService = new UserServiceImpl();
 
@@ -32,7 +33,40 @@ public class UserServlet extends HttpServlet {
             register(req, resp);
         }else if ("selectAll".equals(op)) {
             selectAll(req, resp);
+        }else if ("updateUser".equals(op)) {
+            updateUser(req, resp);
+        }else if ("updateUserImg".equals(op)) {
+            updateUserImg(req, resp);
         }
+    }
+    //修改头像
+    private void updateUserImg(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userId = req.getParameter("userId");
+        String userImg = req.getParameter("userImg");
+//        System.out.println(userImg);
+        req.getSession().setAttribute("userImg",userImg);
+        userService.updateImg(userImg,Integer.parseInt(userId));
+        req.getRequestDispatcher("foreground/person_message.jsp").forward(req,resp);
+    }
+
+    //修改用户信息
+    private void updateUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int userId = (int)req.getSession().getAttribute("userId");
+        String userName = req.getParameter("userName");
+        System.out.println(userName);
+        String userPhone = req.getParameter("userPhone");
+        String userPwd = req.getParameter("userPwd");
+        User user = new User();
+        user.setUserId(userId);
+        user.setUserName(userName);
+        user.setUserIphone(userPhone);
+        user.setUserPwd(userPwd);
+        req.getSession().setAttribute("user",user);
+        System.out.println(user);
+        userService.update(user);
+        PrintWriter out = resp.getWriter();
+        out.write("1");
+        out.flush();
     }
 
     //后台显示所有用户信息
@@ -42,7 +76,6 @@ public class UserServlet extends HttpServlet {
         req.setAttribute("page",all);
         req.getRequestDispatcher("backend/admin/user/list.jsp").forward(req,resp);
     }
-
 
     //注册
     private void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -56,7 +89,6 @@ public class UserServlet extends HttpServlet {
         String msg = userService.addUser(user);
         System.out.println(msg);
         PrintWriter out = resp.getWriter();
-
         out.write(msg);
         out.flush();
 
@@ -77,6 +109,7 @@ public class UserServlet extends HttpServlet {
             System.out.println(user);
             req.getSession().setAttribute("userName",userName);
             req.getSession().setAttribute("userId",user.getUserId());
+            req.getSession().setAttribute("user",user);
             out.write("1");
             out.flush();
         } else {

@@ -87,7 +87,8 @@
                     <h1>个人中心</h1>
                     <button class="btn btn-default" style="color: white;margin-top: 40px">我的订单</button><br>
                     <button class="btn btn-default" style="color: white">历史浏览</button><br>
-                    <button class="btn btn-default" style="color: white">我的留言</button>
+                    <button class="btn btn-default" style="color: white">我的留言</button><br>
+                    <button class="btn btn-default" style="color: white"><a style="color: white" class="islogin">个人信息</a></button>
                 </div>
             </div>
         </div>
@@ -102,6 +103,23 @@
 <script src="js/ekko-lightbox.min.js"></script>
 <!-- custom js -->
 <script src="js/custom.js"></script>
+
+<script>
+    $(function () {
+        //添加购物车
+        $(".islogin").click(function () {
+            if(${userName==nul}){
+                if(confirm("您还没有登录,是否现在登录???")){
+                    console.log("跳转到登录陆")
+                    location.href="<%=request.getContextPath()%>/foreground/login.jsp"
+                }
+            }else {
+                location.href="<%=request.getContextPath()%>/foreground/person_message.jsp"
+            }
+        })
+    })
+</script>
+
 
 </body>
 

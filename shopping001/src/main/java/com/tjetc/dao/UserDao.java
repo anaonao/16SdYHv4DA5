@@ -34,6 +34,11 @@ public interface UserDao {
      */
     int update(User user);
 
+    /*
+    * 修改头像
+    * */
+    int updateImg(String userImg,int userId);
+
     /**
      * 查询所有用户信息
      * @return

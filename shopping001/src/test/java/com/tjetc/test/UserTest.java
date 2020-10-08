@@ -10,8 +10,13 @@ public class UserTest {
 
     public static void main(String[] args) {
          UserDao userDao = new UserDaoImpl();
+         User user = new User();
+         user.setUserId(1);
+         user.setUserImg("1-2.png");
 
-        System.out.println(userDao.selectByName("yanan"));
+        System.out.println(userDao.update(user));
+
+//        System.out.println(userDao.selectByName("yanan"));
     }
     @Test
     public void add(){

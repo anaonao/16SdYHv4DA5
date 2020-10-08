@@ -36,6 +36,12 @@
     <link href="css/style.css" rel="stylesheet"/>
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet"/>
+    <style type="text/css">
+        .form-group div{
+            color: yellow;
+        }
+
+    </style>
 
 </head>
 
@@ -92,15 +98,22 @@
                     <p>
                         凯瑞智能家居商城欢迎您的加入~
                     </p>
-                    <div class="col-lg-4 mx-auto">
+                    <div class="col-lg-8 mx-auto">
                         <div class="form-group">
-                            <input class="form-control" id="userName" name="userName" placeholder="请输入您的用户名">
+                            用户名：<input class="form-control" id="userName" name="userName">
+                            <div></div>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" id="userPhone" name="userPhone" placeholder="请输入您的手机号">
+                            手机号：<input class="form-control" id="userPhone" name="userPhone">
+                            <div></div>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="请输入您的密码">
+                            密码(只能输入6-20个字母、数字、下划线)：<input type="password" class="form-control" id="userPwd" name="userPwd">
+                            <div></div>
+                        </div>
+                        <div class="form-group">
+                            确认密码：<input type="password" class="form-control" id="userPwd2" name="userPwd">
+                            <div></div>
                         </div>
                         <div>
                             <button type="submit" class="slider-link" style="margin-bottom: 40px">注册</button>
@@ -124,20 +137,128 @@
 <script src="js/custom.js"></script>
 
 <script>
+
     $(function () {
+        //手机号验证
+        function phoneTest(phone) {
+            return /^1[3456789]\d{9}$/.test(phone);
+        }
+
+        //	alert(phoneTest(13483327279));
+
+        //密码验证(只能输入6-20个字母、数字、下划线)
+        function passwordTest(password1) {
+            return /^(\w){6,20}$/.test(password1);
+        }
+
+        //	alert(passwordTest(123456));
+
+        //最后提交的时候用于做判断的变量
+        var phoneflag;
+        var pass1flag;
+        var pass2flag;
+        var flag = false;
+        //利用失去焦点事件动态获取和验证信息的准确性
+
+        $("#userName").blur(function () {
+            //获取
+            var phone = $("#userName").val();
+
+            //判断名字是否重复
+            if (phone != "") {
+                //判断格式
+                var phoneFlag = phoneTest(phone);
+                phoneflag = phoneFlag;
+                if (phoneFlag == false) {
+                    alert(phone)
+                    //alert(phoneFlag)
+                    $("#userPhone").next().show();
+                    $("#userPhone").next().text("手机号码有误，请重填");
+                } else {
+                    $("#userPhone").next().hide();
+                }
+            } else {
+                $("#userPhone").next().show();
+                $("#userPhone").next().text("手机号码不能为空，请重填");
+            }
+        });
+
+
+        $("#userPhone").blur(function () {
+            //获取
+            var phone = $("#userPhone").val();
+            //判空
+            if (phone != "") {
+                //判断格式
+                var phoneFlag = phoneTest(phone);
+                phoneflag = phoneFlag;
+                if (phoneFlag == false) {
+                    alert(phone)
+                    //alert(phoneFlag)
+                    $("#userPhone").next().show();
+                    $("#userPhone").next().text("手机号码有误，请重填");
+                } else {
+                    $("#userPhone").next().hide();
+                }
+            } else {
+                $("#userPhone").next().show();
+                $("#userPhone").next().text("手机号码不能为空，请重填");
+            }
+        });
+        $("#userPwd").blur(function () {
+            //获取
+            var password1 = $("#userPwd").val();
+            //判空
+            if (password1 != "") {
+                //判断格式
+                var passFlag = passwordTest(password1);
+                pass1flag = passFlag;
+                if (passFlag == false) {
+                    this.next().show();
+                    $("#userPwd").next().text("密码有误，请重填");
+                } else {
+                    $("#userPwd").next().hide();
+                }
+            } else {
+                $("#userPwd").next().show();
+                $("#userPwd").next().text("密码不能为空，请重填");
+            }
+        })
+        $("#userPwd2").blur(function () {
+            //获取
+            var password2 = $("#password2").val();
+            //判空
+            if (password2 != "") {
+                //判断格式
+                var password1 = $("#userPwd").val();
+                var pass2Flag = (password2 == password1);
+                //alert(pass2Flag)
+                pass2flag = pass2Flag;
+                if (password2 != password1) {
+                    $("#userPwd2").next().show();
+                    $("#userPwd2").next().text("密码不一致，请重填");
+                } else {
+                    $("#userPwd2").next().hide();
+                }
+            } else {
+                $("#userPwd2").next().show();
+                $("#userPwd2").next().text("密码不能为空，请重填");
+            }
+        })
+        //返回submit函数的结果值
         $("#formregister").submit(function () {
             $.ajax({
-                url:"<%=request.getContextPath()%>/UserServlet?op=register",
-                type:"post",
-                data:{
-                    "userName":$("#userName").val(),
-                    "userPwd":$("#userPwd").val(),
-                    "userPhone":$("#userPhone").val()
+                url: "<%=request.getContextPath()%>/UserServlet?op=register",
+                type: "post",
+                data: {
+                    "userName": $("#userName").val(),
+                    "userPwd": $("#userPwd").val(),
+                    "userPhone": $("#userPhone").val()
                 },
-                success:function (data) {
-                    alert("恭喜您"+data);
-                    if("添加成功"==data){
-                        location.href="<%=request.getContextPath()%>/foreground/login.jsp";
+                success: function (data) {
+                    alert("恭喜您" + data);
+                    if ("添加成功" == data) {
+                        location.href = "<%=request.getContextPath()%>/foreground/login.jsp";
                     }
                 }
             })
