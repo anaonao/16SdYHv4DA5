@@ -11,29 +11,30 @@
 
 <head>
     <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="icon" href="<%=request.getContextPath()%>/foreground/images/favicon.png" type="image/gif" />
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="<%=request.getContextPath()%>/foreground/images/favicon.png" type="image/gif"/>
 
     <title>购物车</title>
 
     <!-- bootstrap core css -->
-    <link href="<%=request.getContextPath()%>/asserts/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/foreground/css/bootstrap.css"/>
+
     <!-- fonts style -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
 
     <!-- font awesome style -->
-    <link href="<%=request.getContextPath()%>/foreground/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/foreground/css/font-awesome.min.css" rel="stylesheet"/>
     <!-- Custom styles for this template -->
-    <link href="<%=request.getContextPath()%>/foreground/css/style.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/foreground/css/style.css" rel="stylesheet"/>
     <!-- responsive style -->
-    <link href="<%=request.getContextPath()%>/foreground/css/responsive.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/foreground/css/responsive.css" rel="stylesheet"/>
 
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/foreground/css/card.css"/>
 
@@ -154,11 +155,11 @@
 
 
 <!-- jQery -->
-<script src="<%=request.getContextPath()%>/asserts/js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
-<!-- custom js -->
-<script src="<%=request.getContextPath()%>/foreground/js/custom.js" charset="utf-8"></script>
+<script src="<%=request.getContextPath()%>/foreground/js/jquery-3.4.1.min.js"></script>
 <!-- bootstrap js -->
 <script src="<%=request.getContextPath()%>/foreground/js/bootstrap.js"></script>
+<!-- custom js -->
+<script src="<%=request.getContextPath()%>/foreground/js/custom.js"></script>
 
 <script>
     $(function() {
@@ -181,19 +182,21 @@
                         "                    <div class=\"col-md-3\">\n" +
                         "                        <div class=\"row\">\n" +
                         "                            <div class=\"col-md-4\">\n" +
-                        "                                <img src=\"#\" />\n" +
+                        "                                <img src="+'<%=request.getContextPath()%>/foreground/images/'+item.product.list[0].productImgName+" />\n" +
                         "                            </div>\n" +
                         "                            <div class=\"col-md-8\">\n" +
-                        "                                "+item.product.productDiscraction+"\n" +
+                        // "                                "+item.product.productDiscraction+"\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +
                         "                    </div>\n" +
                         "                    <div class=\"col-md-2\">\n" +
-                        "                        颜色分类（）机型（）\n" +
+                        ((item.product.productDiscraction).length>=10?(item.product.productDiscraction).substring(0,10)+"...":(item.product.productDiscraction))+
                         "                    </div>\n" +
                         "\n" +
                         "                    <div class=\"col-md-1 price\">\n" +
-                        "                    <span class=\"aa\">3999</span>\n" +
+                        "                    <span class=\"aa\">" +
+                        "                                "+item.product.productPrice+"\n" +
+                        "</span>\n" +
                         "                </div>\n" +
                         "                <div class=\"col-xs-3 col-md-3 aaa\">\n" +
                         "                    <input type=\"button\"  class=\"bt1 btn\" value=\"-\"/>\n" +
@@ -201,7 +204,7 @@
                         "                    <input type=\"button\" value=\"+\" class=\"bt2 btn\"/>\n" +
                         "                </div>\n" +
                         "                <div class=\"col-md-1 xj\">\n" +
-                        "                    3999\n" +
+                        "                                "+item.product.productPrice+"\n" +
                         "                </div>\n" +
                         "                <div class=\"col-md-1\">\n" +
                         "                    <a href=\"javascript:\" class=\"outcomm\">移出商品</a>\n" +
