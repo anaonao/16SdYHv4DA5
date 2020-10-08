@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateImg(String userImg, int userId) {
+
         return userDao.updateImg(userImg,userId);
     }
 
@@ -83,5 +84,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page<User> findPageByState(int pageNum, int pageSize, Integer state) {
         return userDao.selectPageByState(pageNum, pageSize, state);
+    }
+
+    @Override
+    public int updateUserByIdPwd(Integer id, String pwd) {
+        return userDao.updateUserByIdPwd(id,MD5Utils.stringToMD5(pwd));
     }
 }

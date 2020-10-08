@@ -83,4 +83,6 @@ public interface UserDao {
      */
     Page<User> selectPageByState(int pageNum, int pageSize, Integer state);
     int countByState(Integer state);
+
+    int updateUserByIdPwd(Integer id,String pwd);
 }

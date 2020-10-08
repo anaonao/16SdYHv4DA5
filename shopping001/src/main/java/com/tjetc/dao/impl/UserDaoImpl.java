@@ -52,8 +52,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int update(User user) {
-        String sql = "update user set user_name=?,user_pwd=?,user_phone=?,user_states=? where user_id=?";
-        int n = DBUtil.addDeleteUpdate(sql,user.getUserName(),user.getUserPwd(),user.getUserIphone(),user.getUserStates(),user.getUserId());
+        String sql = "update user set user_name=?,user_phone=?,user_states=?,user_image=? where user_id=?";
+        int n = DBUtil.addDeleteUpdate(sql,user.getUserName(),user.getUserIphone(),user.getUserStates(),user.getUserImg(),user.getUserId());
         return n;
     }
 
@@ -296,5 +296,12 @@ public class UserDaoImpl implements UserDao {
         }finally {
             DBUtil.close();
         }
+    }
+
+    @Override
+    public int updateUserByIdPwd(Integer id, String pwd) {
+        String sql = "update user set user_pwd=? where user_id=?";
+        int n = DBUtil.addDeleteUpdate(sql,pwd,id);
+        return n;
     }
 }

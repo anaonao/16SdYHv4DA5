@@ -80,4 +80,12 @@ public interface UserService {
      * @return
      */
     Page<User> findPageByState(int pageNum, int pageSize, Integer state);
+
+    /**
+     * 根据编号修改密码
+     * @param id
+     * @param pwd
+     * @return
+     */
+    public int updateUserByIdPwd(Integer id, String pwd);
 }

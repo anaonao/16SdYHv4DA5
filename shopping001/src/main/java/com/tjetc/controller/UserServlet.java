@@ -37,8 +37,25 @@ public class UserServlet extends HttpServlet {
             updateUser(req, resp);
         }else if ("updateUserImg".equals(op)) {
             updateUserImg(req, resp);
+        }else if("updateUserPwd".equals(op)){
+            updateUserPwd(req,resp);
         }
     }
+
+    //修改密码
+    private void updateUserPwd(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int userId = (int)req.getSession().getAttribute("userId");
+        String userPwd = req.getParameter("userPwd");
+        int n = userService.updateUserByIdPwd(userId, userPwd);
+        PrintWriter out = resp.getWriter();
+        if(n>0){
+            out.write("1");
+        }else {
+            out.write("0");
+        }
+        out.flush();
+    }
+
     //修改头像
     private void updateUserImg(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");
@@ -55,17 +72,23 @@ public class UserServlet extends HttpServlet {
         String userName = req.getParameter("userName");
         System.out.println(userName);
         String userPhone = req.getParameter("userPhone");
-        String userPwd = req.getParameter("userPwd");
         User user = new User();
         user.setUserId(userId);
         user.setUserName(userName);
         user.setUserIphone(userPhone);
-        user.setUserPwd(userPwd);
+        user.setUserStates(1);
+        System.out.println("图片："+((User)req.getSession().getAttribute("user")).getUserImg());
+        user.setUserImg(((User)req.getSession().getAttribute("user")).getUserImg());
         req.getSession().setAttribute("user",user);
         System.out.println(user);
-        userService.update(user);
+        int n = userService.update(user);
+        System.out.println("修改："+n);
         PrintWriter out = resp.getWriter();
-        out.write("1");
+        if(n>0){
+            out.write("1");
+        }else {
+            out.write("0");
+        }
         out.flush();
     }
 

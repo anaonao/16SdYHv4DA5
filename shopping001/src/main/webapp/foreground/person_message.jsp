@@ -111,6 +111,9 @@
                     <button data-toggle="modal" data-target="#myModal">
                         <a style="background: #EFEFEF; border: 0; color: #0b2e13">修改信息</a>
                     </button>
+                    <button data-toggle="modal" data-target="#myModalPwd">
+                        <a style="background: #EFEFEF; border: 0; color: #0b2e13">修改密码</a>
+                    </button>
                     <!-- Button trigger modal -->
 
 
@@ -131,12 +134,39 @@
                                                      value="${userName}"><br><br>
                                         手机号修改：<input type="text" id="userPhone" name="userPhone"
                                                      value="${user.userIphone}"><br><br>
-                                        密码修改：<input type="password" id="userPwd" name="userPwd"><br><br>
+                                        密码修改：<input type="password" id="userPwd" name="userPwd" value="${user.userPwd}"><br><br>
                                         <%--                                        头像修改：<input type="file" id="userImg" name="userImg" value="${user.userImg}"><br>--%>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消修改</button>
                                         <input type="button" id="but1" style="background: #EFEFEF; border: 0; color: #0b2e13"
+                                               value="确认修改"></input>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%--密码--%>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalPwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel3">修改密码</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <form>
+                                    <div class="modal-body">
+                                        密码修改：<input type="password" id="UpdateuserPwd" name="UpdateuserPwd" value=""><br><br>
+                                        重复密码：<input type="password" id="UpdateuserPwd2" name="UpdateuserPwd2" value=""><br><br>
+                                      <span id="pwdspan" style="color: red"></span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消修改</button>
+                                        <input type="button" id="but2" style="background: #EFEFEF; border: 0; color: #0b2e13"
                                                value="确认修改"></input>
                                     </div>
                                 </form>
@@ -168,15 +198,59 @@
                 url: "<%=request.getContextPath()%>/UserServlet?op=updateUser",
                 type: "post",
                 data: {
-                    "userName": $("#userName"),
-                    "userPhone": $("#userPhone"),
-                    "userPwd": $("userPwd")
+                    "userName": $("#userName").val(),
+                    "userPhone": $("#userPhone").val()
                 },
                 success: function (data) {
-                    alert(1233);
+                    if(data=="1"){
+                        alert("修改成功！")
+                    }else if(data=="0"){
+                        alert("修改失败！！！")
+                    }
                 }
 
             })
+        })
+
+
+        /*判断文本框中俩个值是否一致*/
+        $("#UpdateuserPwd").blur(function(){
+            if($("#UpdateuserPwd").val()!=$("#UpdateuserPwd2").val()){
+               $("#pwdspan").html("俩次密码不一致请重新输入");
+            }else {
+                $("#pwdspan").html("");
+            }
+        })
+        /*判断文本框中俩个值是否一致*/
+        $("#UpdateuserPwd2").blur(function(){
+            if($("#UpdateuserPwd").val()!=$("#UpdateuserPwd2").val()){
+                $("#pwdspan").html("俩次密码不一致请重新输入");
+            }else {
+                $("#pwdspan").html("");
+            }
+        })
+        /*修改密码绑定*/
+        $("#but2").click(function () {
+            if($("#UpdateuserPwd").val()!=$("#UpdateuserPwd2").val()){
+                alert("俩次密码输入不一致,请重新输入！！！")
+            }else {
+                $.ajax({
+                    url: "<%=request.getContextPath()%>/UserServlet?op=updateUserPwd",
+                    type: "post",
+                    data: {
+                        "userPwd": $("#UpdateuserPwd").val()
+                    },
+                    success: function (data) {
+                        if(data=="1"){
+                            alert("修改成功！")
+                        }else if(data=="0"){
+                            alert("修改失败！！！")
+                        }
+                    }
+
+                })
+            }
+
         })
 
     })
