@@ -60,7 +60,7 @@
                     商品
                 </div>
                 <div class="col-xs-2 col-md-2">
-                    属性
+                    简介
                 </div>
 
                 <div class="col-xs-1 col-md-1">
@@ -140,7 +140,7 @@
                         <li><span  style="color:#666666;">已省：</span><span>-￥0元</span></li>
                         <li><span  style="color:#666666;">总价(不含运费)：￥</span><span style="color: red;font-size: 20px;" class="zj">0</span>（元）</li>
                     </ul>
-                    <div style="width: 80px;height:35px;background-color: red;line-height: 40px;text-align: center;color: #FFFFFF;position: absolute;margin-left: 682px;margin-top: -10px;"><a href="javascript:shoppingJS()" style="color: #FFFFFF;">去结算</a></div>
+                    <div style="width: 80px;height:35px;background-color: red;line-height: 40px;text-align: center;color: #FFFFFF;position: absolute;margin-left: 682px;margin-top: -10px;"><a href="javascript:" style="color: #FFFFFF;" id="conmitCart">去结算</a></div>
                 </div>
             </div>
         </div>
@@ -161,6 +161,7 @@
 <script src="<%=request.getContextPath()%>/foreground/js/custom.js"></script>
 
 <script>
+
     $(function() {
         /*页面初始化加载用户购物车数据*/
         $.ajax({
@@ -177,7 +178,7 @@
                         "                <div class=\"row card-main-1\">\n" +
                         "                    <div class=\"col-md-1\">\n" +
                         "                        <input type=\"hidden\" name=\"cartId\" class=\"cartId\" value='"+item.cartId+"'/>\n" +
-                        "                        <input type=\"checkbox\" name=\"ck\" class=\"ck\"/>\n" +
+                        "                        <input type=\"checkbox\" name=\"ck\" class=\"ck\" value='"+item.cartId+"'/>\n" +
                         "                    </div>\n" +
                         "                    <div class=\"col-md-3\">\n" +
                         "                        <div class=\"row\">\n" +
@@ -185,7 +186,7 @@
                         "                                <img src="+'<%=request.getContextPath()%>/foreground/images/'+item.product.list[0].productImgName+" />\n" +
                         "                            </div>\n" +
                         "                            <div class=\"col-md-8\">\n" +
-                        // "                                "+item.product.productDiscraction+"\n" +
+                        ((item.product.productName).length>=8?(item.product.productName).substring(0,8)+"...":(item.product.productName))+
                         "                            </div>\n" +
                         "                        </div>\n" +
                         "                    </div>\n" +
@@ -200,14 +201,14 @@
                         "                </div>\n" +
                         "                <div class=\"col-xs-3 col-md-3 aaa\">\n" +
                         "                    <input type=\"button\"  class=\"bt1 btn\" value=\"-\"/>\n" +
-                        "                    <input type=\"text\" value=\"1\" min=\"0\" class=\"txt\"/>\n" +
+                        "                    <input type=\"text\" value='"+item.productsCount+"' min=\"0\" class=\"txt\"/>\n" +
                         "                    <input type=\"button\" value=\"+\" class=\"bt2 btn\"/>\n" +
                         "                </div>\n" +
                         "                <div class=\"col-md-1 xj\">\n" +
                         "                                "+item.product.productPrice+"\n" +
                         "                </div>\n" +
                         "                <div class=\"col-md-1\">\n" +
-                        "                    <a href=\"javascript:\" class=\"outcomm\">移出商品</a>\n" +
+                        "                    <a href=\"javascript:\" class=\"outcomm\" onclick='deleteById(\""+item.cartId+"\")'>移出商品</a>\n" +
                         "                </div>\n" +
                         "            </div>")
                 })
@@ -274,31 +275,17 @@
         })
 
         //删除单个商品
-        $(document).on('click',".outcomm",function() {
-            if (confirm("是否移除当前选中商品???")) {
-                $(this).parents(".card-main").remove();
-                deleteById();
-                commisnull();
-            }
-            zj();
-            zjj();
-        })
+        // $(document).on('click',".outcomm",function() {
+        //     if (confirm("是否移除当前选中商品???")) {
+        //         $(this).parents(".card-main").remove();
+        //         deleteById();
+        //         commisnull();
+        //     }
+        //     zj();
+        //     zjj();
+        // })
 
-        //删除商品
-        function deleteById() {
-            $.ajax({
-                url:"<%=request.getContextPath()%>/CartSrvlet?op=deleteById",
-                type:"post",
-                data:{
-                    "cartId":$(".cartId").val()
-                },
-                success:function (data) {
-                  // alert(data)
-                }
 
-            })
-
-        }
         //判断商品是否为空
         function commisnull() {
             // alert($(".card-main").length)
@@ -309,12 +296,7 @@
         //批量删除
         $(".delAll").click(function() {
             if (confirm("是否移除当前选中商品???")) {
-                $(".ck").each(function() {
-                    if ($(this).prop("checked")) {
-                        $(this).parents(".card-main").remove();
-                        commisnull();
-                    }
-                })
+                show();
             }
             zj();
             zjj();
@@ -331,6 +313,7 @@
                 $(this).parents(".card-main-1").children(".xj").text(price*num)
             })
         }
+
 
 
         //总计
@@ -357,8 +340,56 @@
             $(".sum").text(sum);
         }
 
-    })
+        //批量删除
+        function show(){
+            obj = document.getElementsByName("ck");
+            var check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            console.log("批量删除的购物车编号"+check_val);
+            $.ajax({
+                url:"<%=request.getContextPath()%>/CartSrvlet?op=deleteByListCartId",
+                type:"post",
+                data:{
+                    "listCartId":check_val+""
+                },
+                success:function (data) {
+                  console.log("删除返回的数据："+data)
+                    if(data=="0"){
+                        alert("删除数据失败！！！")
+                    }
+                }
+            })
+            //刷新当前页面
+            location.reload();
+        }
 
+        //结算
+        $("#conmitCart").click(function () {
+             alert("结算")
+        })
+
+    })
+    //删除商品
+    function deleteById(id) {
+        alert(id)
+        $.ajax({
+            url:"<%=request.getContextPath()%>/CartSrvlet?op=deleteById",
+            type:"post",
+            data:{
+                "cartId":id
+            },
+            success:function (data) {
+                // alert(data)
+            }
+
+        })
+        //刷新页面
+        location.reload();
+
+    }
 </script>
 
 

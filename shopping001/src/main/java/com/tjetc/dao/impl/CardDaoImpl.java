@@ -9,6 +9,8 @@ import com.tjetc.domain.User;
 import com.tjetc.util.DBUtil;
 import com.tjetc.util.Page;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -177,5 +179,51 @@ public class CardDaoImpl implements CartDao {
         }finally {
             DBUtil.close();
         }
+    }
+
+    @Override
+    public int delteByListCartId(String[] id) {
+        String sql = "delete from cart where cart_id in (?";
+        StringBuffer sqlbuf = new StringBuffer(sql);
+        Connection conn = DBUtil.getConnection();
+        PreparedStatement pstmt=null;
+        try {
+            //拼接sqlbuf，两种情况
+            if (id.length == 1) {
+                //有1条时， 直接加 "）"结束
+                sqlbuf.append(")");
+            }else{
+                //有多条时候，拼接length-1 次，因为初始sql语句已经有一次了。"delete  from `user` where u_id in (? "
+                for (int i = 0; i < id.length-1; i++) {
+                    sqlbuf.append(",?");
+
+                }
+                //最后拼接" )"  圆满完成拼接sql
+                sqlbuf.append(")");
+            }
+            System.out.println(sqlbuf.toString());
+            pstmt = conn.prepareStatement(sqlbuf.toString());
+            if (id.length == 1) {
+                pstmt.setString(1, id[0]);
+            }else{
+
+                for (int i = 1; i <= id.length; i++) {
+                    pstmt.setString(i, id[i-1]);
+                    //userids[i-1] 因为数据下标从0 开始。
+                }
+            }
+            return pstmt.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+                pstmt.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return 0;
     }
 }

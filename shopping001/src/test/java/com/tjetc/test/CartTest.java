@@ -34,9 +34,10 @@ public class CartTest {
         cartService.findByUserId(1,2,1).getData().forEach(System.out::println);
     }
 
-    public static void main(String[] args) {
-        CartDao cartDao = new CardDaoImpl();
-        CartService cartService = new CartServiceImpl();
-        System.out.println(cartService.delete(4));
+    @Test
+    public void deleteListCartId(){
+        String[] i= {"10","12","11"};
+
+        System.out.println(cartDao.delteByListCartId(i));
     }
 }

@@ -52,4 +52,11 @@ public interface CartService {
      * @return
      */
     Cart findByUserIdAndProductId(Integer userId,Integer productId);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    int delteByListCartId(String[] id);
 }

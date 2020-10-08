@@ -34,8 +34,8 @@ public class CartSrvlet extends HttpServlet {
             findAll(req,resp);
         }else if("deleteById".equals(op)){
             deleteById(req,resp);
-        }else if("".equals(op)){
-
+        }else if("deleteByListCartId".equals(op)){
+            deleteByListCartId(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -50,6 +50,27 @@ public class CartSrvlet extends HttpServlet {
 
         }
     }
+
+    //批量删除购物车中的商品
+    private void deleteByListCartId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String[] list= req.getParameter("listCartId").split(",");
+
+        for (int i = 0; i <list.length ; i++) {
+            System.out.println("获取购物车编号1："+list[i]);
+        }
+
+        //调用方法删除数据
+        int n = cartService.delteByListCartId(list);
+        PrintWriter out = resp.getWriter();
+        if(n>0){
+            //删除成功
+            out.write("1");
+        }else {
+            out.write("0");
+        }
+        out.flush();
+    }
+
     //删除商品
     private void deleteById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String cartId = req.getParameter("cartId");

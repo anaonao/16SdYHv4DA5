@@ -60,6 +60,13 @@ public interface CartDao {
      */
     Cart selectByUserIdAndProductId(Integer userId,Integer productId);
 
+    /**
+     *
+     * @param id
+     * @return
+     */
+    int delteByListCartId(String[] id);
+
 
 
 

@@ -49,4 +49,8 @@ public class CartServiceImpl implements CartService {
         return cartDao.selectByUserIdAndProductId(userId,productId);
     }
 
+    @Override
+    public int delteByListCartId(String[] id) {
+        return cartDao.delteByListCartId(id);
+    }
 }
