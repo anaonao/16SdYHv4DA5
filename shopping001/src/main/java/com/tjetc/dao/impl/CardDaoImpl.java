@@ -159,9 +159,10 @@ public class CardDaoImpl implements CartDao {
     public Cart selectByUserIdAndProductId(Integer userId, Integer productId) {
         String sql = "select cart_id,product_id,products_count,user_id from cart where user_id=? and product_id=?";
         ResultSet rs = DBUtil.select(sql,userId,productId);
-        Cart cart = new Cart();
+        Cart cart =null;
         try {
             if(rs.next()){
+                cart = new Cart();
                 Product product = productDao.selectById(rs.getInt("product_id"));
                 User user = userDao.selectById(rs.getInt("user_id"));
                 cart.setCartId(rs.getInt("cart_id"));

@@ -130,7 +130,7 @@
                         type:"post",
                         data:{
                             "productId":${product.productId},
-                            "userId":${userId}
+                            "userId":${userId}+""
                         },
                         success:function (data) {
                             console.log(data)

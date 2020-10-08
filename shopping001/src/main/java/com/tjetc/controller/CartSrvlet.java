@@ -72,7 +72,7 @@ public class CartSrvlet extends HttpServlet {
         Cart cart = new Cart();
         //判断一下当前用户的商品是否存在
         Cart cartByUserIdAndProductId = cartService.findByUserIdAndProductId(Integer.parseInt(userId),Integer.parseInt(productId));
-
+        System.out.println(":"+cartByUserIdAndProductId);
         int n =0;
         if(cartByUserIdAndProductId!=null){
             cartByUserIdAndProductId.setProductsCount(cartByUserIdAndProductId.getProductsCount()+1);
