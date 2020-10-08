@@ -32,8 +32,8 @@ public class CartSrvlet extends HttpServlet {
             addCart(req,resp);
         }else if("findAll".equals(op)){
             findAll(req,resp);
-        }else if("".equals(op)){
-
+        }else if("deleteById".equals(op)){
+            deleteById(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -49,6 +49,17 @@ public class CartSrvlet extends HttpServlet {
         }else if("".equals(op)){
 
         }
+    }
+    //删除商品
+    private void deleteById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String cartId = req.getParameter("cartId");
+        System.out.println(cartId);
+        System.out.println();
+        int n = cartService.delete(Integer.parseInt(cartId));
+        System.out.println("panduan:"+n);
+        PrintWriter out = resp.getWriter();
+        out.write(n);
+        out.flush();
     }
 
 
