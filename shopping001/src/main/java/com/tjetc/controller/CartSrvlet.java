@@ -41,8 +41,8 @@ public class CartSrvlet extends HttpServlet {
         }else if("accountsAll".equals(op)){
             //把购物车选中编号获取到
             accountsAll(req,resp);
-        }else if("".equals(op)){
-
+        }else if("addCartByProductById".equals(op)){
+            addCartByProductById(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
@@ -54,10 +54,28 @@ public class CartSrvlet extends HttpServlet {
         }
     }
 
+    //单个商品立即购买
+    private void addCartByProductById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String productId = req.getParameter("productId");
+        Cart cart = new Cart();
+
+        User user = new User();
+        user.setUserId((int)req.getSession().getAttribute("userId"));
+        cart.setUser(user);
+        Product product = new Product();
+        product.setProductId(Integer.parseInt(productId));
+        cart.setProduct(product);
+        cart.setProductsCount(1);
+        //临时添加到购物车
+        int n = cartService.add(cart);
+        //查询购物车获取编号
+        Cart byUserIdAndProductId = cartService.findByUserIdAndProductId(user.getUserId(), product.getProductId());
+        resp.sendRedirect("CartSrvlet?op=accountsAll&listCartId="+byUserIdAndProductId.getCartId()+"");
+    }
+
     //获取选中购物车编号，显示数据
     private void accountsAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] list= req.getParameter("listCartId").split(",");
-
         List<Cart> cartList = new ArrayList<>();
 
         double sum =0;
