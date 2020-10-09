@@ -57,20 +57,22 @@ public class CartSrvlet extends HttpServlet {
     //获取选中购物车编号，显示数据
     private void accountsAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] list= req.getParameter("listCartId").split(",");
+
         List<Cart> cartList = new ArrayList<>();
 
         double sum =0;
         for (int i = 0; i <list.length ; i++) {
+            System.out.println("选中的商品购物车编号:"+list[i]);
          Cart cartByid = cartService.findById(Integer.parseInt(list[i]));
          cartList.add(cartByid);
          sum+=cartByid.getProduct().getProductPrice()*cartByid.getProductsCount();
         }
         System.out.println("总价格："+sum);
-        System.out.println("显示所有选中的集合："+cartList);
+        System.out.println("显示所有选中的集合："+req.getParameter("listCartId"));
         req.setAttribute("list",cartList);
         req.setAttribute("countPrice",sum);
         //把购物车中选中的编号传递
-        req.setAttribute("listByid",list);
+        req.setAttribute("listByid",req.getParameter("listCartId"));
         req.getRequestDispatcher("foreground/accounts.jsp").forward(req,resp);
 
     }

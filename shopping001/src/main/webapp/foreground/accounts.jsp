@@ -221,7 +221,7 @@
     $(function () {
         $("#submitOrder").click(function () {
             if(confirm("是否确定提交？？？")){
-                alert("下单成功！")
+                console.log(${listByid})
                 location.href="<%=request.getContextPath()%>/OrderServlet?op=submitCart&cartIListd=${listByid}&countPrice=${countPrice}&userId=${userId}";
             }
         })
