@@ -92,7 +92,7 @@
                     <a href="javascript:" id="isloginCart">
                         加入购物车
                     </a>
-                    <a href="javascript:">
+                    <a href="javascript:" id="isSubmitOrder">
                         立即购买
                     </a>
                 </div>
@@ -143,6 +143,9 @@
                     })
                 }
             })
+
+
+        /*立即购买*/
     })
 </script>
 </body>
