@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -60,12 +61,17 @@ public class OrderServlet extends HttpServlet {
         String[] list = req.getParameter("cartIListd").split(",");
         String countPrice = req.getParameter("countPrice");
         String userId = req.getParameter("userId");
+
+        //存放到session中
+        HttpSession session = req.getSession();
+        session.setAttribute("orderSubmitList",list);
+        session.setAttribute("orderSubmitcountPrice",countPrice);
+        session.setAttribute("orderSubmituserId",userId);
         System.out.println("list:" + list);
         System.out.println("countPrice:" + countPrice);
         System.out.println("userId:" + userId);
-        if (countPrice != null && userId != null) {
-            int n = orderService.addOrders(list, Double.parseDouble(countPrice), Integer.parseInt(userId));
-            if (n > 0) {
+        if (list.length>0&&countPrice != null && userId != null) {
+
                 //成功
                 //返回到购物车
 //                resp.sendRedirect("foreground/cart.jsp");
@@ -131,9 +137,6 @@ public class OrderServlet extends HttpServlet {
 
 
 
-            } else {
-                System.out.println("数据提交不成功:n==" + n);
-            }
         } else {
             System.out.println("提交失败！！");
         }

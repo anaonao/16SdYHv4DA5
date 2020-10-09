@@ -16,7 +16,7 @@ public class AlipayConfig {
     // 返回格式
     public static String FORMAT = "json";
     // 页面跳转同步通知页面路径 需http://或者https://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问 商户可以自定义同步跳转地址
-    public static String return_url = "http://localhost:8080/shopping001/foreground/cart.jsp";
+    public static String return_url = "http://localhost:8080/shopping001/OrderSubmitServlet";
 
     // 日志记录目录
 //    public static String log_path = "/log";
