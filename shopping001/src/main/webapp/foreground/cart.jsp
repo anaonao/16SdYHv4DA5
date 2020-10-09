@@ -360,13 +360,18 @@
         $("#conmitCart").click(function () {
             console.log("结算")
             obj = document.getElementsByName("ck");
-            var check_val = [];
-            for(k in obj){
-                if(obj[k].checked)
-                    check_val.push(obj[k].value);
+
+                var check_val = [];
+                for(k in obj){
+                    if(obj[k].checked)
+                        check_val.push(obj[k].value);
+                }
+            if(check_val.length>0){
+                console.log("购物车编号"+check_val);
+                location.href="<%=request.getContextPath()%>/CartSrvlet?op=accountsAll&listCartId="+check_val+"";
+            }else {
+                alert("请选择商品")
             }
-            console.log("购物车编号"+check_val);
-            location.href="<%=request.getContextPath()%>/CartSrvlet?op=accountsAll&listCartId="+check_val+"";
         })
 
     })
