@@ -146,6 +146,10 @@
 
 
         /*立即购买*/
+        $("#isSubmitOrder").click(function () {
+           alert("立即购买")
+            location.href="<%=request.getContextPath()%>/CartSrvlet?op=addCartByProductById&productId="+${product.productId};
+        })
     })
 </script>
 </body>
