@@ -258,6 +258,7 @@
         //     zjj();
         // })
 
+        //修改
         //商品数量手动输入事件
         $(document).on('blur',".txt",function() {
             // alert($(this).val())

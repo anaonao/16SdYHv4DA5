@@ -58,6 +58,7 @@ public class CartSrvlet extends HttpServlet {
         }
     }
 
+    //修改
     //获取购物车中手动输入的商品数量
     private void count(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String cartId = req.getParameter("cartId");
