@@ -6,7 +6,9 @@ import com.tjetc.domain.Cart;
 import com.tjetc.domain.Product;
 import com.tjetc.domain.User;
 import com.tjetc.service.CartService;
+import com.tjetc.service.ProductService;
 import com.tjetc.service.impl.CartServiceImpl;
+import com.tjetc.service.impl.ProductServiceImpl;
 import com.tjetc.util.Page;
 
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ import java.util.List;
 @WebServlet("/CartSrvlet")
 public class CartSrvlet extends HttpServlet {
     private CartService cartService = new CartServiceImpl();
+    private ProductService productService = new ProductServiceImpl();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
@@ -41,17 +44,88 @@ public class CartSrvlet extends HttpServlet {
         }else if("accountsAll".equals(op)){
             //把购物车选中编号获取到
             accountsAll(req,resp);
-        }else if("".equals(op)){
-
-        }else if("".equals(op)){
-
-        }else if("".equals(op)){
-
+        }else if("jia".equals(op)){
+            //添加商品数量
+            jia(req,resp);
+        }else if("jian".equals(op)){
+            jian(req,resp);
+        }else if("count".equals(op)){
+            count(req,resp);
         }else if("".equals(op)){
 
         }else if("".equals(op)){
 
         }
+    }
+
+    //获取购物车中手动输入的商品数量
+    private void count(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String cartId = req.getParameter("cartId");
+        String countnum = req.getParameter("countnum");
+        Cart byId = cartService.findById(Integer.parseInt(cartId));
+        PrintWriter out = resp.getWriter();
+        if(byId!=null){
+            int num = Integer.parseInt(countnum);
+            if(num>0){
+                if(num<=byId.getProduct().getProductCount()){
+                    byId.setProductsCount(num);
+                    int update = cartService.update(byId);
+                    out.write("1");
+                }else {
+                    out.write("0");
+                }
+            }else {
+                out.write("-1");
+            }
+        }
+        out.flush();
+    }
+
+    private void jian(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String cartId = req.getParameter("cartId");
+        Cart byId = cartService.findById(Integer.parseInt(cartId));
+        System.out.println("cart:"+byId);
+        PrintWriter out = resp.getWriter();
+        if(byId!=null){
+            System.out.println("byId.getProductsCount():"+byId.getProductsCount());
+            System.out.println("byId.getProduct().getProductCount():"+byId.getProduct().getProductCount());
+            if(byId.getProductsCount()>1){
+                int num = (byId.getProductsCount())-1;
+                byId.setProductsCount(num);
+                int update = cartService.update(byId);
+                out.write("1");
+            }else {
+                out.write("0");
+            }
+        }else {
+            out.write("2");
+        }
+        out.flush();
+    }
+
+    //
+    private void jia(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String cartId = req.getParameter("cartId");
+        Cart byId = cartService.findById(Integer.parseInt(cartId));
+
+        System.out.println("cart:"+byId);
+        PrintWriter out = resp.getWriter();
+        if(byId!=null){
+            System.out.println("byId.getProductsCount():"+byId.getProductsCount());
+            System.out.println("byId.getProduct().getProductCount():"+byId.getProduct().getProductCount());
+           if(byId.getProductsCount()<byId.getProduct().getProductCount()){
+               int num = (byId.getProductsCount())+1;
+               byId.setProductsCount(num);
+               int update = cartService.update(byId);
+               out.write("1");
+           }else {
+               out.write("0");
+           }
+        }else {
+             out.write("2");
+        }
+        out.flush();
+
     }
 
     //获取选中购物车编号，显示数据

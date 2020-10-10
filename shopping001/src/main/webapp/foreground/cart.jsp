@@ -200,9 +200,10 @@
                         "</span>\n" +
                         "                </div>\n" +
                         "                <div class=\"col-xs-3 col-md-3 aaa\">\n" +
-                        "                    <input type=\"button\"  class=\"bt1 btn\" value=\"-\"/>\n" +
+                        "                    <input type=\"button\"  class=\"bt1 btn\" value=\"-\" onclick='jian(\""+item.cartId+"\")'/>\n" +
                         "                    <input type=\"text\" value='"+item.productsCount+"' min=\"0\" class=\"txt\"/>\n" +
-                        "                    <input type=\"button\" value=\"+\" class=\"bt2 btn\"/>\n" +
+                        "                    <input type=\"button\" value=\"+\" class=\"bt2 btn\"  onclick='jia(\""+item.cartId+"\")'/>\n" +
+                        "                    <input type=\"hidden\" value='"+item.cartId+"'/>\n" +
                         "                </div>\n" +
                         "                <div class=\"col-md-1 xj\">\n" +
                         "                                "+(item.product.productPrice)*(item.productsCount)+"\n" +
@@ -242,37 +243,9 @@
             zjj();
         })
 
-        //购物车加减
-        $(document).on('click',".bt1",function() {
-            var jian = $(this).next().val();
-            // alert(jian)
-            if (jian > 1) {
-                jian--;
-            }
-            $(this).next().val(jian);
 
-            //价格
-            var price = $(this).parent().prev().text();
-            //小计
-            $(this).parent().next().text(price * jian);
-            zj();
-            zjj();
-        })
 
-        //购物车加减
-        $(document).on('click',".bt2",function() {
-            var jia = $(this).prev().val();
-            // alert(jian)
-            jia++;
-            $(this).prev().val(jia);
 
-            //价格
-            var price = $(this).parent().prev().text();
-            //小计
-            $(this).parent().next().text(price * jia);
-            zj();
-            zjj();
-        })
 
         //删除单个商品
         // $(document).on('click',".outcomm",function() {
@@ -285,6 +258,31 @@
         //     zjj();
         // })
 
+        //商品数量手动输入事件
+        $(document).on('blur',".txt",function() {
+            // alert($(this).val())
+            // alert($(this).next().next().val())
+            var countnum=$(this).val();
+            var cartId=$(this).next().next().val();
+            $.ajax({
+                url:"<%=request.getContextPath()%>/CartSrvlet?op=count",
+                type:"post",
+                data:{
+                    "cartId":cartId,
+                    "countnum":countnum
+                },
+                success:function (data) {
+                    console.log(data)
+                    if(data=="-1"){
+                        alert("请输入有效数字！！！")
+                    }else if(data=="0") {
+                        alert("库存不足！！")
+                    }else if(data=="1"){
+
+                    }
+                }
+            })
+        })
 
         //判断商品是否为空
         function commisnull() {
@@ -306,29 +304,7 @@
 
 
 
-        //总计
-        function zj(){
-            var sum=0;
-            $(".ck").each(function(){
-                if($(this).prop("checked")){
-                    var p =$(this).parents(".card-main-1").children(".xj").text();
-                    sum+=parseInt(p);
-                }
-            })
-            $(".zj").text(sum);
-        }
 
-        //件数
-        function zjj(){
-            var sum=0;
-            $(".ck").each(function(){
-                if($(this).prop("checked")){
-                    var p =($(this).parents(".card-main-1").children(".aaa").children(".txt").val())
-                    sum+=parseInt(p);
-                }
-            })
-            $(".sum").text(sum);
-        }
 
         //批量删除
         function show(){
@@ -387,11 +363,100 @@
             success:function (data) {
                 // alert(data)
             }
-
         })
         //刷新页面
         location.reload();
+    }
+    //购物车商品数量添加
+    function jia(id) {
+        $.ajax({
+            url:"<%=request.getContextPath()%>/CartSrvlet?op=jia",
+            type:"post",
+            data:{
+                "cartId":id
+            },
+            success:function (data) {
+                if(data=="0"){
+                    alert("库存不足！！！")
+                }else if(data=="1"){
+                    //购物车加减
+                    $(document).on('click',".bt2",function() {
+                        var jia = $(this).prev().val();
+                        // alert(jian)
+                        jia++;
+                        $(this).prev().val(jia);
+                        //价格
+                        var price = $(this).parent().prev().text();
+                        //小计
+                        $(this).parent().next().text(price * jia);
+                        zj();
+                        zjj();
+                    })
 
+
+                }
+            }
+        })
+
+    }
+    //购物车商品数量减少
+    function jian(id) {
+        $.ajax({
+            url:"<%=request.getContextPath()%>/CartSrvlet?op=jian",
+            type:"post",
+            data:{
+                "cartId":id
+            },
+            success:function (data) {
+                if(data=="0"){
+                }else if(data=="1"){
+                    //购物车加减
+                    $(document).on('click',".bt1",function() {
+                        var jian = $(this).next().val();
+                        // alert(jian)
+                        if (jian > 1) {
+                            jian--;
+                        }
+                        $(this).next().val(jian);
+                        //价格
+                        var price = $(this).parent().prev().text();
+                        //小计
+                        $(this).parent().next().text(price * jian);
+                        zj();
+                        zjj();
+                    })
+
+
+                }
+            }
+        })
+
+    }
+
+
+
+    //总计
+    function zj(){
+        var sum=0;
+        $(".ck").each(function(){
+            if($(this).prop("checked")){
+                var p =$(this).parents(".card-main-1").children(".xj").text();
+                sum+=parseInt(p);
+            }
+        })
+        $(".zj").text(sum);
+    }
+
+    //件数
+    function zjj(){
+        var sum=0;
+        $(".ck").each(function(){
+            if($(this).prop("checked")){
+                var p =($(this).parents(".card-main-1").children(".aaa").children(".txt").val())
+                sum+=parseInt(p);
+            }
+        })
+        $(".sum").text(sum);
     }
 </script>
 
