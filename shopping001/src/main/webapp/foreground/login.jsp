@@ -139,6 +139,8 @@
                         location.href="<%=request.getContextPath()%>/foreground/index.jsp";
                     }else if(data=="0"){
                         alert("用户名或者密码错误")
+                    }else if(data=="2"){
+                        alert("Sorry，该用户处于禁用状态，无法登录")
                     }
                 }
             })
@@ -148,6 +150,7 @@
 </script>
 
 </body>
+
 
 </html>
 

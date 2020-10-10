@@ -115,7 +115,7 @@
                     <c:set var="islogin" value="${empty sessionScope.userName}"/>
                     <%--                        未登录--%>
                     <c:if test="${islogin}">
-                        <a href="<%=request.getContextPath()%>/foreground/register.jsp.jsp" class="slider-link">
+                        <a href="<%=request.getContextPath()%>/foreground/register.jsp" class="slider-link">
                             注册
                         </a>
                     </c:if>

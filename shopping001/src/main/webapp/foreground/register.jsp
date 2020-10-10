@@ -90,7 +90,7 @@
     <div class="detail-box">
         <div class="col-md-8 col-lg-6 mx-auto">
             <div class="inner_detail-box">
-                <form id="formregister" action="<%=request.getContextPath()%>/UserServlet?op=register" method="post">
+                <form  action="<%=request.getContextPath()%>/UserServlet?op=register" method="post">
                     <h1>
                         凯瑞智能家居<br>
                         工作室
@@ -112,11 +112,11 @@
                             <div></div>
                         </div>
                         <div class="form-group">
-                            确认密码：<input type="password" class="form-control" id="userPwd2" name="userPwd">
+                            确认密码：<input type="password" class="form-control" id="userPwd2" name="userPwd2">
                             <div></div>
                         </div>
                         <div>
-                            <button type="submit" class="slider-link" style="margin-bottom: 40px">注册</button>
+                            <button id="formregister" type="button" class="slider-link" style="margin-bottom: 40px">注册</button>
                         </div>
                         <a href="login.jsp" class="btn btn-default" style="color: white ;">已有账号？登录</a><br>
                         <a href="index.jsp" class="btn btn-default" style="color: white">暂不登录</a>
@@ -156,34 +156,10 @@
         //最后提交的时候用于做判断的变量
         var phoneflag;
         var pass1flag;
-        var pass2flag;
+        var passflag;
         var flag = false;
         //利用失去焦点事件动态获取和验证信息的准确性
-
-        $("#userName").blur(function () {
-            //获取
-            var phone = $("#userName").val();
-
-            //判断名字是否重复
-            if (phone != "") {
-                //判断格式
-                var phoneFlag = phoneTest(phone);
-                phoneflag = phoneFlag;
-                if (phoneFlag == false) {
-                    alert(phone)
-                    //alert(phoneFlag)
-                    $("#userPhone").next().show();
-                    $("#userPhone").next().text("手机号码有误，请重填");
-                } else {
-                    $("#userPhone").next().hide();
-                }
-            } else {
-                $("#userPhone").next().show();
-                $("#userPhone").next().text("手机号码不能为空，请重填");
-            }
-        });
-
-
+        //手机号
         $("#userPhone").blur(function () {
             //获取
             var phone = $("#userPhone").val();
@@ -193,7 +169,7 @@
                 var phoneFlag = phoneTest(phone);
                 phoneflag = phoneFlag;
                 if (phoneFlag == false) {
-                    alert(phone)
+                    // alert(phone)
                     //alert(phoneFlag)
                     $("#userPhone").next().show();
                     $("#userPhone").next().text("手机号码有误，请重填");
@@ -205,13 +181,14 @@
                 $("#userPhone").next().text("手机号码不能为空，请重填");
             }
         });
+        //密码
         $("#userPwd").blur(function () {
             //获取
-            var password1 = $("#userPwd").val();
+            var userPwd = $("#userPwd").val();
             //判空
-            if (password1 != "") {
+            if (userPwd != "") {
                 //判断格式
-                var passFlag = passwordTest(password1);
+                var passFlag = passwordTest(userPwd);
                 pass1flag = passFlag;
                 if (passFlag == false) {
                     this.next().show();
@@ -226,15 +203,12 @@
         })
         $("#userPwd2").blur(function () {
             //获取
-            var password2 = $("#password2").val();
+            var password2 = $("#userPwd2").val();
             //判空
             if (password2 != "") {
-                //判断格式
-                var password1 = $("#userPwd").val();
-                var pass2Flag = (password2 == password1);
-                //alert(pass2Flag)
-                pass2flag = pass2Flag;
-                if (password2 != password1) {
+                //判断是否相同
+                passflag = (password2 == password1);
+                if (!passflag) {
                     $("#userPwd2").next().show();
                     $("#userPwd2").next().text("密码不一致，请重填");
                 } else {
@@ -245,24 +219,23 @@
                 $("#userPwd2").next().text("密码不能为空，请重填");
             }
         })
-        //返回submit函数的结果值
-        $("#formregister").submit(function () {
-            $.ajax({
-                url: "<%=request.getContextPath()%>/UserServlet?op=register",
-                type: "post",
-                data: {
-                    "userName": $("#userName").val(),
-                    "userPwd": $("#userPwd").val(),
-                    "userPhone": $("#userPhone").val()
-                },
-                success: function (data) {
-                    alert("恭喜您" + data);
-                    if ("添加成功" == data) {
-                        location.href = "<%=request.getContextPath()%>/foreground/login.jsp";
+
+        $("#formregister").click(function () {
+                $.ajax({
+                    url: "<%=request.getContextPath()%>/UserServlet?op=register",
+                    type: "post",
+                    data: {
+                        "userName": $("#userName").val(),
+                        "userPwd": $("#userPwd").val(),
+                        "userPhone": $("#userPhone").val()
+                    },
+                    success: function (data) {
+                        alert(data)
+                        if ("添加成功" == data) {
+                            location.href = "<%=request.getContextPath()%>/foreground/login.jsp";
+                        }
                     }
-                }
-            })
-            return false;
+                })
         })
     })
 </script>

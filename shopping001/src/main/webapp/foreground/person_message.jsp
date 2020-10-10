@@ -241,8 +241,7 @@
                     success: function (data) {
                         if(data=="1"){
                             alert("修改成功！请重新登录！");
-                            location.href("<%=request.getContextPath()%>/foreground/login.jsp")
-
+                            location.href="<%=request.getContextPath()%>/foreground/login.jsp"
                         }else if(data=="0"){
                             alert("修改失败！！！")
                         }

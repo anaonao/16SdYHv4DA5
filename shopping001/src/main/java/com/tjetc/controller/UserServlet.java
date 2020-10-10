@@ -49,6 +49,8 @@ public class UserServlet extends HttpServlet {
         int n = userService.updateUserByIdPwd(userId, userPwd);
         PrintWriter out = resp.getWriter();
         if(n>0){
+            //销毁用户名
+            req.getSession().removeAttribute("userName");
             out.write("1");
         }else {
             out.write("0");
@@ -103,6 +105,7 @@ public class UserServlet extends HttpServlet {
     //注册
     private void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String userName = req.getParameter("userName");
+        System.out.println(userName);
         String userPwd = req.getParameter("userPwd");
         String userPhone = req.getParameter("userPhone");
         User user = new User();
@@ -122,12 +125,14 @@ public class UserServlet extends HttpServlet {
         String userName = req.getParameter("userName");
         String userPwd = req.getParameter("userPwd");
         User user = userService.findNameAndPwd(userName, userPwd);
+        //获取用户状态
+        int userStates = user.getUserStates();
         PrintWriter out = resp.getWriter();
         System.out.println(userName);
         System.out.println(userPwd);
         System.out.println(user);
         //登录成功
-        if (user != null) {
+        if (userStates==1) {
             req.setAttribute("user", user);
             System.out.println(user);
             req.getSession().setAttribute("userName",userName);
@@ -135,7 +140,10 @@ public class UserServlet extends HttpServlet {
             req.getSession().setAttribute("user",user);
             out.write("1");
             out.flush();
-        } else {
+        } else if (userStates==0) {//禁用
+            out.write("2");
+            out.flush();
+        }else {//不正确
             out.write("0");
             out.flush();
         }
