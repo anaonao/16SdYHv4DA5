@@ -147,7 +147,7 @@
         <!-- end bottom -->
     </div>
 </section>
-
+<input type="text"id="flag" value="true">
 <!-- end about section -->
 
 <%@include file="myFoot.jsp" %>
@@ -200,9 +200,9 @@
                         "</span>\n" +
                         "                </div>\n" +
                         "                <div class=\"col-xs-3 col-md-3 aaa\">\n" +
-                        "                    <input type=\"button\"  class=\"bt1 btn\" value=\"-\" onclick='jian(\""+item.cartId+"\")'/>\n" +
+                        "                    <input type=\"button\"  class=\"bt1 btn\" value=\"-\"/>\n" +
                         "                    <input type=\"text\" value='"+item.productsCount+"' min=\"0\" class=\"txt\"/>\n" +
-                        "                    <input type=\"button\" value=\"+\" class=\"bt2 btn\"  onclick='jia(\""+item.cartId+"\")'/>\n" +
+                        "                    <input type=\"button\" value=\"+\" class=\"bt2 btn\"/>\n" +
                         "                    <input type=\"hidden\" value='"+item.cartId+"'/>\n" +
                         "                </div>\n" +
                         "                <div class=\"col-md-1 xj\">\n" +
@@ -284,6 +284,73 @@
                 }
             })
         })
+
+        //购物车加
+        $(document).on('click',".bt2",function() {
+            var cartId=$(this).next().val();
+            //购物车商品数量添加
+            $.ajax({
+                url:"<%=request.getContextPath()%>/CartSrvlet?op=jia",
+                type:"post",
+                data:{
+                    "cartId":cartId
+                },
+                success:function (data) {
+                    if(data=="0"){
+                        alert("库存不足！！！")
+                        flag=false;
+                        $("#flag").val(false)
+                    }else if(data=="1"){
+                        $("#flag").val(true)
+                    }
+                }
+            })
+            if($("#flag").val()=="true"){
+                var jia = $(this).prev().val();
+                jia++;
+                $(this).prev().val(jia);
+                //价格
+                var price = $(this).parent().prev().text();
+                //小计
+                $(this).parent().next().text(price * jia);
+                zj();
+                zjj();
+            }
+        })
+        //购物车减
+        $(document).on('click',".bt1",function() {
+            var cartId=$(this).next().next().next().val();
+            //购物车商品数量减少
+            $.ajax({
+                url:"<%=request.getContextPath()%>/CartSrvlet?op=jian",
+                type:"post",
+                data:{
+                    "cartId":cartId
+                },
+                success:function (data) {
+                    if(data=="0"){
+                        $("#flag").val(false)
+                    }else if(data=="1"){
+                        $("#flag").val(true)
+                    }
+                }
+            })
+            if($("#flag").val()=="true"){
+                var jian = $(this).next().val();
+                if (jian > 1) {
+                    jian--;
+                }
+                $(this).next().val(jian);
+                //价格
+                var price = $(this).parent().prev().text();
+                //小计
+                $(this).parent().next().text(price * jian);
+                zj();
+                zjj();
+            }
+        })
+
+
 
         //判断商品是否为空
         function commisnull() {
@@ -368,71 +435,10 @@
         //刷新页面
         location.reload();
     }
-    //购物车商品数量添加
-    function jia(id) {
-        $.ajax({
-            url:"<%=request.getContextPath()%>/CartSrvlet?op=jia",
-            type:"post",
-            data:{
-                "cartId":id
-            },
-            success:function (data) {
-                if(data=="0"){
-                    alert("库存不足！！！")
-                }else if(data=="1"){
-                    //购物车加减
-                    $(document).on('click',".bt2",function() {
-                        var jia = $(this).prev().val();
-                        // alert(jian)
-                        jia++;
-                        $(this).prev().val(jia);
-                        //价格
-                        var price = $(this).parent().prev().text();
-                        //小计
-                        $(this).parent().next().text(price * jia);
-                        zj();
-                        zjj();
-                    })
 
 
-                }
-            }
-        })
-
-    }
-    //购物车商品数量减少
-    function jian(id) {
-        $.ajax({
-            url:"<%=request.getContextPath()%>/CartSrvlet?op=jian",
-            type:"post",
-            data:{
-                "cartId":id
-            },
-            success:function (data) {
-                if(data=="0"){
-                }else if(data=="1"){
-                    //购物车加减
-                    $(document).on('click',".bt1",function() {
-                        var jian = $(this).next().val();
-                        // alert(jian)
-                        if (jian > 1) {
-                            jian--;
-                        }
-                        $(this).next().val(jian);
-                        //价格
-                        var price = $(this).parent().prev().text();
-                        //小计
-                        $(this).parent().next().text(price * jian);
-                        zj();
-                        zjj();
-                    })
 
 
-                }
-            }
-        })
-
-    }
 
 
 
